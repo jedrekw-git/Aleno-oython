@@ -36,8 +36,7 @@ class SmokeTest(unittest.TestCase):
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
         home_page.header.logout()
-        sleep(4)
-        Assert.contains("Einloggen", account_page.get_page_source())
+        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._einloggen_text_field, "Einloggen"))
 
     def test_register_restaurant_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -75,7 +74,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_third_restaurant()
+        account_page.open_AUTOTESTadhoiofg_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_rooms_tab()
         restaurant_settings_page.add_two_rooms()
@@ -84,13 +83,15 @@ class SmokeTest(unittest.TestCase):
         self.not_contains(restaurant_settings_page._add_room_name_value1, restaurant_settings_page.get_page_source())
         self.not_contains(restaurant_settings_page._add_room_name_value2, restaurant_settings_page.get_page_source())
 
+#Dodawanie pokoju po angielsku jest niemożliwe, zgłoszone
+
     def test_add_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_third_restaurant()
+        account_page.open_AUTOTESTadhoiofg_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -118,7 +119,7 @@ class SmokeTest(unittest.TestCase):
         self.not_contains(restaurant_settings_page._shift_name_value, restaurant_settings_page.get_page_source())
         self.not_contains(restaurant_settings_page._shift_internal_name_value, restaurant_settings_page.get_page_source())
 
-#ROOM CAPACITY SIE NIE ZAPISUJE, zgłoszone
+#Dodawanie shifta po angielsku jest niemożliwe, zgłoszone
 
     def test_add_room_to_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -126,7 +127,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_fourth_restaurant()
+        account_page.open_AUTOTESTaooeigwc_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -137,7 +138,7 @@ class SmokeTest(unittest.TestCase):
         account_page.open_shifts_menu()
         account_page.expand_first_shift()
 
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._first_shift_room_name_field, restaurant_settings_page.first_room_name))
+        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._first_shift_first_room_name_field, restaurant_settings_page.first_room_name))
 
         account_page = home_page.header.open_account_page()
         restaurant_settings_page = account_page.open_restaurant_settings()
@@ -147,13 +148,16 @@ class SmokeTest(unittest.TestCase):
         self.not_contains(restaurant_settings_page._shift_name_value, restaurant_settings_page.get_page_source())
         self.not_contains(restaurant_settings_page._shift_internal_name_value, restaurant_settings_page.get_page_source())
 
+#Dodawanie shifta po angielsku jest niemożliwe, zgłoszone
+#pusta zakladka raume - zgloszone patrykowi
+
     def test_add_2_rooms_to_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_fourth_restaurant()
+        account_page.open_AUTOTESTaooeigwc_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -195,15 +199,16 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_fifth_restaurant()
+        account_page.open_AUTOTESTayruflyu_restaurant()
+        account_page.open_shifts_menu()
+        account_page.click_first_shift()
         seatIn_page = account_page.open_seatIn()
-        seatIn_page.click_hour()
+        # seatIn_page.click_hour()
         seatIn_page.click_add_reservation_plus_button()
         seatIn_page.click_reservation_details_button()
         seatIn_page.enter_reservation_details()
         seatIn_page.save_reservation()
         seatIn_page.expand_seatIn_reservation_details()
-        sleep(15)
 
         Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
         Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
@@ -211,7 +216,8 @@ class SmokeTest(unittest.TestCase):
 
         seatIn_page.click_added_reservation()
         seatIn_page.remove_added_reservation()
-        sleep(15)
+
+#AUTOMATYCZNY TEST NIE DODAJE REZERWACJI
 
     def test_add_provisional_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -219,7 +225,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_fifth_restaurant()
+        account_page.open_AUTOTESTayruflyu_restaurant()
         account_page = home_page.header.open_account_page()
         account_page.open_shifts_menu()
         account_page.click_first_shift()
@@ -252,7 +258,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_fifth_restaurant()
+        account_page.open_AUTOTESTayruflyu_restaurant()
         account_page = home_page.header.open_account_page()
         account_page.open_shifts_menu()
         account_page.click_first_shift()
@@ -264,7 +270,7 @@ class SmokeTest(unittest.TestCase):
         seatIn_page.reservation_set_email_sms_notifications()
         seatIn_page.save_reservation()
 
-#DO POPRAWKI JAK NAPRAWIĄ DODAWANIE REZERWACJI
+#DO POPRAWKI PO NAPRAWIE DODAWANIA REZERWACJI
 
     def test_add_daily_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -272,7 +278,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_fourth_restaurant()
+        account_page.open_AUTOTESTayruflyu_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.add_daily_shift_click_button()
@@ -295,23 +301,25 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_fifth_restaurant()
+        account_page.open_AUTOTESTayruflyu_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.daily_shift_activate_global()
         daily_settings_page.edit_first_daily_shift()
+        if not "aleno" in daily_settings_page.get_page_title():
+                daily_settings_page.daily_shift_activate_global()
+                daily_settings_page.edit_first_daily_shift()
         daily_settings_page.add_shift_daily_first_accordeon()
         daily_settings_page.save_shift()
-        sleep(2)
 
-        Assert.contains(daily_settings_page._add_daily_shift_name_value, daily_settings_page.get_page_source())
+        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(daily_settings_page._daily_shift_edit_first_button, daily_settings_page._add_daily_shift_name_value))
         Assert.contains(daily_settings_page._add_daily_shift_internal_name_value, daily_settings_page.get_page_source())
 
         daily_settings_page.daily_shift_activate_global()
 
         self.not_contains(daily_settings_page._add_daily_shift_name_value, daily_settings_page.get_page_source())
         self.not_contains(daily_settings_page._add_daily_shift_internal_name_value, daily_settings_page.get_page_source())
-
+        
     def test_zz_generate_plot_and_send_email(self):
         self._save_plot()
         self._send_email()

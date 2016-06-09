@@ -30,7 +30,7 @@ class RestaurantSettingsPage(BasePage):
     _image_url_field = (By.NAME, "imageUrl")
     _rooms_tab = (By.XPATH, "//div/ul/li[4]/a")
     _add_room_en_button = (By.XPATH, "//form/div/div[4]/button[2]")
-    _add_room_name_field = (By.XPATH, "//form/div/div[2]/input")
+    _add_room_name_field = (By.XPATH, "//div[2]/form/div/input")
     _add_room_name_value1 = get_random_string(8)
     _add_room_name_value2 = get_random_string(7)
     _add_room_submit = (By.XPATH, "//div[2]/form/button")
@@ -47,9 +47,9 @@ class RestaurantSettingsPage(BasePage):
     _add_room_remove_first = (By.XPATH, "//div/div/div/a")
     _shift_tab = (By.XPATH, "//div/ul/li[2]/a")
     _add_shift_button = (By.XPATH, "/html/body/div[2]/div[2]/div/div/button")
-    _shift_name_field = (By.XPATH, "//div[2]/input")
+    _shift_name_field = (By.NAME, "name")
     _shift_name_value = "Shift Abend"
-    _shift_internal_name_field = (By.XPATH, "//div[2]/div/div[2]/input")
+    _shift_internal_name_field = (By.NAME, "internalName")
     _shift_internal_name_value = "abend"
     _shift_start_date_field = (By.NAME, "startDate")
     _shift_start_date_value = str(datetime.date.today().day-1)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
@@ -123,7 +123,7 @@ class RestaurantSettingsPage(BasePage):
         self.click(self._rooms_tab)
 
     def add_two_rooms(self):
-        self.click(self._add_room_en_button)
+        # self.click(self._add_room_en_button)
         self.clear_field_and_send_keys(self._add_room_name_value1, self._add_room_name_field)
         self.click(self._add_room_submit)
         sleep(3)

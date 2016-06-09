@@ -11,12 +11,14 @@ from selenium.common.exceptions import TimeoutException
 class SeatInPage(BasePage):
     _title = "SeatIn Page"
 
-    _add_reservation_plus_button = (By.XPATH, "//div[2]/div/button")
+    _add_reservation_plus_button = (By.XPATH, "/html/body/div[2]/div[1]/div[2]/div[1]/div[1]/div/div[4]/div/button[1]")
     _add_reservation_hour_button = (By.XPATH, "//div[2]/div/div/div[3]/div")
-    _add_reservation_details_button = (By.XPATH, "//button[3]")
+    _add_reservation_details_button = (By.XPATH, "//button[2]")
     _add_reservation_first_accordeon = (By.XPATH, "//form/div/div/div/a")
     _add_reservation_guests_field = (By.NAME, "peopleCount")
     _add_reservation_guests_value = randint(2, 8)
+    _add_reservation_start_time_field = (By.NAME, "selectedTime")
+    _add_reservation_start_time_value = "10:00"
     _add_reservation_second_accordeon = (By.XPATH, "//form/div/div[2]/div/a")
     _add_reservation_language_dropdown = (By.NAME, "lang")
     _add_reservation_phone_field = (By.NAME, "phoneNumber")
@@ -62,8 +64,9 @@ class SeatInPage(BasePage):
 
     def enter_reservation_details(self):
         self.clear_field_and_send_keys(self._add_reservation_guests_value, self._add_reservation_guests_field)
+        self.clear_field_and_send_keys(self._add_reservation_start_time_value, self._add_reservation_start_time_field)
         self.click(self._add_reservation_second_accordeon)
-        self.select_index_from_dropdown(2, self._add_reservation_language_dropdown)
+        # self.select_index_from_dropdown(2, self._add_reservation_language_dropdown)
         self.clear_field_and_send_keys(self._add_reservation_phone_value, self._add_reservation_phone_field)
         self.clear_field_and_send_keys(self._add_reservation_first_name_value, self._add_reservation_first_name_field)
         self.clear_field_and_send_keys(self._add_reservation_surname_value, self._add_reservation_surname_field)

@@ -5,11 +5,11 @@ USERNAME = os.environ.get('SAUCE_USERNAME', "testuj")
 ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY', "0029898f-54be-48b2-9166-9306282bef0c")
 sauce = SauceClient(USERNAME, ACCESS_KEY)
 
-USER = "patryk.bader@testuj.pl"
-PASSWORD = "tester777"
+USER2 = "patryk.bader@testuj.pl"
+PASSWORD2 = "tester777"
 
-USER2 = "aleksandra.mika@vazco.eu"
-PASSWORD2 = "aleno101"
+USER = "aleksandra.mika@vazco.eu"
+PASSWORD = "aleno101"
 
 CHANGE_PASSWORD_USER = "testujpl@go2.pl"
 
