@@ -30,7 +30,7 @@ class RestaurantSettingsPage(BasePage):
     _image_url_field = (By.NAME, "imageUrl")
     _rooms_tab = (By.XPATH, "//div/ul/li[4]/a")
     _add_room_en_button = (By.XPATH, "//form/div/div[4]/button[2]")
-    _add_room_name_field = (By.XPATH, "//div[2]/form/div/input")
+    _add_room_name_field = (By.XPATH, "/html/body/div[2]/div[2]/div/div/div[1]/div[2]/form/div/div[1]/input")
     _add_room_name_value1 = get_random_string(8)
     _add_room_name_value2 = get_random_string(7)
     _add_room_submit = (By.XPATH, "//div[2]/form/button")
@@ -47,12 +47,12 @@ class RestaurantSettingsPage(BasePage):
     _add_room_remove_first = (By.XPATH, "//div/div/div/a")
     _shift_tab = (By.XPATH, "//div/ul/li[2]/a")
     _add_shift_button = (By.XPATH, "/html/body/div[2]/div[2]/div/div/button")
-    _shift_name_field = (By.NAME, "name")
+    _shift_name_field = (By.XPATH, "//div/input")
     _shift_name_value = "Shift Abend"
-    _shift_internal_name_field = (By.NAME, "internalName")
+    _shift_internal_name_field = (By.XPATH, "//div[2]/div/div/input")
     _shift_internal_name_value = "abend"
     _shift_start_date_field = (By.NAME, "startDate")
-    _shift_start_date_value = str(datetime.date.today().day-1)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
+    _shift_start_date_value = str(datetime.date.today().day-2)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
     _shift_service_start_field = (By.NAME, "openingTime")
     _shift_service_start_value = "16:00"
     _shift_service_end_field = (By.NAME, "closingTime")
@@ -84,7 +84,7 @@ class RestaurantSettingsPage(BasePage):
     _added_shift_name_field = (By.NAME, "name")
     _added_shift_internal_name_field = (By.NAME, "internalName")
     _remove_added_shift_button = (By.XPATH, "//td[6]/button")
-    _shift_third_accordeon_menu = (By.LINK_TEXT, "Rooms")
+    _shift_third_accordeon_menu = (By.PARTIAL_LINK_TEXT, "Räume")
     _shift_select_first_room_checkbox = (By.NAME, "roomId")
     _shift_first_room_name_field = (By.XPATH, "//div[2]/div/div/div/div/div/div/div")
     _shift_second_room_name_field = (By.XPATH, "//div[2]/div/div/div/div/div/div[2]/div")
@@ -97,6 +97,40 @@ class RestaurantSettingsPage(BasePage):
     _daily_shift_activate_global_checkbox = (By.NAME, "selectedGlobalShifts")
     _daily_shift_activate_global_save_button = (By.XPATH, "/html/body/div[2]/div[2]/div/div/form/button")
     _daily_shift_edit_first_button = (By.XPATH, "/html/body/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[1]/a")
+    _first_shift_archive_button = (By.XPATH, "//td[6]/button[3]")
+    _first_shift_internal_name_field = (By.CSS, "td.internalName")
+    _unarchive_shift_button = (By.XPATH, "//table[2]/tbody/tr/td[6]/button[3]")
+    _expand_archived_shifts_button = (By.XPATH, "//div[2]/div/div/button[2]")
+    _first_archived_shift_internal_name_field = (By.XPATH, "//table[2]/tbody/tr/td[2]")
+    _tables_tab = (By.XPATH, "//div/ul/li[5]/a")
+    _table_name_value = get_random_string(6)
+    _table_name_field = (By.NAME, "tableName")
+    _table_capacity_value = get_random_integer(2)
+    _table_capacity_field = (By.NAME, "tableCapacity")
+    _add_table_button = (By.XPATH, "//form/div/button")
+    _first_table_name_field = (By.CSS, "td.tableName")
+    _first_table_capacity_field = (By.CSS, "td.tableCapacity")
+    _remove_first_table_button = (By.XPATH, "//td[3]/button[2]")
+    _holidays_tab = (By.XPATH, "//li[6]/a")
+    _add_holiday_button = (By.XPATH, "/html/body/div[2]/div[2]/div/div/button")
+    _holiday_name_field = (By.NAME, "name")
+    _holiday_name_value = get_random_string(7)
+    _holiday_from_to_checkbox = (By.NAME, "hasRange")
+    _holiday_start_date_value = str(datetime.date.today().day)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
+    _holiday_start_date_field = (By.NAME, "startDate")
+    _holiday_end_date_value = str(datetime.date.today().day+1)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
+    _holiday_end_date_field = (By.NAME, "endDate")
+    _holiday_information_value = get_random_string(5)+" "+get_random_string(6)+" "+get_random_string(7)
+    _holiday_information_text_field = (By.XPATH, "//div[2]/div[3]/div[3]")
+    _holiday_information_open_field = (By.XPATH, "//div[5]/div/div/div/div")
+    _holiday_information_close_field = (By.XPATH, "//form/div/div[5]/div/div/div/button")
+    _add_holiday_submit = (By.XPATH, "//div[2]/div/button")
+    _first_added_holiday_name_field = (By.XPATH, "//td/a")
+    _first_added_holiday_from_field = (By.CSS, "td.startDate")
+    _first_added_holiday_to_field = (By.CSS, "td.endDate")
+    _first_added_holiday_information_field = (By.CSS, "td.message")
+    _remove_first_added_holiday_button = (By.XPATH, "//td[5]/button")
+
 
     def __init__(self, driver):
         super(RestaurantSettingsPage, self).__init__(driver, self._title)
@@ -226,3 +260,46 @@ class RestaurantSettingsPage(BasePage):
 
     def edit_first_daily_shift(self):
         self.click(self._daily_shift_edit_first_button)
+
+    def archive_first_shift(self):
+        self.click(self._first_shift_archive_button)
+
+    def get_first_shift_internal_name(self):
+        self._first_shift_internal_name = self.get_text(self._first_shift_internal_name_field)
+
+    def expand_archived_shifts(self):
+        self.click(self._expand_archived_shifts_button)
+
+    def unachive_shift(self):
+        self.click(self._unarchive_shift_button)
+
+    def open_tables_tab(self):
+        self.click(self._tables_tab)
+
+    def add_table(self):
+        self.clear_field_and_send_keys(self._table_name_value, self._table_name_field)
+        self.clear_field_and_send_keys(self._table_capacity_value, self._table_capacity_field)
+        self.click(self._add_table_button)
+
+    def remove_first_table(self):
+        self.click(self._remove_first_table_button)
+        self.accept_alert()
+
+    def open_holidays_tab(self):
+        self.click(self._holidays_tab)
+        sleep(2)
+
+    def add_holiday(self):
+        self.click(self._add_holiday_button)
+        self.clear_field_and_send_keys(self._holiday_name_value, self._holiday_name_field)
+        self.click(self._holiday_from_to_checkbox)
+        self.clear_field_and_send_keys(self._holiday_start_date_value, self._holiday_start_date_field)
+        self.clear_field_and_send_keys(self._holiday_end_date_value, self._holiday_end_date_field)
+        self.click(self._holiday_information_open_field)
+        self.clear_field_and_send_keys(self._holiday_information_value, self._holiday_information_text_field)
+        self.click(self._holiday_information_close_field)
+        self.click(self._add_holiday_submit)
+
+    def remove_added_holiday(self):
+        self.click(self._remove_first_added_holiday_button)
+        self.accept_alert()

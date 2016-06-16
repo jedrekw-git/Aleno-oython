@@ -319,7 +319,7 @@ class SmokeTest(unittest.TestCase):
 
         self.not_contains(daily_settings_page._add_daily_shift_name_value, daily_settings_page.get_page_source())
         self.not_contains(daily_settings_page._add_daily_shift_internal_name_value, daily_settings_page.get_page_source())
-        
+
     def test_zz_generate_plot_and_send_email(self):
         self._save_plot()
         self._send_email()

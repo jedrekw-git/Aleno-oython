@@ -11,14 +11,14 @@ from selenium.common.exceptions import TimeoutException
 class SeatInPage(BasePage):
     _title = "SeatIn Page"
 
-    _add_reservation_plus_button = (By.XPATH, "/html/body/div[2]/div[1]/div[2]/div[1]/div[1]/div/div[4]/div/button[1]")
+    _add_reservation_plus_button = (By.XPATH, "//div[2]/div/button")
     _add_reservation_hour_button = (By.XPATH, "//div[2]/div/div/div[3]/div")
-    _add_reservation_details_button = (By.XPATH, "//button[2]")
+    _add_reservation_details_button = (By.XPATH, "//button[@title='Details']")
     _add_reservation_first_accordeon = (By.XPATH, "//form/div/div/div/a")
     _add_reservation_guests_field = (By.NAME, "peopleCount")
     _add_reservation_guests_value = randint(2, 8)
     _add_reservation_start_time_field = (By.NAME, "selectedTime")
-    _add_reservation_start_time_value = "10:00"
+    _add_reservation_start_time_value = "13:00"
     _add_reservation_second_accordeon = (By.XPATH, "//form/div/div[2]/div/a")
     _add_reservation_language_dropdown = (By.NAME, "lang")
     _add_reservation_phone_field = (By.NAME, "phoneNumber")
@@ -45,7 +45,8 @@ class SeatInPage(BasePage):
     _expand_seatIn_reservation_details_button = (By.XPATH, "//div[2]/div/div/div[3]/button")
     _added_reservation = (By.PARTIAL_LINK_TEXT, "%s" % _add_reservation_surname_value)
     _remove_added_reservation_button = (By.XPATH, "//button[4]")
-    _shift_name_field = (By.XPATH, "//div[2]/span[2]")
+    _shift_name_field = (By.CSS, "span.shiftName")
+    _seatIn_room_separator_field = (By.CSS, "div.ce-room-separator")
 
     def __init__(self, driver):
         super(SeatInPage, self).__init__(driver, self._title)
