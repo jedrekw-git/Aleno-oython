@@ -10,6 +10,7 @@ from selenium.common.exceptions import TimeoutException
 from pages.restaurant_settings_page import RestaurantSettingsPage
 from pages.reservation_popup_page import ReservationPopupPage
 from pages.seatIn_page import SeatInPage
+from pages.relatin_page import RelatInPage
 import datetime
 
 class AccountPage(BasePage):
@@ -39,6 +40,7 @@ class AccountPage(BasePage):
     _restaurant_AUTOTESTammzkkcm_option = (By.ID, "xvkWn37yRSmcSNjjE")
     _restaurant_George_Bar_Grill_option = (By.ID, "EYccPQ4dsanRaNnWd")
     _einloggen_text_field = (By.XPATH, "//h1")
+    _relatin_menu = (By.XPATH, "//li[2]/a")
 
     def __init__(self, driver):
         super(AccountPage, self).__init__(driver, self._title)
@@ -109,3 +111,7 @@ class AccountPage(BasePage):
     def open_George_Bar_Grill_restaurant(self):
         self.click(self._restaurants_dropdown)
         self.click(self._restaurant_George_Bar_Grill_option)
+
+    def open_relatIn(self):
+        self.click(self._relatin_menu)
+        return RelatInPage(self.get_driver())

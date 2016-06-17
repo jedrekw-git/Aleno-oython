@@ -129,7 +129,26 @@ class RestaurantSettingsPage(BasePage):
     _first_added_holiday_from_field = (By.CSS, "td.startDate")
     _first_added_holiday_to_field = (By.CSS, "td.endDate")
     _first_added_holiday_information_field = (By.CSS, "td.message")
+    _edit_holiday_name_value = get_random_string(8)
+    _edit_holiday_name_field = (By.XPATH, "//div[2]/div/div[2]/form/div/div/div/input")
+    _edit_holiday_start_date_value = str(datetime.date.today().day-1)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
+    _edit_holiday_start_date_field = (By.XPATH, "//div[2]/div/div[2]/form/div/div[3]/div/input")
+    _edit_holiday_end_date_value = str(datetime.date.today().day)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
+    _edit_holiday_end_date_field = (By.XPATH, "//form[@id='editHolidays']/div/div[4]/div/input")
+    _edit_holiday_information_value = get_random_string(6)+" "+get_random_string(5)+" "+get_random_string(3)
+    _edit_holiday_information_text_field = (By.XPATH, "//form[@id='editHolidays']/div/div[5]/div/div/div/div[2]/div[3]/div[3]")
+    _edit_holiday_information_open_field = (By.XPATH, "//form[@id='editHolidays']/div/div[5]/div/div/div/div")
+    _edit_holiday_information_close_field = (By.XPATH, "//form[@id='editHolidays']/div/div[5]/div/div/div/button")
+    _edit_holiday_submit = (By.XPATH, "//form[@id='editHolidays']/div[2]/div/button")
     _remove_first_added_holiday_button = (By.XPATH, "//td[5]/button")
+    _coustomizations_tab = (By.XPATH, "//li[10]/a")
+    _percentage_of_capacity_labeled_as_confirmed_checkbox = (By.XPATH, "//div/input")
+    _percentage_of_capacity_labeled_as_confirmed_field = (By.NAME, "serviceRole80")
+    _percentage_of_capacity_labeled_as_confirmed_value = str(randint(1,99))
+    _booking_in_advance_field = (By.NAME, "daysInAdvance")
+    _booking_in_advance_value = str(randint(1,200))
+    _save_coustomizations_tab = (By.XPATH, "//div[2]/div/button")
+
 
 
     def __init__(self, driver):
@@ -300,6 +319,32 @@ class RestaurantSettingsPage(BasePage):
         self.click(self._holiday_information_close_field)
         self.click(self._add_holiday_submit)
 
+    def edit_holiday(self):
+        self.click(self._first_added_holiday_name_field)
+        self.clear_field_and_send_keys(self._edit_holiday_name_value, self._edit_holiday_name_field)
+        self.clear_field_and_send_keys(self._edit_holiday_start_date_value, self._edit_holiday_start_date_field)
+        self.clear_field_and_send_keys(self._edit_holiday_end_date_value, self._edit_holiday_end_date_field)
+        self.click(self._edit_holiday_information_open_field)
+        self.clear_field_and_send_keys(self._edit_holiday_information_value, self._edit_holiday_information_text_field)
+        self.click(self._edit_holiday_information_close_field)
+        self.click(self._edit_holiday_submit)
+
     def remove_added_holiday(self):
         self.click(self._remove_first_added_holiday_button)
         self.accept_alert()
+
+    def open_coustomizations_tab(self):
+        self.click(self._coustomizations_tab)
+        sleep(2)
+
+    def click_percentage_of_capacity_checkbox(self):
+        self.click(self._percentage_of_capacity_labeled_as_confirmed_checkbox)
+
+    def edit_coustomization_tab(self):
+        self.clear_field_and_send_keys(self._percentage_of_capacity_labeled_as_confirmed_value, self._percentage_of_capacity_labeled_as_confirmed_field)
+        self.clear_field_and_send_keys(self._booking_in_advance_value, self._booking_in_advance_field)
+        self.click(self._save_coustomizations_tab)
+
+    def get_vaules_coustomization_tab(self):
+        self._percentage_of_capacity_labeled_as_confirmed_saved_value = self.get_value(self._percentage_of_capacity_labeled_as_confirmed_field)
+        self._booking_in_advance_saved_value = self.get_value(self._booking_in_advance_field)

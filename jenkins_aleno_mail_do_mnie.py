@@ -16,7 +16,8 @@ from selenium.common.exceptions import TimeoutException
 from time import gmtime, strftime
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import re
-from change_password import *
+from selenium.webdriver.remote.webelement import *
+from selenium.common.exceptions import NoSuchElementException
 
 SCREEN_DUMP_LOCATION = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'screendumps'
@@ -74,7 +75,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTadhoiofg_restaurant()
+        account_page.open_AUTOTESTaabkoajo_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_rooms_tab()
         restaurant_settings_page.add_two_rooms()
@@ -83,15 +84,13 @@ class SmokeTest(unittest.TestCase):
         self.not_contains(restaurant_settings_page._add_room_name_value1, restaurant_settings_page.get_page_source())
         self.not_contains(restaurant_settings_page._add_room_name_value2, restaurant_settings_page.get_page_source())
 
-#Dodawanie pokoju po angielsku jest niemożliwe, zgłoszone
-
     def test_add_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTadhoiofg_restaurant()
+        account_page.open_AUTOTESTaabkoajo_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -119,7 +118,26 @@ class SmokeTest(unittest.TestCase):
         self.not_contains(restaurant_settings_page._shift_name_value, restaurant_settings_page.get_page_source())
         self.not_contains(restaurant_settings_page._shift_internal_name_value, restaurant_settings_page.get_page_source())
 
-#Dodawanie shifta po angielsku jest niemożliwe, zgłoszone
+    def test_archive_shift_should_succeed(self):
+        home_page = HomePage(self.driver).open_home_page()
+        account_page = home_page.header.login(USER, PASSWORD)
+        sleep(5)
+        if "Einloggen" in home_page.header.get_page_source():
+            account_page = home_page.header.login(USER, PASSWORD)
+        account_page.open_George_Bar_Grill_restaurant()
+        restaurant_settings_page = account_page.open_restaurant_settings()
+        restaurant_settings_page.open_shift_tab()
+        restaurant_settings_page.get_first_shift_internal_name()
+        restaurant_settings_page.archive_first_shift()
+        sleep(3)
+
+        Assert.not_equal(restaurant_settings_page._first_shift_internal_name, restaurant_settings_page.get_text(restaurant_settings_page._first_shift_internal_name_field))
+        restaurant_settings_page.expand_archived_shifts()
+        Assert.equal(restaurant_settings_page._first_shift_internal_name, restaurant_settings_page.get_text(restaurant_settings_page._first_archived_shift_internal_name_field))
+        restaurant_settings_page.unachive_shift()
+
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_shift_internal_name_field, restaurant_settings_page._first_shift_internal_name))
+        Assert.true(self.is_element_present("//table[2]/tbody/tr/td[2]")==False)
 
     def test_add_room_to_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -127,7 +145,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaooeigwc_restaurant()
+        account_page.open_AUTOTESTalcmfaoa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -148,16 +166,13 @@ class SmokeTest(unittest.TestCase):
         self.not_contains(restaurant_settings_page._shift_name_value, restaurant_settings_page.get_page_source())
         self.not_contains(restaurant_settings_page._shift_internal_name_value, restaurant_settings_page.get_page_source())
 
-#Dodawanie shifta po angielsku jest niemożliwe, zgłoszone
-#pusta zakladka raume - zgloszone patrykowi
-
     def test_add_2_rooms_to_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaooeigwc_restaurant()
+        account_page.open_AUTOTESTalcmfaoa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -193,31 +208,100 @@ class SmokeTest(unittest.TestCase):
 
 #NIE WIDZI POPUP'U
 
+    def test_add_table_should_succeed(self):
+        home_page = HomePage(self.driver).open_home_page()
+        account_page = home_page.header.login(USER, PASSWORD)
+        sleep(5)
+        if "Einloggen" in home_page.header.get_page_source():
+            account_page = home_page.header.login(USER, PASSWORD)
+        account_page.open_AUTOTESTaabkoajo_restaurant()
+        restaurant_settings_page = account_page.open_restaurant_settings()
+        restaurant_settings_page.open_tables_tab()
+        restaurant_settings_page.add_table()
+
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_table_name_field, restaurant_settings_page._table_name_value))
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_table_capacity_field, restaurant_settings_page._table_capacity_value))
+
+        restaurant_settings_page.remove_first_table()
+
+        self.not_contains(restaurant_settings_page._table_name_value, restaurant_settings_page.get_page_source())
+        self.not_contains(restaurant_settings_page._table_capacity_value, restaurant_settings_page.get_page_source())
+
+    def test_add_and_edit_holiday_should_succeed(self):
+        home_page = HomePage(self.driver).open_home_page()
+        account_page = home_page.header.login(USER, PASSWORD)
+        sleep(5)
+        if "Einloggen" in home_page.header.get_page_source():
+            account_page = home_page.header.login(USER, PASSWORD)
+        account_page.open_AUTOTESTaabkoajo_restaurant()
+        restaurant_settings_page = account_page.open_restaurant_settings()
+        restaurant_settings_page.open_holidays_tab()
+        restaurant_settings_page.add_holiday()
+
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_name_field, restaurant_settings_page._holiday_name_value))
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_from_field, restaurant_settings_page._holiday_start_date_value))
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_to_field, restaurant_settings_page._holiday_end_date_value))
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_information_field, restaurant_settings_page._holiday_information_value))
+
+        restaurant_settings_page.edit_holiday()
+
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_name_field, restaurant_settings_page._edit_holiday_name_value))
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_from_field, restaurant_settings_page._edit_holiday_start_date_value))
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_to_field, restaurant_settings_page._edit_holiday_end_date_value))
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_information_field, restaurant_settings_page._edit_holiday_information_value))
+
+        restaurant_settings_page.remove_added_holiday()
+
+        self.not_contains(restaurant_settings_page._edit_holiday_name_value, restaurant_settings_page.get_page_source())
+        self.not_contains(restaurant_settings_page._edit_holiday_start_date_value, restaurant_settings_page.get_page_source())
+        self.not_contains(restaurant_settings_page._edit_holiday_end_date_value, restaurant_settings_page.get_page_source())
+        # self.not_contains(restaurant_settings_page._edit_holiday_information_value, restaurant_settings_page.get_page_source())
+
+#restaurant_settings_page._edit_holiday_information_value remains in page source, zgłoszone
+
+    def test_edit_customizations_tab_should_succeed(self):
+        home_page = HomePage(self.driver).open_home_page()
+        account_page = home_page.header.login(USER, PASSWORD)
+        sleep(5)
+        if "Einloggen" in home_page.header.get_page_source():
+            account_page = home_page.header.login(USER, PASSWORD)
+        account_page.open_AUTOTESTaabkoajo_restaurant()
+        restaurant_settings_page = account_page.open_restaurant_settings()
+        restaurant_settings_page.open_coustomizations_tab()
+        if not self.driver.find_element_by_name("serviceRole80").is_enabled():
+            restaurant_settings_page.click_percentage_of_capacity_checkbox()
+        restaurant_settings_page.edit_coustomization_tab()
+        restaurant_settings_page.get_vaules_coustomization_tab()
+
+        Assert.equal(restaurant_settings_page._percentage_of_capacity_labeled_as_confirmed_value, restaurant_settings_page._percentage_of_capacity_labeled_as_confirmed_saved_value)
+        Assert.equal(restaurant_settings_page._booking_in_advance_value, restaurant_settings_page._booking_in_advance_saved_value)
+
     def test_add_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTayruflyu_restaurant()
+        account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
         account_page.click_first_shift()
         seatIn_page = account_page.open_seatIn()
         # seatIn_page.click_hour()
         seatIn_page.click_add_reservation_plus_button()
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.click_reservation_details_button()
         seatIn_page.enter_reservation_details()
         seatIn_page.save_reservation()
         seatIn_page.expand_seatIn_reservation_details()
 
         Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
-        Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
-        Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
+        # Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
+        # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
 
         seatIn_page.click_added_reservation()
         seatIn_page.remove_added_reservation()
 
-#AUTOMATYCZNY TEST NIE DODAJE REZERWACJI
+#AUTOMATYCZNY TEST NIE DODAJE REZERWACJI, zgłoszone
 
     def test_add_provisional_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -225,13 +309,13 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTayruflyu_restaurant()
-        account_page = home_page.header.open_account_page()
+        account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
         account_page.click_first_shift()
         seatIn_page = account_page.open_seatIn()
-        seatIn_page.click_hour()
+        # seatIn_page.click_hour()
         seatIn_page.click_add_reservation_plus_button()
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.click_reservation_details_button()
         seatIn_page.enter_reservation_details()
         seatIn_page.reservation_set_provisional()
@@ -258,16 +342,15 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTayruflyu_restaurant()
-        account_page = home_page.header.open_account_page()
+        account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
         account_page.click_first_shift()
         seatIn_page = account_page.open_seatIn()
-        seatIn_page.click_hour()
+        # seatIn_page.click_hour()
+        seatIn_page.click_add_reservation_plus_button()
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.click_reservation_details_button()
-        seatIn_page.reservation_open_first_accordeon()
         seatIn_page.enter_reservation_details()
-        seatIn_page.reservation_set_email_sms_notifications()
         seatIn_page.save_reservation()
 
 #DO POPRAWKI PO NAPRAWIE DODAWANIA REZERWACJI
@@ -278,7 +361,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTayruflyu_restaurant()
+        account_page.open_AUTOTESTammzkkcm_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.add_daily_shift_click_button()
@@ -301,7 +384,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTayruflyu_restaurant()
+        account_page.open_AUTOTESTammzkkcm_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.daily_shift_activate_global()
@@ -319,6 +402,29 @@ class SmokeTest(unittest.TestCase):
 
         self.not_contains(daily_settings_page._add_daily_shift_name_value, daily_settings_page.get_page_source())
         self.not_contains(daily_settings_page._add_daily_shift_internal_name_value, daily_settings_page.get_page_source())
+
+    def test_add_contact_to_relatin_should_succeed(self):
+        home_page = HomePage(self.driver).open_home_page()
+        account_page = home_page.header.login(USER, PASSWORD)
+        sleep(5)
+        if "Einloggen" in home_page.header.get_page_source():
+            account_page = home_page.header.login(USER, PASSWORD)
+        account_page.open_AUTOTESTammzkkcm_restaurant()
+        relatIn_page = account_page.open_relatIn()
+        relatIn_page.add_client()
+
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(relatIn_page._added_client_first_name_field, relatIn_page._client_first_name_value))
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(relatIn_page._added_client_last_name_field, relatIn_page._client_last_name_value))
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(relatIn_page._added_client_phone_number_field, "+41"+relatIn_page._client_phone_number_value))
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(relatIn_page._added_client_email_field, relatIn_page._client_email_value))
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(relatIn_page._added_client_category_field, relatIn_page._client_category_value))
+
+        relatIn_page.remove_first_client()
+
+        self.not_contains(relatIn_page._client_first_name_value, relatIn_page.get_page_source())
+        self.not_contains(relatIn_page._client_last_name_value, relatIn_page.get_page_source())
+        self.not_contains(relatIn_page._client_phone_number_value, relatIn_page.get_page_source())
+        self.not_contains(relatIn_page._client_email_value, relatIn_page.get_page_source())
 
     def test_zz_generate_plot_and_send_email(self):
         self._save_plot()
@@ -400,7 +506,7 @@ class SmokeTest(unittest.TestCase):
 
         # The slices will be ordered and plotted counter-clockwise.
         labels = 'Errors', 'Failures', 'Passes'
-        sizes = [err, fail, 13-fail-err]
+        sizes = [err, fail, 16-fail-err]
         colors = ['red', 'gold', 'green']
         explode = (0.1, 0.1, 0.1)
 
@@ -410,7 +516,7 @@ class SmokeTest(unittest.TestCase):
         print "\n WYKRES:\n", filename
         plt.savefig(filename)
         text_file = open("AlenoRaportScreeny.txt", "a")
-        text_file.write("<br><br>Wykres statystyczny: <a href=""http://ci.testuj.pl/job/Neo24/ws/screendumps/"+self._saved_filename_plot+".png>Wykres</a>")
+        text_file.write("<br><br>Wykres statystyczny: <a href=""http://ci.testuj.pl/job/Aleno/ws/screendumps/"+self._saved_filename_plot+".png>Wykres</a>")
         text_file.close()
 
     def take_screenshot(self):
@@ -421,7 +527,7 @@ class SmokeTest(unittest.TestCase):
         self.driver.get_screenshot_as_file(filename)
         text_file = open("AlenoRaportScreeny.txt", "a")
         text_file.write("<br><br>{method} Screenshot and HTML:<br>".format(
-            method=self._testMethodName)+"<br>Screenshot: <a href=""http://ci.testuj.pl/job/Neo24/ws/screendumps/"+self._saved_filename+".png>"+self._saved_filename+"</a>")
+            method=self._testMethodName)+"<br>Screenshot: <a href=""http://ci.testuj.pl/job/Aleno/ws/screendumps/"+self._saved_filename+".png>"+self._saved_filename+"</a>")
         text_file.close()
 
     def dump_html(self):
@@ -430,7 +536,7 @@ class SmokeTest(unittest.TestCase):
         with open(filename, 'w') as f:
             f.write(self.driver.page_source.encode('utf-8'))
         text_file = open("AlenoRaportScreeny.txt", "a")
-        text_file.write("<br>Html: <a href=""http://ci.testuj.pl/job/Neo24/ws/screendumps/"+self._saved_filename+".html>"+self._saved_filename+"</a>")
+        text_file.write("<br>Html: <a href=""http://ci.testuj.pl/job/Aleno/ws/screendumps/"+self._saved_filename+".html>"+self._saved_filename+"</a>")
         text_file.close()
 
     def _send_email(self):
@@ -439,10 +545,10 @@ class SmokeTest(unittest.TestCase):
 
         message = Message(From="jedrzej.wojcieszczyk@testuj.pl",
                           To=["jedrzej.wojcieszczyk@testuj.pl"])
-        message.Subject = "Raport Jenkins Neo24 Testy Automatyczne"
+        message.Subject = "Raport Jenkins Aleno Testy Automatyczne"
         message.Html = """<head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></head><p>Cześć!<br>
-           Oto wygenerowany automatycznie raport z testów Neo24.pl<br><br>
-           Tabela raportowa z logami wykonanych testów, a pod nią linki do screenshotów i kodu html testów które nie przeszły oraz wykres statystyczny: <a href="http://ci.testuj.pl/job/Neo24/ws/AlenoReportLogi.htm">Tabela z logami, screenshoty i wykres</a></p>"""
+           Oto wygenerowany automatycznie raport z testów Aleno.pl<br><br>
+           Tabela raportowa z logami wykonanych testów, a pod nią linki do screenshotów i kodu html testów które nie przeszły oraz wykres statystyczny: <a href="http://ci.testuj.pl/job/Aleno/ws/AlenoReportLogi.htm">Tabela z logami, screenshoty i wykres</a></p>"""
 
         sender = Mailer('smtp.gmail.com', use_tls=True, usr='jedrzej.wojcieszczyk@testuj.pl', pwd='paluch88')
         sender.send(message)
@@ -453,10 +559,17 @@ class SmokeTest(unittest.TestCase):
         except AssertionError:
             raise AssertionError('%s is found in %s. %s' % (needle, haystack, msg))
 
+    def is_element_present(self, xpath):
+        try:
+            self.driver.find_element_by_xpath(xpath)
+        except NoSuchElementException:
+            return False
+        return True
+
 open("AlenoRaportScreeny.txt", 'w').close()
 suite = unittest.TestLoader().loadTestsFromTestCase(SmokeTest)
 outfile = open("AlenoReportLogi.htm", "wb")
-runner = HTMLTestRunner(stream=outfile, title='Test Report', description='Neo24', verbosity=2)
+runner = HTMLTestRunner(stream=outfile, title='Test Report', description='Aleno', verbosity=2)
 runner.run(suite)
 
      # htmltestrunner.main()
