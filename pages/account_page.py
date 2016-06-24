@@ -41,6 +41,21 @@ class AccountPage(BasePage):
     _restaurant_George_Bar_Grill_option = (By.ID, "EYccPQ4dsanRaNnWd")
     _einloggen_text_field = (By.XPATH, "//h1")
     _relatin_menu = (By.XPATH, "//li[2]/a")
+    _add_notes_button = (By.CSS, "i.aleno-icon-pen.js-header-calendar-edit-mode-activator")
+    _add_note_for_staff_button = (By.XPATH, "//div[2]/a")
+    _add_note_for_guests_button = (By.XPATH, "//div/div/div/a")
+    _add_note_open_field = (By.XPATH, "//form/div/div/div/div/div")
+    _add_note_text_field = (By.XPATH, "//div[3]/div[3]")
+    _add_note_text_value = get_random_string(7)+" "+get_random_string(5)
+    _add_note_close_field = (By.XPATH, "//form/div/div/div/div/button")
+    _add_note_submit_button = (By.XPATH, "/html/body/div[2]/div[1]/div[2]/div/div/div[2]/button")
+    _added_note_type_field = (By.XPATH, "//strong")
+    _added_note_type_guests_value = "info für Gäste"
+    _added_note_type_staff_value = "info für Personal"
+    _added_note_value_field = (By.XPATH, "//div[3]/div/div[2]/div/div/span")
+    _remove_added_note_button = (By.XPATH, "//div[2]/div/div/div[4]/i")
+    _remove_added_note_submit_yes_button = (By.XPATH, "//div[2]/div/button")
+
 
     def __init__(self, driver):
         super(AccountPage, self).__init__(driver, self._title)
@@ -115,3 +130,29 @@ class AccountPage(BasePage):
     def open_relatIn(self):
         self.click(self._relatin_menu)
         return RelatInPage(self.get_driver())
+
+    def add_note_for_staff(self):
+        self.click(self._add_notes_button)
+        self.click(self._add_note_for_staff_button)
+        sleep(2)
+        self.click(self._add_note_open_field)
+        self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field)
+        self.click(self._add_note_close_field)
+        self.click(self._add_note_submit_button)
+        sleep(2)
+
+    def add_note_for_guests(self):
+        self.click(self._add_notes_button)
+        self.click(self._add_note_for_guests_button)
+        sleep(2)
+        self.click(self._add_note_open_field)
+        self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field)
+        self.click(self._add_note_close_field)
+        self.click(self._add_note_submit_button)
+        sleep(2)
+
+    def remove_added_note(self):
+        self.click(self._add_notes_button)
+        self.click(self._remove_added_note_button)
+        self.click(self._remove_added_note_submit_yes_button)
+        self.click(self._add_notes_button)

@@ -16,6 +16,7 @@ from time import gmtime, strftime
 import re
 from selenium.webdriver.remote.webelement import *
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.action_chains import *
 
 SCREEN_DUMP_LOCATION = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), 'screendumps'
@@ -271,6 +272,46 @@ class SmokeTest(unittest.TestCase):
         Assert.equal(restaurant_settings_page._percentage_of_capacity_labeled_as_confirmed_value, restaurant_settings_page._percentage_of_capacity_labeled_as_confirmed_saved_value)
         Assert.equal(restaurant_settings_page._booking_in_advance_value, restaurant_settings_page._booking_in_advance_saved_value)
 
+    def test_add_daily_note_for_staff_should_succeed(self):
+        home_page = HomePage(self.driver).open_home_page()
+        account_page = home_page.header.login(USER, PASSWORD)
+        sleep(5)
+        if "Einloggen" in home_page.header.get_page_source():
+            account_page = home_page.header.login(USER, PASSWORD)
+        account_page.open_George_Bar_Grill_restaurant()
+        account_page.open_shifts_menu()
+        account_page.add_note_for_staff()
+
+        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_type_field, account_page._added_note_type_staff_value))
+        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_value_field, account_page._add_note_text_value))
+
+        account_page.remove_added_note()
+
+        self.not_contains(account_page._added_note_type_staff_value, account_page.get_page_source())
+        self.not_contains(account_page._add_note_text_value, account_page.get_page_source())
+
+#AUTOMATIC TEST DOESN'T ADD NOTE, ALTHOUGH THE INFO IS "Gespeichert", zgłosić jak coś
+
+    def test_add_daily_note_for_guests_should_succeed(self):
+        home_page = HomePage(self.driver).open_home_page()
+        account_page = home_page.header.login(USER, PASSWORD)
+        sleep(5)
+        if "Einloggen" in home_page.header.get_page_source():
+            account_page = home_page.header.login(USER, PASSWORD)
+        account_page.open_George_Bar_Grill_restaurant()
+        account_page.open_shifts_menu()
+        account_page.add_note_for_guests()
+
+        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_type_field, account_page._added_note_type_guests_value))
+        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_value_field, account_page._add_note_text_value))
+
+        account_page.remove_added_note()
+
+        self.not_contains(account_page._added_note_type_guests_value, account_page.get_page_source())
+        self.not_contains(account_page._add_note_text_value, account_page.get_page_source())
+
+#AUTOMATIC TEST DOESN'T ADD NOTE, ALTHOUGH THE INFO IS "Gespeichert", zgłosić jak coś
+
     def test_add_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
         account_page = home_page.header.login(USER, PASSWORD)
@@ -473,6 +514,15 @@ class SmokeTest(unittest.TestCase):
         except NoSuchElementException:
             return False
         return True
+
+    def drag_and_drop(self, locator, x_from, y_from, x_to, y_to):
+        element = self.driver.find_element_by_xpath(locator)
+        ActionChains(self.driver).move_to_element(element)
+        ActionChains(self.driver).move_by_offset(x_from, y_from)
+        ActionChains(self.driver).click_and_hold(on_element=None)
+        ActionChains(self.driver).move_by_offset(x_to, y_to)
+        ActionChains(self.driver).release(on_element=None)
+        ActionChains(self.driver).perform()
 
 if __name__ == '__main__':
      unittest.main()
