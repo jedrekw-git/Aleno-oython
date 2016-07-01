@@ -18,7 +18,7 @@ class AccountPage(BasePage):
 
     _settings_icon = (By.CSS, "i.aleno-icon-setting")
     _settings_option = (By.LINK_TEXT, "Grundeinstellungen")
-    _daily_settings_option = (By.NAME, "Tageseinstellungen")
+    _daily_settings_option = (By.LINK_TEXT, "Tageseinstellungen")
     _test_option = (By.NAME, "Test")
     _test_shift_name_field = (By.XPATH, "//div/input")
     _test_date_field = (By.XPATH, "//div[2]/input")
@@ -30,7 +30,7 @@ class AccountPage(BasePage):
     _fourth_restaurant_option = (By.XPATH, "//div/ul/li[4]")
     _shifts_menu = (By.CSS, "div.toolbar-top-item.toolbar-top-item-shift")
     _expand_first_shift_button = (By.XPATH, "//th/span/i")
-    _click_first_shift_button = (By.CSS, "span.js-go.shift-info > span")
+    _click_first_shift_button = (By.CSS, "span.js-go.shift-info")
     _first_shift_first_room_name_field = (By.XPATH, "//tr[2]/th/span")
     _first_shift_second_room_name_field = (By.XPATH, "//tr[3]/th/span")
     _seatIn_menu = (By.XPATH, "//li/a")
@@ -55,6 +55,8 @@ class AccountPage(BasePage):
     _added_note_value_field = (By.XPATH, "//div[3]/div/div[2]/div/div/span")
     _remove_added_note_button = (By.XPATH, "//div[2]/div/div/div[4]/i")
     _remove_added_note_submit_yes_button = (By.XPATH, "//div[2]/div/button")
+    _stg_restaurant_AUTOTESTa_option = (By.ID, "8NdC8QFy6HPyZm5va")
+    _stg_restaurant_AUTOTESTb_option = (By.ID, "JTcpXtDTGvF6wxG8X")
 
 
     def __init__(self, driver):
@@ -85,6 +87,7 @@ class AccountPage(BasePage):
 
     def click_first_shift(self):
         self.click(self._click_first_shift_button)
+        return SeatInPage(self.get_driver())
 
     def open_test_page(self):
         self.click(self._settings_icon)
@@ -156,3 +159,11 @@ class AccountPage(BasePage):
         self.click(self._remove_added_note_button)
         self.click(self._remove_added_note_submit_yes_button)
         self.click(self._add_notes_button)
+
+    def stg_open_AUTOTESTa_restaurant(self):
+        self.click(self._restaurants_dropdown)
+        self.click(self._stg_restaurant_AUTOTESTa_option)
+
+    def stg_open_AUTOTESTb_restaurant(self):
+        self.click(self._restaurants_dropdown)
+        self.click(self._stg_restaurant_AUTOTESTb_option)

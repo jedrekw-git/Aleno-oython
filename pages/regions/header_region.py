@@ -33,3 +33,7 @@ class HeaderRegion(Page):
     def open_account_page(self):
         self.get(self._base_url)
         return AccountPage(self.get_driver())
+
+    def click_account_page(self):
+        self.click(self._aleno_logo)
+        return AccountPage(self.get_driver())

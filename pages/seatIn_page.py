@@ -11,7 +11,8 @@ from selenium.common.exceptions import TimeoutException
 class SeatInPage(BasePage):
     _title = "SeatIn Page"
 
-    _add_reservation_plus_button = (By.XPATH, "//div[2]/div/button")
+    _add_reservation_plus_button = (By.XPATH, '//button[@title="Neue Reservation"]')
+    _add_reservation_plus_button2 = (By.XPATH, "//div[2]/div/button")
     _add_reservation_hour_button = (By.XPATH, "//div[2]/div/div/div[3]/div")
     _add_reservation_details_button = (By.XPATH, "//button[@title='Details']")
     _add_reservation_first_accordeon = (By.XPATH, "//form/div/div/div/a")
@@ -43,8 +44,8 @@ class SeatInPage(BasePage):
     # _add_reservation_internal_comment_value = get_random_string(8)+" "+get_random_string(7)+" "+get_random_string(6)
     _save_reservation_button = (By.XPATH, "//div[2]/button")
     _expand_seatIn_reservation_details_button = (By.XPATH, "//div[2]/div/div/div[3]/button")
-    _added_reservation = (By.PARTIAL_LINK_TEXT, "%s" % _add_reservation_surname_value)
-    _remove_added_reservation_button = (By.XPATH, "//button[4]")
+    _added_reservation = (By.XPATH, "//*[text()='" + _add_reservation_first_name_value + "']")
+    _remove_added_reservation_button = (By.LINK_TEXT, "Storniert")
     _shift_name_field = (By.CSS, "span.shiftName")
     _seatIn_room_separator_field = (By.CSS, "div.ce-room-separator")
 
@@ -67,11 +68,12 @@ class SeatInPage(BasePage):
         self.clear_field_and_send_keys(self._add_reservation_guests_value, self._add_reservation_guests_field)
         self.clear_field_and_send_keys(self._add_reservation_start_time_value, self._add_reservation_start_time_field)
         self.click(self._add_reservation_second_accordeon)
-        # self.select_index_from_dropdown(2, self._add_reservation_language_dropdown)
+        # self.select_index_from_dropdown(0, self._add_reservation_language_dropdown)
         self.clear_field_and_send_keys(self._add_reservation_phone_value, self._add_reservation_phone_field)
         self.clear_field_and_send_keys(self._add_reservation_first_name_value, self._add_reservation_first_name_field)
         self.clear_field_and_send_keys(self._add_reservation_surname_value, self._add_reservation_surname_field)
         self.clear_field_and_send_keys(self._add_reservation_email_value, self._add_reservation_email_field)
+        sleep(7)
         # self.click(self._add_reservation_fourth_accordeon)
         # sleep(2)
         # self.click(self._add_reservation_guests_comment_open_field)
@@ -99,6 +101,8 @@ class SeatInPage(BasePage):
 
     def remove_added_reservation(self):
         self.click(self._remove_added_reservation_button)
+        self.accept_alert()
+        sleep(2)
 
 
 

@@ -134,6 +134,8 @@ class RestaurantSettingsPage(BasePage):
     _edit_holiday_start_date_value = str(datetime.date.today().day-1)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
     _edit_holiday_start_date_field = (By.XPATH, "//div[2]/div/div[2]/form/div/div[3]/div/input")
     _edit_holiday_end_date_value = str(datetime.date.today().day)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
+    _first_day_next_month = "1."+str(datetime.date.today().month+1)+"."+str(datetime.date.today().year)
+    _last_day_previous_month = "29."+str(datetime.date.today().month-1)+"."+str(datetime.date.today().year)
     _edit_holiday_end_date_field = (By.XPATH, "//form[@id='editHolidays']/div/div[4]/div/input")
     _edit_holiday_information_value = get_random_string(6)+" "+get_random_string(5)+" "+get_random_string(3)
     _edit_holiday_information_text_field = (By.XPATH, "//form[@id='editHolidays']/div/div[5]/div/div/div/div[2]/div[3]/div[3]")
@@ -310,10 +312,17 @@ class RestaurantSettingsPage(BasePage):
 
     def add_holiday(self):
         self.click(self._add_holiday_button)
+        sleep(2)
         self.clear_field_and_send_keys(self._holiday_name_value, self._holiday_name_field)
         self.click(self._holiday_from_to_checkbox)
         self.clear_field_and_send_keys(self._holiday_start_date_value, self._holiday_start_date_field)
-        self.clear_field_and_send_keys(self._holiday_end_date_value, self._holiday_end_date_field)
+        if str(datetime.date.today().day)==29 and str(datetime.date.today().month)==2:
+            self.clear_field_and_send_keys(self._first_day_next_month, self._holiday_end_date_field)
+        elif str(datetime.date.today().day)==30 or str(datetime.date.today().day)==31:
+            self.clear_field_and_send_keys(self._first_day_next_month, self._holiday_end_date_field)
+        else:
+            self.clear_field_and_send_keys(self._holiday_end_date_value, self._holiday_end_date_field)
+        self._holiday_end_date_inserted = self.get_text(self._holiday_end_date_field)
         self.click(self._holiday_information_open_field)
         self.clear_field_and_send_keys(self._holiday_information_value, self._holiday_information_text_field)
         self.click(self._holiday_information_close_field)
@@ -322,7 +331,11 @@ class RestaurantSettingsPage(BasePage):
     def edit_holiday(self):
         self.click(self._first_added_holiday_name_field)
         self.clear_field_and_send_keys(self._edit_holiday_name_value, self._edit_holiday_name_field)
-        self.clear_field_and_send_keys(self._edit_holiday_start_date_value, self._edit_holiday_start_date_field)
+        if str(datetime.date.today().day)==1:
+            self.clear_field_and_send_keys(self._last_day_previous_month, self._edit_holiday_start_date_field)
+        else:
+            self.clear_field_and_send_keys(self._edit_holiday_start_date_value, self._edit_holiday_start_date_field)
+        self._edit_holiday_start_date_inserted = self.get_text(self._edit_holiday_start_date_field)
         self.clear_field_and_send_keys(self._edit_holiday_end_date_value, self._edit_holiday_end_date_field)
         self.click(self._edit_holiday_information_open_field)
         self.clear_field_and_send_keys(self._edit_holiday_information_value, self._edit_holiday_information_text_field)

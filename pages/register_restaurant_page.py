@@ -24,7 +24,7 @@ class RegisterRestaurantPage(BasePage):
     _country_value = get_random_string(7)
     _timezone_dropdown = (By.NAME, "timezone")
     _timezone_index = randint(1, 583)
-    _random_language = (By.XPATH, "//tr[%s]/td[2]/input" %randint(1,3))
+    _random_language = (By.XPATH, "//tr[%s]/td[2]/input" %randint(1,2))
     _email_field = (By.NAME, "email")
     _email_value = get_random_string(7)+"@"+get_random_string(5)+".pl"
     _senders_email_field = (By.NAME, "publicEmail")

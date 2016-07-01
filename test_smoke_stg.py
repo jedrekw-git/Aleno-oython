@@ -73,7 +73,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.stg_open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_rooms_tab()
         restaurant_settings_page.add_two_rooms()
@@ -88,7 +88,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.stg_open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -125,6 +125,7 @@ class SmokeTest(unittest.TestCase):
         account_page.open_George_Bar_Grill_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
+        sleep(3)
         restaurant_settings_page.get_first_shift_internal_name()
         restaurant_settings_page.archive_first_shift()
         sleep(3)
@@ -143,7 +144,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTalcmfaoa_restaurant()
+        account_page.stg_open_AUTOTESTb_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -170,7 +171,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTalcmfaoa_restaurant()
+        account_page.stg_open_AUTOTESTb_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -178,7 +179,7 @@ class SmokeTest(unittest.TestCase):
         restaurant_settings_page.add_2_rooms_to_shift_publish()
         restaurant_settings_page.save_shift()
 
-        account_page = home_page.header.open_account_page()
+        account_page = home_page.header.click_account_page()
         account_page.open_shifts_menu()
         account_page.expand_first_shift()
 
@@ -196,7 +197,7 @@ class SmokeTest(unittest.TestCase):
         # Assert.contains(restaurant_settings_page.first_room_name, reservation_popup_page.get_page_source())
         # Assert.contains(restaurant_settings_page.second_room_name, reservation_popup_page.get_page_source())
 
-        account_page = home_page.header.open_account_page()
+        account_page = home_page.header.click_account_page()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.remove_first_shift()
@@ -212,7 +213,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.stg_open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_tables_tab()
         restaurant_settings_page.add_table()
@@ -231,20 +232,20 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.stg_open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_holidays_tab()
         restaurant_settings_page.add_holiday()
 
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_name_field, restaurant_settings_page._holiday_name_value))
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_from_field, restaurant_settings_page._holiday_start_date_value))
-        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_to_field, restaurant_settings_page._holiday_end_date_value))
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_to_field, restaurant_settings_page._holiday_end_date_inserted))
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_information_field, restaurant_settings_page._holiday_information_value))
 
         restaurant_settings_page.edit_holiday()
 
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_name_field, restaurant_settings_page._edit_holiday_name_value))
-        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_from_field, restaurant_settings_page._edit_holiday_start_date_value))
+        WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_from_field, restaurant_settings_page._edit_holiday_start_date_inserted))
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_to_field, restaurant_settings_page._edit_holiday_end_date_value))
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_information_field, restaurant_settings_page._edit_holiday_information_value))
 
@@ -263,7 +264,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.stg_open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_coustomizations_tab()
         if not self.driver.find_element_by_name("serviceRole80").is_enabled():
@@ -412,7 +413,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTammzkkcm_restaurant()
+        account_page.open_George_Bar_Grill_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.add_daily_shift_click_button()
@@ -435,7 +436,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTammzkkcm_restaurant()
+        account_page.open_George_Bar_Grill_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.daily_shift_activate_global()
@@ -460,7 +461,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTammzkkcm_restaurant()
+        account_page.stg_open_AUTOTESTa_restaurant()
         relatIn_page = account_page.open_relatIn()
         relatIn_page.add_client()
 
