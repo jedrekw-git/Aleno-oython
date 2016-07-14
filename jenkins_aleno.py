@@ -77,7 +77,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_rooms_tab()
         restaurant_settings_page.add_two_rooms()
@@ -92,7 +92,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -147,7 +147,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTalcmfaoa_restaurant()
+        account_page.open_AUTOTESTb_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -174,7 +174,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTalcmfaoa_restaurant()
+        account_page.open_AUTOTESTb_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.add_shift_first_accordeon()
@@ -216,7 +216,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_tables_tab()
         restaurant_settings_page.add_table()
@@ -235,7 +235,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_holidays_tab()
         restaurant_settings_page.add_holiday()
@@ -267,7 +267,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTaabkoajo_restaurant()
+        account_page.open_AUTOTESTa_restaurant()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_coustomizations_tab()
         if not self.driver.find_element_by_name("serviceRole80").is_enabled():
@@ -416,7 +416,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTammzkkcm_restaurant()
+        account_page.open_George_Bar_Grill_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.add_daily_shift_click_button()
@@ -439,7 +439,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTammzkkcm_restaurant()
+        account_page.open_George_Bar_Grill_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.daily_shift_activate_global()
@@ -464,7 +464,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_AUTOTESTammzkkcm_restaurant()
+        account_page.open_AUTOTESTa_restaurant()
         relatIn_page = account_page.open_relatIn()
         relatIn_page.add_client()
 

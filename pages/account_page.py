@@ -35,8 +35,8 @@ class AccountPage(BasePage):
     _first_shift_second_room_name_field = (By.XPATH, "//tr[3]/th/span")
     _seatIn_menu = (By.XPATH, "//li/a")
     _fifth_restaurant_option = (By.XPATH, "//div/ul/li[5]")
-    _restaurant_AUTOTESTaabkoajo_option = (By.ID, "ovbthH9HZMJZ6DnjQ")
-    _restaurant_AUTOTESTalcmfaoa_option = (By.ID, "Y8pxTZXifE362chuQ")
+    _restaurant_AUTOTESTa_option = (By.ID, "cujLTfAiQ8v9ADAMm")
+    _restaurant_AUTOTESTb_option = (By.ID, "jmM3toAhncpgf87nG")
     _restaurant_AUTOTESTammzkkcm_option = (By.ID, "xvkWn37yRSmcSNjjE")
     _restaurant_George_Bar_Grill_option = (By.ID, "EYccPQ4dsanRaNnWd")
     _einloggen_text_field = (By.XPATH, "//h1")
@@ -114,13 +114,13 @@ class AccountPage(BasePage):
         self.click(self._daily_settings_option)
         return RestaurantSettingsPage(self.get_driver())
 
-    def open_AUTOTESTaabkoajo_restaurant(self):
+    def open_AUTOTESTa_restaurant(self):
         self.click(self._restaurants_dropdown)
-        self.click(self._restaurant_AUTOTESTaabkoajo_option)
+        self.click(self._restaurant_AUTOTESTa_option)
 
-    def open_AUTOTESTalcmfaoa_restaurant(self):
+    def open_AUTOTESTb_restaurant(self):
         self.click(self._restaurants_dropdown)
-        self.click(self._restaurant_AUTOTESTalcmfaoa_option)
+        self.click(self._restaurant_AUTOTESTb_option)
 
     def open_AUTOTESTammzkkcm_restaurant(self):
         self.click(self._restaurants_dropdown)
