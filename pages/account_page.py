@@ -55,7 +55,7 @@ class AccountPage(BasePage):
     _added_note_value_field = (By.XPATH, "//div[3]/div/div[2]/div/div/span")
     _remove_added_note_button = (By.XPATH, "//div[2]/div/div/div[4]/i")
     _remove_added_note_submit_yes_button = (By.XPATH, "//div[2]/div/button")
-    _stg_restaurant_AUTOTESTa_option = (By.ID, "8NdC8QFy6HPyZm5va")
+    _stg_restaurant_AUTOTESTa_option = (By.PARTIAL_LINK_TEXT, "AUTOTESTa")
     _stg_restaurant_AUTOTESTb_option = (By.ID, "JTcpXtDTGvF6wxG8X")
 
 

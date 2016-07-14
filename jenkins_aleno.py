@@ -69,6 +69,8 @@ class SmokeTest(unittest.TestCase):
         Assert.equal(restaurant_settings_page.restaurant_info_phone, register_restaurant_page._phone_value)
         Assert.equal(restaurant_settings_page.restaurant_info_image_url, register_restaurant_page._image_url_value)
 
+#random language do sprawdzenia
+
     def test_add_rooms_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
         account_page = home_page.header.login(USER, PASSWORD)
@@ -152,13 +154,13 @@ class SmokeTest(unittest.TestCase):
         restaurant_settings_page.add_1_room_to_shift()
         restaurant_settings_page.save_shift()
 
-        account_page = home_page.header.open_account_page()
+        account_page = home_page.header.click_account_page()
         account_page.open_shifts_menu()
         account_page.expand_first_shift()
 
         WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._first_shift_first_room_name_field, restaurant_settings_page.first_room_name))
 
-        account_page = home_page.header.open_account_page()
+        account_page = home_page.header.click_account_page()
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         restaurant_settings_page.remove_first_shift()
@@ -225,7 +227,7 @@ class SmokeTest(unittest.TestCase):
         restaurant_settings_page.remove_first_table()
 
         self.not_contains(restaurant_settings_page._table_name_value, restaurant_settings_page.get_page_source())
-        self.not_contains(restaurant_settings_page._table_capacity_value, restaurant_settings_page.get_page_source())
+        # self.not_contains(restaurant_settings_page._table_capacity_value, restaurant_settings_page.get_page_source())
 
     def test_add_and_edit_holiday_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -324,8 +326,9 @@ class SmokeTest(unittest.TestCase):
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        account_page.click_first_shift()
-        seatIn_page = account_page.open_seatIn()
+        sleep(3)
+        seatIn_page = account_page.click_first_shift()
+        # seatIn_page = account_page.open_seatIn()
         # seatIn_page.click_hour()
         seatIn_page.click_add_reservation_plus_button()
         WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
@@ -339,9 +342,12 @@ class SmokeTest(unittest.TestCase):
         # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
 
         seatIn_page.click_added_reservation()
+        seatIn_page.click_added_reservation()
         seatIn_page.remove_added_reservation()
 
-#AUTOMATYCZNY TEST NIE DODAJE REZERWACJI, zgłoszone
+        self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
+
+#ZGŁOSIC, że już rezerwacja automatyczna działa
 
     def test_add_provisional_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -351,8 +357,9 @@ class SmokeTest(unittest.TestCase):
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        account_page.click_first_shift()
-        seatIn_page = account_page.open_seatIn()
+        sleep(3)
+        seatIn_page = account_page.click_first_shift()
+        # seatIn_page = account_page.open_seatIn()
         # seatIn_page.click_hour()
         seatIn_page.click_add_reservation_plus_button()
         WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
@@ -360,21 +367,18 @@ class SmokeTest(unittest.TestCase):
         seatIn_page.enter_reservation_details()
         seatIn_page.reservation_set_provisional()
         seatIn_page.save_reservation()
-        account_page = home_page.header.open_account_page()
-        account_page.open_shifts_menu()
-        account_page.click_first_shift()
-        seatIn_page = account_page.open_seatIn()
         seatIn_page.expand_seatIn_reservation_details()
 
         Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
         # Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
         # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
-        Assert.contains("Provisional", seatIn_page.get_page_source())
+        Assert.contains("Provisorisch", seatIn_page.get_page_source())
 
+        seatIn_page.click_added_reservation()
         seatIn_page.click_added_reservation()
         seatIn_page.remove_added_reservation()
 
-#AUTOMATIC RESERVATION ISN'T CREATED, zgłoszone
+        self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
 
     def test_edit_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -384,16 +388,27 @@ class SmokeTest(unittest.TestCase):
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        account_page.click_first_shift()
-        seatIn_page = account_page.open_seatIn()
+        sleep(3)
+        seatIn_page = account_page.click_first_shift()
+        # seatIn_page = account_page.open_seatIn()
         # seatIn_page.click_hour()
         seatIn_page.click_add_reservation_plus_button()
         WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.click_reservation_details_button()
         seatIn_page.enter_reservation_details()
         seatIn_page.save_reservation()
+        seatIn_page.expand_seatIn_reservation_details()
 
-#DO POPRAWKI PO NAPRAWIE DODAWANIA REZERWACJI
+        Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
+        # Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
+        # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
+
+        seatIn_page.click_added_reservation()
+        seatIn_page.click_added_reservation()
+        seatIn_page.remove_added_reservation()
+
+        self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
+        #do napisania
 
     def test_add_daily_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -584,7 +599,7 @@ class SmokeTest(unittest.TestCase):
         from mailer import Message
 
         message = Message(From="jedrzej.wojcieszczyk@testuj.pl",
-                          To=["a", "b"])
+                          To=["aleksandra.mika@vazco.eu", "michal.zacher@vazco.eu", "developer@vazco.eu", "pawel.kuligowski@vazco.eu", "michal.wanat@vazco.eu", "jan.slowik@vazco.eu", "radoslaw.miernik@vazco.eu"])
         message.Subject = "Raport Jenkins Aleno Testy Automatyczne"
         message.Html = """<head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></head><p>Cześć!<br>
            Oto wygenerowany automatycznie raport z testów Aleno.pl<br><br>
