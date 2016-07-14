@@ -46,8 +46,8 @@ class SeatInPage(BasePage):
     _expand_seatIn_reservation_details_button = (By.XPATH, "//div[2]/div/div/div[3]/button")
     _added_reservation = (By.XPATH, "//*[text()='" + _add_reservation_first_name_value + "']")
     _remove_added_reservation_button = (By.LINK_TEXT, "Storniert")
-    _shift_name_field = (By.CSS, "span.shiftName")
-    _seatIn_room_separator_field = (By.CSS, "div.ce-room-separator")
+    _shift_name_field = (By.CSS_SELECTOR, "span.shiftName")
+    _seatIn_room_separator_field = (By.CSS_SELECTOR, "div.ce-room-separator")
 
     def __init__(self, driver):
         super(SeatInPage, self).__init__(driver, self._title)
