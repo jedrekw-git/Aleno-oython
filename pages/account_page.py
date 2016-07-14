@@ -16,7 +16,7 @@ import datetime
 class AccountPage(BasePage):
     _title = "Account Page"
 
-    _settings_icon = (By.CSS, "i.aleno-icon-setting")
+    _settings_icon = (By.CSS_SELECTOR, "i.aleno-icon-setting")
     _settings_option = (By.LINK_TEXT, "Grundeinstellungen")
     _daily_settings_option = (By.LINK_TEXT, "Tageseinstellungen")
     _test_option = (By.NAME, "Test")
@@ -28,9 +28,9 @@ class AccountPage(BasePage):
     _first_restaurant_option = (By.XPATH, "//div[2]/ul/li")
     _third_restaurant_option = (By.XPATH, "//div/ul/li[3]")
     _fourth_restaurant_option = (By.XPATH, "//div/ul/li[4]")
-    _shifts_menu = (By.CSS, "div.toolbar-top-item.toolbar-top-item-shift")
+    _shifts_menu = (By.CSS_SELECTOR, "div.toolbar-top-item.toolbar-top-item-shift")
     _expand_first_shift_button = (By.XPATH, "//th/span/i")
-    _click_first_shift_button = (By.CSS, "span.js-go.shift-info")
+    _click_first_shift_button = (By.CSS_SELECTOR, "span.js-go.shift-info")
     _first_shift_first_room_name_field = (By.XPATH, "//tr[2]/th/span")
     _first_shift_second_room_name_field = (By.XPATH, "//tr[3]/th/span")
     _seatIn_menu = (By.XPATH, "//li/a")
@@ -41,7 +41,7 @@ class AccountPage(BasePage):
     _restaurant_George_Bar_Grill_option = (By.ID, "EYccPQ4dsanRaNnWd")
     _einloggen_text_field = (By.XPATH, "//h1")
     _relatin_menu = (By.XPATH, "//li[2]/a")
-    _add_notes_button = (By.CSS, "i.aleno-icon-pen.js-header-calendar-edit-mode-activator")
+    _add_notes_button = (By.CSS_SELECTOR, "i.aleno-icon-pen.js-header-calendar-edit-mode-activator")
     _add_note_for_staff_button = (By.XPATH, "//div[2]/a")
     _add_note_for_guests_button = (By.XPATH, "//div/div/div/a")
     _add_note_open_field = (By.XPATH, "//form/div/div/div/div/div")
