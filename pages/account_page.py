@@ -30,7 +30,8 @@ class AccountPage(BasePage):
     _fourth_restaurant_option = (By.XPATH, "//div/ul/li[4]")
     _shifts_menu = (By.CSS_SELECTOR, "div.toolbar-top-item.toolbar-top-item-shift")
     _expand_first_shift_button = (By.XPATH, "//th/span/i")
-    _click_first_shift_button = (By.CSS_SELECTOR, "span.js-go.shift-info")
+    _click_first_shift_button = (By.CSS_SELECTOR, "span.js-go.shift-info > span")
+    _first_shift_start_time_field = (By.XPATH, "//span[2]/span[2]/span")
     _first_shift_first_room_name_field = (By.XPATH, "//tr[2]/th/span")
     _first_shift_second_room_name_field = (By.XPATH, "//tr[3]/th/span")
     _seatIn_menu = (By.XPATH, "//li/a")
@@ -44,11 +45,11 @@ class AccountPage(BasePage):
     _add_notes_button = (By.CSS_SELECTOR, "i.aleno-icon-pen.js-header-calendar-edit-mode-activator")
     _add_note_for_staff_button = (By.XPATH, "//div[2]/a")
     _add_note_for_guests_button = (By.XPATH, "//div/div/div/a")
-    _add_note_open_field = (By.XPATH, "//form/div/div/div/div/div")
-    _add_note_text_field = (By.XPATH, "//div[3]/div[3]")
+    _add_note_open_field = (By.XPATH, "//p")
+    _add_note_text_field = (By.XPATH, "//div[3]/div[3]/div[3]")
     _add_note_text_value = get_random_string(7)+" "+get_random_string(5)
     _add_note_close_field = (By.XPATH, "//form/div/div/div/div/button")
-    _add_note_submit_button = (By.XPATH, "/html/body/div[2]/div[1]/div[2]/div/div/div[2]/button")
+    _add_note_submit_button = (By.XPATH, "/html/body/div[2]/div[1]/div[2]/div[1]/div/div[2]/button")
     _added_note_type_field = (By.XPATH, "//strong")
     _added_note_type_guests_value = "info für Gäste"
     _added_note_type_staff_value = "info für Personal"
@@ -83,11 +84,15 @@ class AccountPage(BasePage):
         self.click(self._shifts_menu)
 
     def expand_first_shift(self):
-        self.click(self._expand_first_shift_button)
+        # self.click(self._expand_first_shift_button)
+        self.get_driver().execute_script("arguments[0].click();", self.find_element(self._expand_first_shift_button))
 
     def click_first_shift(self):
         self.click(self._click_first_shift_button)
         return SeatInPage(self.get_driver())
+
+    def get_first_shift_start_time(self):
+        self.first_shift_start_time = self.get_text(self._first_shift_start_time_field)
 
     def open_test_page(self):
         self.click(self._settings_icon)
@@ -138,19 +143,20 @@ class AccountPage(BasePage):
         self.click(self._add_notes_button)
         self.click(self._add_note_for_staff_button)
         sleep(2)
-        self.click(self._add_note_open_field)
+        self.click(self._add_note_text_field)
         self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field)
-        self.click(self._add_note_close_field)
+        # self.click(self._add_note_close_field)
         self.click(self._add_note_submit_button)
         sleep(2)
 
     def add_note_for_guests(self):
         self.click(self._add_notes_button)
+        # WebDriverWait(self.get_driver(), 15).until(EC.element_to_be_clickable(self._add_note_for_guests_button))
         self.click(self._add_note_for_guests_button)
         sleep(2)
-        self.click(self._add_note_open_field)
+        self.click(self._add_note_text_field)
         self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field)
-        self.click(self._add_note_close_field)
+        # self.click(self._add_note_close_field)
         self.click(self._add_note_submit_button)
         sleep(2)
 
@@ -167,3 +173,6 @@ class AccountPage(BasePage):
     def stg_open_AUTOTESTb_restaurant(self):
         self.click(self._restaurants_dropdown)
         self.click(self._stg_restaurant_AUTOTESTb_option)
+
+    def get_text_added_note_type(self):
+        self.added_note_type_text = (self.get_text(self._added_note_type_field)).encode('utf-8')

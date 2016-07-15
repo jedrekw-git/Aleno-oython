@@ -2,6 +2,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 
 class Page(object):
     def __init__(self, driver, title=None, url=None):
@@ -82,7 +84,11 @@ class Page(object):
         dropdown.select_by_visible_text(text)
 
     def accept_alert(self):
-        return self.get_driver().switch_to_alert().accept()
+        try:
+            WebDriverWait(self.get_driver(), 15).until(EC.alert_is_present())
+            return self.get_driver().switch_to_alert().accept()
+        except TimeoutException:
+            print "no alert"
 
     def refresh(self):
         self.get_driver().refresh()

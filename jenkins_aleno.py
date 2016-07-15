@@ -288,12 +288,13 @@ class SmokeTest(unittest.TestCase):
         account_page.open_shifts_menu()
         account_page.add_note_for_staff()
 
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_type_field, account_page._added_note_type_staff_value))
         WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_value_field, account_page._add_note_text_value))
+        account_page.get_text_added_note_type()
+        Assert.equal(account_page.added_note_type_text, account_page._added_note_type_staff_value)
 
         account_page.remove_added_note()
 
-        self.not_contains(account_page._added_note_type_staff_value, account_page.get_page_source())
+        self.not_contains(account_page._added_note_type_staff_value, account_page.get_page_source().encode('utf-8'))
         self.not_contains(account_page._add_note_text_value, account_page.get_page_source())
 
 #AUTOMATIC TEST DOESN'T ADD NOTE, ALTHOUGH THE INFO IS "Gespeichert", zgłosić jak coś
@@ -308,12 +309,13 @@ class SmokeTest(unittest.TestCase):
         account_page.open_shifts_menu()
         account_page.add_note_for_guests()
 
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_type_field, account_page._added_note_type_guests_value))
         WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_value_field, account_page._add_note_text_value))
+        account_page.get_text_added_note_type()
+        Assert.equal(account_page.added_note_type_text, account_page._added_note_type_guests_value)
 
         account_page.remove_added_note()
 
-        self.not_contains(account_page._added_note_type_guests_value, account_page.get_page_source())
+        self.not_contains(account_page._added_note_type_guests_value, account_page.get_page_source().encode('utf-8'))
         self.not_contains(account_page._add_note_text_value, account_page.get_page_source())
 
 #AUTOMATIC TEST DOESN'T ADD NOTE, ALTHOUGH THE INFO IS "Gespeichert", zgłosić jak coś
@@ -326,14 +328,15 @@ class SmokeTest(unittest.TestCase):
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        sleep(3)
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(account_page._click_first_shift_button))
+        account_page.get_first_shift_start_time()
         seatIn_page = account_page.click_first_shift()
         # seatIn_page = account_page.open_seatIn()
         # seatIn_page.click_hour()
         seatIn_page.click_add_reservation_plus_button()
         WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.click_reservation_details_button()
-        seatIn_page.enter_reservation_details()
+        seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
         seatIn_page.save_reservation()
         seatIn_page.expand_seatIn_reservation_details()
 
@@ -357,14 +360,15 @@ class SmokeTest(unittest.TestCase):
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        sleep(3)
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(account_page._click_first_shift_button))
+        account_page.get_first_shift_start_time()
         seatIn_page = account_page.click_first_shift()
         # seatIn_page = account_page.open_seatIn()
         # seatIn_page.click_hour()
         seatIn_page.click_add_reservation_plus_button()
         WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.click_reservation_details_button()
-        seatIn_page.enter_reservation_details()
+        seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
         seatIn_page.reservation_set_provisional()
         seatIn_page.save_reservation()
         seatIn_page.expand_seatIn_reservation_details()
@@ -388,14 +392,15 @@ class SmokeTest(unittest.TestCase):
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        sleep(3)
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(account_page._click_first_shift_button))
+        account_page.get_first_shift_start_time()
         seatIn_page = account_page.click_first_shift()
         # seatIn_page = account_page.open_seatIn()
         # seatIn_page.click_hour()
         seatIn_page.click_add_reservation_plus_button()
         WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.click_reservation_details_button()
-        seatIn_page.enter_reservation_details()
+        seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
         seatIn_page.save_reservation()
         seatIn_page.expand_seatIn_reservation_details()
 
@@ -442,18 +447,19 @@ class SmokeTest(unittest.TestCase):
         account_page.open_George_Bar_Grill_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
-        daily_settings_page.daily_shift_activate_global()
+        daily_settings_page.daily_shift_activate_first_global()
+        if not "a class=\"edit-shift\"" in daily_settings_page.get_page_source():
+            daily_settings_page.daily_shift_activate_first_global()
+        if not "a class=\"edit-shift\"" in daily_settings_page.get_page_source():
+            daily_settings_page.daily_shift_activate_first_global()
         daily_settings_page.edit_first_daily_shift()
-        if not "aleno" in daily_settings_page.get_page_title():
-                daily_settings_page.daily_shift_activate_global()
-                daily_settings_page.edit_first_daily_shift()
         daily_settings_page.add_shift_daily_first_accordeon()
         daily_settings_page.save_shift()
 
+        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(daily_settings_page._first_shift_internal_name_field, daily_settings_page._add_daily_shift_internal_name_value))
         WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(daily_settings_page._daily_shift_edit_first_button, daily_settings_page._add_daily_shift_name_value))
-        Assert.contains(daily_settings_page._add_daily_shift_internal_name_value, daily_settings_page.get_page_source())
 
-        daily_settings_page.daily_shift_activate_global()
+        daily_settings_page.daily_shift_activate_first_global()
 
         self.not_contains(daily_settings_page._add_daily_shift_name_value, daily_settings_page.get_page_source())
         self.not_contains(daily_settings_page._add_daily_shift_internal_name_value, daily_settings_page.get_page_source())

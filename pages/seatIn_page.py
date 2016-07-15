@@ -19,7 +19,7 @@ class SeatInPage(BasePage):
     _add_reservation_guests_field = (By.NAME, "peopleCount")
     _add_reservation_guests_value = randint(2, 8)
     _add_reservation_start_time_field = (By.NAME, "selectedTime")
-    _add_reservation_start_time_value = "13:00"
+    # _add_reservation_start_time_value = "15:00"
     _add_reservation_second_accordeon = (By.XPATH, "//form/div/div[2]/div/a")
     _add_reservation_language_dropdown = (By.NAME, "lang")
     _add_reservation_phone_field = (By.NAME, "phoneNumber")
@@ -33,6 +33,7 @@ class SeatInPage(BasePage):
     _add_reservation_status_dropdown = (By.NAME, "state")
     _add_reservation_email_benachrichtigung_checkbox = (By.NAME, "resendStateTemplate")
     _add_reservation_send_sms_e_mail_reminder = (By.NAME, "sendReminderEmailTemplate")
+    _add_reservation_edited_by_header = (By.XPATH, "//div[12]/div[2]/label")
     # _add_reservation_fourth_accordeon = (By.LINK_TEXT, "Comments")
     # _add_reservation_guests_comment_open_field = (By.NAME, "comment")
     # _add_reservation_guests_comment_close_field = (By.XPATH, "/html/body/div[3]/div[2]/div/div/div/div/form/div/div[4]/div[2]/div/div[1]/div/div/button")
@@ -42,7 +43,7 @@ class SeatInPage(BasePage):
     # _add_reservation_internal_comment_close_field = (By.XPATH, "/html/body/div[3]/div[2]/div/div/div/div/form/div/div[4]/div[2]/div/div[2]/div/div/button")
     # _add_reservation_internal_comment_field = (By.XPATH, "//div[2]/div/div/div[2]/div[3]/div[3]/p")
     # _add_reservation_internal_comment_value = get_random_string(8)+" "+get_random_string(7)+" "+get_random_string(6)
-    _save_reservation_button = (By.XPATH, "//div[2]/button")
+    _save_reservation_button = (By.CSS_SELECTOR, "html.bg-aleno.scroll-y body div.wrap div.main-header-wrapper div.main-top-subnav-wrapper div.main-top-subnavigation div.container div.col-sm-6.text-right.toolbar-lh button.js-submit-form.btn.btn-default.btn-success")
     _expand_seatIn_reservation_details_button = (By.XPATH, "//div[2]/div/div/div[3]/button")
     _added_reservation = (By.XPATH, "//*[text()='" + _add_reservation_first_name_value + "']")
     _remove_added_reservation_button = (By.LINK_TEXT, "Storniert")
@@ -64,16 +65,16 @@ class SeatInPage(BasePage):
     def reservation_open_first_accordeon(self):
         self.click(self._add_reservation_first_accordeon)
 
-    def enter_reservation_details(self):
+    def enter_reservation_details(self, start_time):
         self.clear_field_and_send_keys(self._add_reservation_guests_value, self._add_reservation_guests_field)
-        self.clear_field_and_send_keys(self._add_reservation_start_time_value, self._add_reservation_start_time_field)
+        self.clear_field_and_send_keys(start_time, self._add_reservation_start_time_field)
         self.click(self._add_reservation_second_accordeon)
         # self.select_index_from_dropdown(0, self._add_reservation_language_dropdown)
         self.clear_field_and_send_keys(self._add_reservation_phone_value, self._add_reservation_phone_field)
         self.clear_field_and_send_keys(self._add_reservation_first_name_value, self._add_reservation_first_name_field)
         self.clear_field_and_send_keys(self._add_reservation_surname_value, self._add_reservation_surname_field)
         self.clear_field_and_send_keys(self._add_reservation_email_value, self._add_reservation_email_field)
-        sleep(7)
+        WebDriverWait(self.get_driver(), 30).until(EC.text_to_be_present_in_element(self._add_reservation_edited_by_header, "Bearbeitet von"))
         # self.click(self._add_reservation_fourth_accordeon)
         # sleep(2)
         # self.click(self._add_reservation_guests_comment_open_field)
