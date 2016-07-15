@@ -21,7 +21,7 @@ class ReservationPopupPage(BasePage):
         self.click(self._other_button)
 
     def click_first_shift(self):
-        self.click1(self._first_shift_button)
+        self.click(self._first_shift_button)
 
 
 

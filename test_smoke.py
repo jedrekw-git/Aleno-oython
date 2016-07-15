@@ -417,7 +417,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_George_Bar_Grill_restaurant()
+        account_page.open_AUTOTESTa_restaurant()
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.add_daily_shift_click_button()
@@ -426,7 +426,7 @@ class SmokeTest(unittest.TestCase):
         daily_settings_page.save_shift()
         seatIn_page = account_page.open_seatIn()
 
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(seatIn_page._shift_name_field, daily_settings_page._add_daily_shift_name_value))
+        WebDriverWait(self.driver, 20).until(EC.text_to_be_present_in_element(seatIn_page._shift_name_field, daily_settings_page._add_daily_shift_name_value))
 
         HomePage(self.driver).open_home_page()
         daily_settings_page = account_page.open_daily_settings()

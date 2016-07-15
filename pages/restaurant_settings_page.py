@@ -242,7 +242,7 @@ class RestaurantSettingsPage(BasePage):
         self.added_shift_daily_deadlinie = self.get_value(self._shift_daily_online_deadline_field)
         self.added_shift_kitchen_start = self.get_value(self._shift_kitchen_start_field)
         self.added_shift_kitchen_end = self.get_value(self._shift_kitchen_end_field)
-        self.get_driver().execute_script("window.scrollTo(3000, 0);")
+        self.get_driver().execute_script("window.scrollTo(2000, 0);")
         self.added_shift_timeslot_capacity = self.get_value(self._shift_timeslot_capacity_field)
         self.added_shift_reservations_confirmed = self.get_value(self._shift_reservations_confirmed_field)
         self.added_shift_minimum_guests = self.get_value(self._shift_minimum_guests_field)
@@ -288,7 +288,8 @@ class RestaurantSettingsPage(BasePage):
         self.first_active_shift_internal_name = self.get_text(self._first_shift_internal_name_field)
 
     def edit_first_daily_shift(self):
-        self.click(self._daily_shift_edit_first_button)
+        self.get_driver().execute_script("arguments[0].click();", self.find_element(self._daily_shift_edit_first_button))
+        # self.click(self._daily_shift_edit_first_button)
 
     def archive_first_shift(self):
         self.click(self._first_shift_archive_button)

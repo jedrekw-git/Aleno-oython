@@ -34,7 +34,7 @@ class AccountPage(BasePage):
     _first_shift_start_time_field = (By.XPATH, "//span[2]/span[2]/span")
     _first_shift_first_room_name_field = (By.XPATH, "//tr[2]/th/span")
     _first_shift_second_room_name_field = (By.XPATH, "//tr[3]/th/span")
-    _seatIn_menu = (By.XPATH, "//li/a")
+    _seatIn_menu = (By.XPATH, "/html/body/div[2]/div[1]/div[1]/nav/div/nav[1]/ul/li[1]/a")
     _fifth_restaurant_option = (By.XPATH, "//div/ul/li[5]")
     _restaurant_AUTOTESTa_option = (By.ID, "cujLTfAiQ8v9ADAMm")
     _restaurant_AUTOTESTb_option = (By.ID, "jmM3toAhncpgf87nG")
@@ -88,7 +88,8 @@ class AccountPage(BasePage):
         self.get_driver().execute_script("arguments[0].click();", self.find_element(self._expand_first_shift_button))
 
     def click_first_shift(self):
-        self.click(self._click_first_shift_button)
+        self.get_driver().execute_script("arguments[0].click();", self.find_element(self._click_first_shift_button))
+        # self.click(self._click_first_shift_button)
         return SeatInPage(self.get_driver())
 
     def get_first_shift_start_time(self):
