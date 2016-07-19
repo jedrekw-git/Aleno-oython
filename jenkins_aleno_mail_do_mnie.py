@@ -609,7 +609,7 @@ class SmokeTest(unittest.TestCase):
         message.Subject = "Raport Jenkins Aleno Testy Automatyczne"
         message.Html = """<head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></head><p>Cześć!<br>
            Oto wygenerowany automatycznie raport z testów Aleno.pl<br><br>
-           Tabela raportowa z logami wykonanych testów, a pod nią linki do screenshotów i kodu html testów które nie przeszły oraz wykres statystyczny: <a href="http://ci.testuj.pl/job/Aleno/ws/AlenoReportLogi.htm">Tabela z logami, screenshoty i wykres</a></p>"""
+           Tabela raportowa z logami wykonanych testów, a pod nią linki do screenshotów i kodu html testów które nie przeszły oraz wykres statystyczny: <a href="http://ci.testuj.pl/job/Aleno/ws/AlenoReportLogi.html">Tabela z logami, screenshoty i wykres</a></p>"""
 
         sender = Mailer('smtp.gmail.com', use_tls=True, usr='jedrzej.wojcieszczyk@testuj.pl', pwd='paluch88')
         sender.send(message)
@@ -629,7 +629,7 @@ class SmokeTest(unittest.TestCase):
 
 open("AlenoRaportScreeny.txt", 'w').close()
 suite = unittest.TestLoader().loadTestsFromTestCase(SmokeTest)
-outfile = open("AlenoReportLogi.htm", "wb")
+outfile = open("AlenoReportLogi.html", "wb")
 runner = HTMLTestRunner(stream=outfile, title='Test Report', description='Aleno', verbosity=2)
 runner.run(suite)
 
