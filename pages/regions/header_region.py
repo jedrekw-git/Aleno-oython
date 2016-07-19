@@ -15,6 +15,7 @@ class HeaderRegion(Page):
     _base_url = "http://test.aleno.me/"
     _base_url2 = "http://stg.aleno.me/"
     _aleno_logo = (By.XPATH, "//img")
+    _einloggen_text = (By.XPATH, "//h1")
 
 
     def login(self, login, password):
