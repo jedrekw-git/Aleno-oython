@@ -50,6 +50,8 @@ class SmokeTest(unittest.TestCase):
         register_restaurant_page = home_page.header.open_register_restaurant_page()
         register_restaurant_page.enter_restaurant_data()
         account_page = register_restaurant_page.save_restaurant()
+        home_page.header.click_account_page()
+        # account_page.open_registered_restaurant(register_restaurant_page._last_name_value)
         sleep(6)
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.get_restaurant_info()
@@ -309,6 +311,8 @@ class SmokeTest(unittest.TestCase):
 
         WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_value_field, account_page._add_note_text_value))
         account_page.get_text_added_note_type()
+        print account_page.added_note_type_text
+        print account_page._added_note_type_staff_value
         Assert.equal(account_page.added_note_type_text, account_page._added_note_type_staff_value)
 
         account_page.remove_added_note()

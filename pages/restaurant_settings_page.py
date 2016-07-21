@@ -84,7 +84,7 @@ class RestaurantSettingsPage(BasePage):
     _added_shift_name_field = (By.NAME, "name")
     _added_shift_internal_name_field = (By.NAME, "internalName")
     _remove_added_shift_button = (By.XPATH, "//td[6]/button")
-    _shift_third_accordeon_menu = (By.PARTIAL_LINK_TEXT, "Räume")
+    _shift_third_accordeon_menu = (By.CSS_SELECTOR, "a[href*='#rooms']")
     _shift_select_first_room_checkbox = (By.NAME, "roomId")
     _shift_first_room_name_field = (By.XPATH, "//div[2]/div/div/div/div/div/div/div")
     _shift_second_room_name_field = (By.XPATH, "//div[2]/div/div/div/div/div/div[2]/div")

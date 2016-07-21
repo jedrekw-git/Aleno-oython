@@ -37,6 +37,8 @@ class RelatInPage(BasePage):
 
     def add_client(self):
         self.click(self._add_client_button)
+        WebDriverWait(self.get_driver(), 15).until(EC.visibility_of_element_located(self._client_first_name_field))
+        self.click(self._client_first_name_field)
         self.clear_field_and_send_keys(self._client_first_name_value, self._client_first_name_field)
         self.clear_field_and_send_keys(self._client_last_name_value, self._client_last_name_field)
         self.clear_field_and_send_keys(self._client_phone_number_value, self._client_phone_number_field)

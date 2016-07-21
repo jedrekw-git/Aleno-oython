@@ -4,6 +4,8 @@ from pages.base import BasePage
 from utils.utils import *
 from random import randint
 from time import sleep
+from unittestzero import Assert
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
@@ -18,6 +20,7 @@ class AccountPage(BasePage):
 
     _settings_icon = (By.CSS_SELECTOR, "i.aleno-icon-setting")
     _settings_option = (By.LINK_TEXT, "Grundeinstellungen")
+    _settings_option2 = (By.LINK_TEXT, "Settings")
     _daily_settings_option = (By.LINK_TEXT, "Tageseinstellungen")
     _test_option = (By.NAME, "Test")
     _test_shift_name_field = (By.XPATH, "//div/input")
@@ -73,7 +76,14 @@ class AccountPage(BasePage):
 
     def open_restaurant_settings(self):
         self.click(self._settings_icon)
-        self.click(self._settings_option)
+        try:
+            self.click(self._settings_option)
+        except TimeoutException:
+            self.click(self._settings_option2)
+        # if WebDriverWait.until(EC.element_to_be_clickable, self._settings_option):
+        #
+        # else:
+        #     self.click(self._settings_option2)
         return RestaurantSettingsPage(self.get_driver())
 
     def open_fourth_restaurant(self):
@@ -177,3 +187,7 @@ class AccountPage(BasePage):
 
     def get_text_added_note_type(self):
         self.added_note_type_text = (self.get_text(self._added_note_type_field)).encode('utf-8')
+
+    def open_registered_restaurant(self, restaurant_name):
+        self.click(self._restaurants_dropdown)
+        self.click((By.XPATH, "//li[contains(text(), %s" %restaurant_name))
