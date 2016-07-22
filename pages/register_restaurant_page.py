@@ -6,7 +6,7 @@ from random import randint
 from time import sleep
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import *
 from pages.account_page import AccountPage
 
 class RegisterRestaurantPage(BasePage):
@@ -66,8 +66,10 @@ class RegisterRestaurantPage(BasePage):
         self.clear_field_and_send_keys(self._city_value, self._city_field)
         self.clear_field_and_send_keys(self._country_value, self._country_field)
         self.select_index_from_dropdown(self._timezone_index, self._timezone_dropdown)
-        self.get_driver().execute_script("arguments[0].click();", self.find_element(self._random_language))
-        # self.click(self._random_language)
+        try:
+            self.click(self._random_language)
+        except WebDriverException as e:
+            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._random_language))
         self.clear_field_and_send_keys(self._email_value, self._email_field)
         self.clear_field_and_send_keys(self._senders_email_value, self._senders_email_field)
         self.clear_field_and_send_keys(self._msgIn_email_value, self._msgIn_email_field)

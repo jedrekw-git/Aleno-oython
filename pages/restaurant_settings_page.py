@@ -6,7 +6,7 @@ from random import randint
 from time import sleep
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import *
 import datetime
 
 class RestaurantSettingsPage(BasePage):
@@ -288,8 +288,10 @@ class RestaurantSettingsPage(BasePage):
         self.first_active_shift_internal_name = self.get_text(self._first_shift_internal_name_field)
 
     def edit_first_daily_shift(self):
-        self.get_driver().execute_script("arguments[0].click();", self.find_element(self._daily_shift_edit_first_button))
-        # self.click(self._daily_shift_edit_first_button)
+        try:
+            self.click(self._daily_shift_edit_first_button)
+        except WebDriverException as e:
+            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._daily_shift_edit_first_button))
 
     def archive_first_shift(self):
         self.click(self._first_shift_archive_button)
