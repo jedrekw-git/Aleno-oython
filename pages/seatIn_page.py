@@ -74,7 +74,7 @@ class SeatInPage(BasePage):
         self.clear_field_and_send_keys(self._add_reservation_first_name_value, self._add_reservation_first_name_field)
         self.clear_field_and_send_keys(self._add_reservation_surname_value, self._add_reservation_surname_field)
         self.clear_field_and_send_keys(self._add_reservation_email_value, self._add_reservation_email_field)
-        WebDriverWait(self.get_driver(), 30).until(EC.text_to_be_present_in_element(self._add_reservation_edited_by_header, "Bearbeitet von"))
+        WebDriverWait(self.get_driver(), 60).until(EC.text_to_be_present_in_element(self._add_reservation_edited_by_header, "Bearbeitet von"))
         # self.click(self._add_reservation_fourth_accordeon)
         # sleep(2)
         # self.click(self._add_reservation_guests_comment_open_field)

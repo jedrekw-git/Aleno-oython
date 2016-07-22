@@ -32,7 +32,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_login_and_logout_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -42,7 +42,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_register_restaurant_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -77,7 +77,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_rooms_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -93,7 +93,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -128,7 +128,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_archive_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -150,7 +150,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_room_to_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -178,7 +178,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_2_rooms_to_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -221,7 +221,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_table_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -241,7 +241,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_and_edit_holiday_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -274,7 +274,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_edit_customizations_tab_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -292,14 +292,14 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_daily_note_for_staff_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(account_page._click_first_shift_button))
+        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button))
         while True:
             if account_page._added_note_type_guests_value in account_page.get_page_source().encode('utf-8'):
                 account_page.remove_added_note()
@@ -324,14 +324,14 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_daily_note_for_guests_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(account_page._click_first_shift_button))
+        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button))
         while True:
             if account_page._added_note_type_guests_value in account_page.get_page_source().encode('utf-8'):
                 account_page.remove_added_note()
@@ -354,14 +354,14 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(account_page._click_first_shift_button))
+        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button))
         account_page.get_first_shift_start_time()
         seatIn_page = account_page.click_first_shift()
         # seatIn_page = account_page.open_seatIn()
@@ -371,6 +371,7 @@ class SmokeTest(unittest.TestCase):
         seatIn_page.click_reservation_details_button()
         seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
         seatIn_page.save_reservation()
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.expand_seatIn_reservation_details()
 
         Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
@@ -387,14 +388,14 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_provisional_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(account_page._click_first_shift_button))
+        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button))
         account_page.get_first_shift_start_time()
         seatIn_page = account_page.click_first_shift()
         # seatIn_page = account_page.open_seatIn()
@@ -405,6 +406,7 @@ class SmokeTest(unittest.TestCase):
         seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
         seatIn_page.reservation_set_provisional()
         seatIn_page.save_reservation()
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.expand_seatIn_reservation_details()
 
         Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
@@ -420,14 +422,14 @@ class SmokeTest(unittest.TestCase):
 
     def test_edit_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_George_Bar_Grill_restaurant()
         account_page.open_shifts_menu()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(account_page._click_first_shift_button))
+        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button))
         account_page.get_first_shift_start_time()
         seatIn_page = account_page.click_first_shift()
         # seatIn_page = account_page.open_seatIn()
@@ -437,6 +439,7 @@ class SmokeTest(unittest.TestCase):
         seatIn_page.click_reservation_details_button()
         seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
         seatIn_page.save_reservation()
+        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field))
         seatIn_page.expand_seatIn_reservation_details()
 
         Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
@@ -452,7 +455,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_daily_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -476,7 +479,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_edit_daily_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
@@ -485,9 +488,9 @@ class SmokeTest(unittest.TestCase):
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
         daily_settings_page.daily_shift_activate_first_global()
-        if not "a class=\"edit-shift\"" in daily_settings_page.get_page_source():
+        if not "edit-shift" in daily_settings_page.get_page_source():
             daily_settings_page.daily_shift_activate_first_global()
-        if not "a class=\"edit-shift\"" in daily_settings_page.get_page_source():
+        if not "edit-shift" in daily_settings_page.get_page_source():
             daily_settings_page.daily_shift_activate_first_global()
         daily_settings_page.edit_first_daily_shift()
         daily_settings_page.add_shift_daily_first_accordeon()
@@ -503,7 +506,7 @@ class SmokeTest(unittest.TestCase):
 
     def test_add_contact_to_relatin_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
         account_page = home_page.header.login(USER, PASSWORD)
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():

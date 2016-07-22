@@ -48,8 +48,8 @@ class RelatInPage(BasePage):
         self.click(self._save_client_button)
 
     def remove_first_client(self):
-        # self.get_driver().execute_script("arguments[0].click();", self.find_element(self._remove_first_client_button))
-        self.click(self._remove_first_client_button)
+        self.get_driver().execute_script("arguments[0].click();", self.find_element(self._remove_first_client_button))
+        # self.click(self._remove_first_client_button)
         self.accept_alert()
 
 
