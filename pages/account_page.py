@@ -8,7 +8,7 @@ from unittestzero import Assert
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import *
 from pages.restaurant_settings_page import RestaurantSettingsPage
 from pages.reservation_popup_page import ReservationPopupPage
 from pages.seatIn_page import SeatInPage
@@ -91,15 +91,20 @@ class AccountPage(BasePage):
         self.click(self._fourth_restaurant_option)
 
     def open_shifts_menu(self):
-        self.click(self._shifts_menu)
+        try:
+            self.click(self._shifts_menu)
+        except WebDriverException as e:
+            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._shifts_menu))
 
     def expand_first_shift(self):
         # self.click(self._expand_first_shift_button)
         self.get_driver().execute_script("arguments[0].click();", self.find_element(self._expand_first_shift_button))
 
     def click_first_shift(self):
-        self.get_driver().execute_script("arguments[0].click();", self.find_element(self._click_first_shift_button))
-        # self.click(self._click_first_shift_button)
+        try:
+            self.click(self._click_first_shift_button)
+        except WebDriverException as e:
+            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._click_first_shift_button))
         return SeatInPage(self.get_driver())
 
     def get_first_shift_start_time(self):
