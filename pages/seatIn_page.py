@@ -27,7 +27,6 @@ class SeatInPage(BasePage):
     _add_reservation_first_name_field = (By.NAME, "firstName")
     _add_reservation_first_name_value = get_random_string(8)
     _add_reservation_surname_field = (By.NAME, "lastName")
-    _add_reservation_surname_value = get_random_string(9)
     _add_reservation_email_field = (By.NAME, "email")
     _add_reservation_email_value = get_random_string(7)+"@"+get_random_string(5)+".pl"
     _add_reservation_status_dropdown = (By.NAME, "state")
@@ -52,6 +51,7 @@ class SeatInPage(BasePage):
 
     def __init__(self, driver):
         super(SeatInPage, self).__init__(driver, self._title)
+        self._add_reservation_surname_value = get_random_string(9)
 
     def click_add_reservation_plus_button(self):
         self.click(self._add_reservation_plus_button)
