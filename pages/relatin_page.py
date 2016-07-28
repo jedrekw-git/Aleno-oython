@@ -20,7 +20,7 @@ class RelatInPage(BasePage):
     _client_phone_number_value = get_random_integer(7)
     _client_email_field = (By.NAME, "primaryEmail")
     _client_email_value = get_random_string(7)+"@"+get_random_string(5)+".pl"
-    _client_description_field = (By.NAME, "description")
+    _client_description_field = (By.XPATH, "//textarea")
     _client_description_value = get_random_string(4)+" "+get_random_string(5)+" "+get_random_string(7)
     _client_category_field = (By.NAME, "category")
     _client_category_value = get_random_string(6)

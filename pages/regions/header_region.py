@@ -12,11 +12,10 @@ class HeaderRegion(Page):
     _login_field = (By.NAME, "email")
     _password_field = (By.NAME, "password")
     _login_submit = (By.XPATH, "//div[3]/div/button")
-    _base_url = "http://test.aleno.me/"
-    _base_url2 = "http://stg.aleno.me/"
+    _base_url2 = "http://test.aleno.me/"
+    _base_url = "http://stg.aleno.me/"
     _aleno_logo = (By.XPATH, "//img")
     _einloggen_text = (By.XPATH, "//h1")
-
 
     def login(self, login, password):
         self.clear_field_and_send_keys(login, self._login_field)

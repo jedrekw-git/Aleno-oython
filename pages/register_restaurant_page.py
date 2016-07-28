@@ -45,8 +45,8 @@ class RegisterRestaurantPage(BasePage):
     _yelp_value = get_random_string(7)
     _phone_field = (By.NAME, "phone")
     _phone_value = get_random_integer(9)
-    _opening_hours_open_field = (By.XPATH, "//div[18]/div/div")
-    _opening_hours_close_field = (By.XPATH, "//div[18]/div/button")
+    _opening_hours_open_field = (By.XPATH, "//div[19]/div/div")
+    _opening_hours_close_field = (By.XPATH, "//div[19]/div/button")
     _opening_hours_field = (By.XPATH, "//div[3]/div[3]")
     _opening_hours_value = get_random_integer(2)+"-"+get_random_integer(2)+": Monday - Friday"
     _image_url_field = (By.NAME, "imageUrl")
@@ -59,8 +59,8 @@ class RegisterRestaurantPage(BasePage):
     def __init__(self, driver):
         super(RegisterRestaurantPage, self).__init__(driver, self._title)
 
-    def enter_restaurant_data(self):
-        self.clear_field_and_send_keys(self._last_name_value, self._last_name_field)
+    def enter_restaurant_data(self, restaurant_name):
+        self.clear_field_and_send_keys(restaurant_name, self._last_name_field)
         self.clear_field_and_send_keys(self._address_value, self._address_field)
         self.clear_field_and_send_keys(self._zip_code_value, self._zip_code_field)
         self.clear_field_and_send_keys(self._city_value, self._city_field)

@@ -10,8 +10,8 @@ from selenium.common.exceptions import TimeoutException
 
 class HomePage(BasePage):
     _title = "test.aleno.me"
-    _url = "http://test.aleno.me/"
-    _url2 = "http://stg.aleno.me/"
+    _url2 = "http://test.aleno.me/"
+    _url = "http://stg.aleno.me/"
 
     def __init__(self, driver):
         super(HomePage, self).__init__(driver, self._title, self._url)
