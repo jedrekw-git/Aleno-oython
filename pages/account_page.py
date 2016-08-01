@@ -37,7 +37,7 @@ class AccountPage(BasePage):
     _first_shift_start_time_field = (By.XPATH, "//span[2]/span[2]/span")
     _first_shift_first_room_name_field = (By.XPATH, "//tr[2]/th/span")
     _first_shift_second_room_name_field = (By.XPATH, "//tr[3]/th/span")
-    _seatIn_menu = (By.XPATH, "//li/a")
+    _seatIn_menu = (By.PARTIAL_LINK_TEXT, "seatIn")
     _fifth_restaurant_option = (By.XPATH, "//div/ul/li[5]")
     _restaurant_AUTOTESTa_option = (By.ID, "cujLTfAiQ8v9ADAMm")
     _restaurant_AUTOTESTb_option = (By.ID, "jmM3toAhncpgf87nG")

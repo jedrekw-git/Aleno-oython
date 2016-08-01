@@ -336,12 +336,12 @@ class SmokeTest(unittest.TestCase):
             if not account_page._added_note_type_guests_value in account_page.get_page_source().encode('utf-8') and not account_page._added_note_type_staff_value in account_page.get_page_source().encode('utf-8'):
                 break
         account_page.add_note_for_staff()
+        account_page.click_add_notes_button()
 
         WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_value_field, account_page._add_note_text_value))
         account_page.get_text_added_note_type()
         Assert.equal(account_page.added_note_type_text, account_page._added_note_type_staff_value)
 
-        account_page.click_add_notes_button()
         account_page.remove_added_note()
 
         self.not_contains(account_page._added_note_type_staff_value, account_page.get_page_source().encode('utf-8'))
@@ -365,12 +365,12 @@ class SmokeTest(unittest.TestCase):
             if not account_page._added_note_type_guests_value in account_page.get_page_source().encode('utf-8') and not account_page._added_note_type_staff_value in account_page.get_page_source().encode('utf-8'):
                 break
         account_page.add_note_for_guests()
+        account_page.click_add_notes_button()
 
         WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element(account_page._added_note_value_field, account_page._add_note_text_value))
         account_page.get_text_added_note_type()
         Assert.equal(account_page.added_note_type_text, account_page._added_note_type_guests_value)
 
-        account_page.click_add_notes_button()
         account_page.remove_added_note()
 
         self.not_contains(account_page._added_note_type_guests_value, account_page.get_page_source().encode('utf-8'))
@@ -487,9 +487,9 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_registered_restaurant("AUTOTESTa")
+        account_page.open_registered_restaurant("AUTOTESTb")
         daily_settings_page = account_page.open_daily_settings()
-        sleep(3)
+        sleep(6)
         daily_settings_page.add_daily_shift_click_button()
         daily_settings_page.add_shift_daily_first_accordeon()
         daily_settings_page.add_shift_second_accordeon()
