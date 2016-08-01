@@ -327,9 +327,9 @@ class RestaurantSettingsPage(BasePage):
         self.clear_field_and_send_keys(self._holiday_name_value, self._holiday_name_field)
         self.click(self._holiday_from_to_checkbox)
         self.clear_field_and_send_keys(self._holiday_start_date_value, self._holiday_start_date_field)
-        if str(datetime.date.today().day)==29 and str(datetime.date.today().month)==2:
+        if (datetime.date.today().day)==29 and (datetime.date.today().month)==2:
             self.clear_field_and_send_keys(self._first_day_next_month, self._holiday_end_date_field)
-        elif str(datetime.date.today().day)==30 or str(datetime.date.today().day)==31:
+        elif (datetime.date.today().day)==30 or (datetime.date.today().day)==31:
             self.clear_field_and_send_keys(self._first_day_next_month, self._holiday_end_date_field)
         else:
             self.clear_field_and_send_keys(self._holiday_end_date_value, self._holiday_end_date_field)
@@ -344,7 +344,7 @@ class RestaurantSettingsPage(BasePage):
         self.click(self._first_added_holiday_name_field)
         sleep(2)
         self.clear_field_and_send_keys(self._edit_holiday_name_value, self._edit_holiday_name_field)
-        if str(datetime.date.today().day)==1:
+        if (datetime.date.today().day)==1:
             self.clear_field_and_send_keys(self._last_day_previous_month, self._edit_holiday_start_date_field)
         else:
             self.clear_field_and_send_keys(self._edit_holiday_start_date_value, self._edit_holiday_start_date_field)

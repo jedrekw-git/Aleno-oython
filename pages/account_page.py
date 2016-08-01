@@ -179,9 +179,11 @@ class AccountPage(BasePage):
         self.click(self._add_note_close_field)
         self.click(self._add_note_submit_button)
         sleep(2)
+    def click_add_notes_button(self):
+        self.click(self._add_notes_button)
 
     def remove_added_note(self):
-        # self.click(self._add_notes_button)
+        self.click(self._add_notes_button)
         self.click(self._remove_added_note_button)
         self.click(self._remove_added_note_submit_yes_button)
         self.click(self._add_notes_button)
