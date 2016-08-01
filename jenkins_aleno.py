@@ -16,7 +16,7 @@ from time import gmtime, strftime
 import re
 from selenium.webdriver.remote.webelement import *
 from selenium.webdriver.common.action_chains import *
-import datetime
+from datetime import *
 from selenium.common.exceptions import *
 
 SCREEN_DUMP_LOCATION = os.path.join(
