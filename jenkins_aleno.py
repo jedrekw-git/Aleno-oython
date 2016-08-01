@@ -16,7 +16,8 @@ from time import gmtime, strftime
 import re
 from selenium.webdriver.remote.webelement import *
 from selenium.webdriver.common.action_chains import *
-from datetime import *
+import datetime as dt
+from datetime import datetime
 from selenium.common.exceptions import *
 
 SCREEN_DUMP_LOCATION = os.path.join(
@@ -276,9 +277,9 @@ class SmokeTest(unittest.TestCase):
 
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_name_field, restaurant_settings_page._holiday_name_value))
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_from_field, restaurant_settings_page._holiday_start_date_value))
-        if (datetime.date.today().day)==29 and (datetime.date.today().month)==2:
+        if (dt.date.today().day)==29 and (dt.date.today().month)==2:
             WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_to_field, restaurant_settings_page._first_day_next_month))
-        elif (datetime.date.today().day)==30 or (datetime.date.today().day)==31:
+        elif (dt.date.today().day)==30 or (dt.date.today().day)==31:
             WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_to_field, restaurant_settings_page._first_day_next_month))
         else:
             WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_to_field, restaurant_settings_page._holiday_end_date_value))
@@ -287,7 +288,7 @@ class SmokeTest(unittest.TestCase):
         restaurant_settings_page.edit_holiday()
 
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_name_field, restaurant_settings_page._edit_holiday_name_value))
-        if (datetime.date.today().day)==1:
+        if (dt.date.today().day)==1:
             WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_from_field, restaurant_settings_page._last_day_previous_month))
         else:
             WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(restaurant_settings_page._first_added_holiday_from_field, restaurant_settings_page._edit_holiday_start_date_value))
@@ -297,7 +298,7 @@ class SmokeTest(unittest.TestCase):
         restaurant_settings_page.remove_added_holiday()
 
         self.not_contains(restaurant_settings_page._edit_holiday_name_value, restaurant_settings_page.get_page_source())
-        if (datetime.date.today().day)==1:
+        if (dt.date.today().day)==1:
             self.not_contains(restaurant_settings_page._last_day_previous_month, restaurant_settings_page.get_page_source())
         else:
             self.not_contains(restaurant_settings_page._edit_holiday_start_date_value, restaurant_settings_page.get_page_source())
