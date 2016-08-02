@@ -25,6 +25,7 @@ class RelatInPage(BasePage):
     _client_category_field = (By.NAME, "category")
     _client_category_value = get_random_string(6)
     _save_client_button = (By.XPATH, "//div[2]/button")
+    _close_new_client_popup_button = (By.CSS_SELECTOR, "button.close")
     _added_client_first_name_field = (By.XPATH, "//td/a")
     _added_client_last_name_field = (By.XPATH, "//td[2]/a")
     _added_client_phone_number_field = (By.XPATH, "//td[3]/a")
@@ -46,6 +47,7 @@ class RelatInPage(BasePage):
         self.clear_field_and_send_keys(self._client_description_value, self._client_description_field)
         self.clear_field_and_send_keys(self._client_category_value, self._client_category_field)
         self.click(self._save_client_button)
+        self.click(self._close_new_client_popup_button)
 
     def remove_first_client(self):
         try:
@@ -53,6 +55,7 @@ class RelatInPage(BasePage):
         except WebDriverException as e:
             self.get_driver().execute_script("arguments[0].click();", self.find_element(self._remove_first_client_button))
         self.accept_alert()
+
 
 
 

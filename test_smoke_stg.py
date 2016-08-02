@@ -119,6 +119,11 @@ class SmokeTest(unittest.TestCase):
         account_page.open_registered_restaurant("AUTOTESTa")
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
+        while True:
+            if restaurant_settings_page._shift_name_value in account_page.get_page_source():
+                restaurant_settings_page.remove_first_shift()
+            if not restaurant_settings_page._shift_name_value in account_page.get_page_source():
+                break
         restaurant_settings_page.add_shift_first_accordeon()
         restaurant_settings_page.add_shift_second_accordeon()
         restaurant_settings_page.save_shift()
@@ -410,8 +415,6 @@ class SmokeTest(unittest.TestCase):
 
         self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source())
 
-#ZGŁOSIC, że już rezerwacja automatyczna działa
-
     def test_add_provisional_reservation_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
         WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"))
@@ -553,7 +556,7 @@ class SmokeTest(unittest.TestCase):
 
         relatIn_page.remove_first_client()
 
-        self.not_contains(relatIn_page._client_first_name_value, relatIn_page.get_page_source())
+        WebDriverWait(self.driver, 10).until_not(EC.text_to_be_present_in_element(relatIn_page._added_client_first_name_field, relatIn_page._client_first_name_value))
         self.not_contains(relatIn_page._client_last_name_value, relatIn_page.get_page_source())
         self.not_contains(relatIn_page._client_phone_number_value, relatIn_page.get_page_source())
         self.not_contains(relatIn_page._client_email_value, relatIn_page.get_page_source())

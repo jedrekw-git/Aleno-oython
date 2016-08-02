@@ -95,6 +95,7 @@ class AccountPage(BasePage):
             self.click(self._shifts_menu)
         except WebDriverException as e:
             self.get_driver().execute_script("arguments[0].click();", self.find_element(self._shifts_menu))
+        sleep(3)
 
     def expand_first_shift(self):
         try:
