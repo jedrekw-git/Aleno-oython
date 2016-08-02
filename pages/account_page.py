@@ -44,7 +44,7 @@ class AccountPage(BasePage):
     _restaurant_AUTOTESTammzkkcm_option = (By.ID, "xvkWn37yRSmcSNjjE")
     _restaurant_George_Bar_Grill_option = (By.ID, "EYccPQ4dsanRaNnWd")
     _einloggen_text_field = (By.XPATH, "//h1")
-    _relatin_menu = (By.XPATH, "//li[3]/a")
+    _relatin_menu = (By.XPATH, "//li[4]/a")
     _add_notes_button = (By.CSS_SELECTOR, "i.aleno-icon-pen.js-header-calendar-edit-mode-activator")
     _add_note_for_staff_button = (By.XPATH, "//div[2]/a")
     _add_note_for_guests_button = (By.XPATH, "//div/div/div/a")
@@ -201,4 +201,7 @@ class AccountPage(BasePage):
 
     def open_registered_restaurant(self, restaurant_name):
         self.click(self._restaurants_dropdown)
-        self.click((By.NAME, "%s" %restaurant_name))
+        try:
+            self.click((By.NAME, "%s" %restaurant_name))
+        except WebDriverException as e:
+            self.get_driver().execute_script("arguments[0].click();", self.find_element((By.NAME, "%s" %restaurant_name)))

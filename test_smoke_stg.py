@@ -326,7 +326,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_registered_restaurant("George Bar & Grill")
+        account_page.open_registered_restaurant("AUTOTESTa")
         account_page.open_shifts_menu()
         WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button))
         while True:
@@ -355,7 +355,7 @@ class SmokeTest(unittest.TestCase):
         sleep(5)
         if "Einloggen" in home_page.header.get_page_source():
             account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_registered_restaurant("George Bar & Grill")
+        account_page.open_registered_restaurant("AUTOTESTa")
         account_page.open_shifts_menu()
         WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button))
         while True:

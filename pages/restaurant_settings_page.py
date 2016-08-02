@@ -112,7 +112,7 @@ class RestaurantSettingsPage(BasePage):
     _first_table_name_field = (By.CSS_SELECTOR, "td.tableName")
     _first_table_capacity_field = (By.CSS_SELECTOR, "td.tableCapacity")
     _remove_first_table_button = (By.XPATH, "//td[3]/button[2]")
-    _holidays_tab = (By.XPATH, "//li[6]/a")
+    _holidays_tab = (By.XPATH, "//div/ul/li[6]/a")
     _add_holiday_button = (By.XPATH, "//div[@id='__blaze-root']/div[2]/div[2]/div/div/button")
     _holiday_name_field = (By.NAME, "name")
     _holiday_name_value = get_random_string(7)
@@ -144,15 +144,13 @@ class RestaurantSettingsPage(BasePage):
     _edit_holiday_information_close_field = (By.XPATH, "//form[@id='editHolidays']/div/div[5]/div[2]/div/div/button")
     _edit_holiday_submit = (By.XPATH, "//form[@id='editHolidays']/div[2]/div/button")
     _remove_first_added_holiday_button = (By.XPATH, "//td[5]/button")
-    _coustomizations_tab = (By.XPATH, "//li[10]/a")
+    _coustomizations_tab = (By.XPATH, "//div/ul/li[10]/a")
     _percentage_of_capacity_labeled_as_confirmed_checkbox = (By.XPATH, "//form/div/div/input")
     _percentage_of_capacity_labeled_as_confirmed_field = (By.NAME, "serviceRole80")
     _percentage_of_capacity_labeled_as_confirmed_value = str(randint(1,99))
     _booking_in_advance_field = (By.NAME, "daysInAdvance")
     _booking_in_advance_value = str(randint(1,200))
     _save_coustomizations_tab = (By.XPATH, "//div[2]/div/button")
-
-
 
     def __init__(self, driver):
         super(RestaurantSettingsPage, self).__init__(driver, self._title)
