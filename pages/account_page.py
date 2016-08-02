@@ -27,7 +27,7 @@ class AccountPage(BasePage):
     _test_date_field = (By.XPATH, "//div[2]/input")
     _test_tomorrow_date = str(datetime.date.today().day+1)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
     _book_now_button = (By.XPATH, "/html/body/div[2]/div[2]/div/div/div/div/div/div/div/button")
-    _restaurants_dropdown = (By.XPATH, "//div[2]/div/div/div/div[2]/div")
+    _restaurants_dropdown = (By.XPATH, "//a/span")
     _first_restaurant_option = (By.XPATH, "//div[2]/ul/li")
     _third_restaurant_option = (By.XPATH, "//div/ul/li[3]")
     _fourth_restaurant_option = (By.XPATH, "//div/ul/li[4]")
