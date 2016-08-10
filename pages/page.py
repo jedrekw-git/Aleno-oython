@@ -25,10 +25,9 @@ class Page(object):
         #             "Expected page title: %s. Actual page title: %s" % (self._title, self.get_driver().title))
         return True
 
-    def wait_for_visibility(self, locator, timeout=10):
+    def wait_for_visibility(self, locator, info="no error", timeout=10):
         return WebDriverWait(self.get_driver(), timeout).until(
-            expected_conditions.visibility_of_element_located(locator)
-        )
+            expected_conditions.visibility_of_element_located(locator), info)
 
     def hit_enter(self, element):
         element.send_keys(Keys.RETURN)
@@ -52,8 +51,8 @@ class Page(object):
     def clear_field(self, locator):
         self.find_element(locator).clear()
 
-    def click(self, locator):
-        element = self.wait_for_visibility(locator)
+    def click(self, locator, info="no error"):
+        element = self.wait_for_visibility(locator, info)
         # self.find_element(locator).click()
         # ycoord = element.location['y']
         # self.get_driver().execute_script("window.scrollTo(0, {0})".format(ycoord))
@@ -88,7 +87,7 @@ class Page(object):
             WebDriverWait(self.get_driver(), 15).until(EC.alert_is_present())
             return self.get_driver().switch_to_alert().accept()
         except TimeoutException:
-            print "no alert"
+            print "no alert was found on the page"
 
     def refresh(self):
         self.get_driver().refresh()
@@ -119,5 +118,5 @@ class Page(object):
         if self.wait_for_visibility(locator).is_selected():
             self.click(locator)
 
-    def get_value(self, locator):
-        return self.wait_for_visibility(locator).get_attribute("value")
+    def get_value(self, locator, info):
+        return self.wait_for_visibility(locator, info).get_attribute("value")

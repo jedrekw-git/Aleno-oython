@@ -67,7 +67,7 @@ class RegisterRestaurantPage(BasePage):
         self.clear_field_and_send_keys(self._country_value, self._country_field)
         self.select_index_from_dropdown(self._timezone_index, self._timezone_dropdown)
         try:
-            self.click(self._random_language)
+            self.click(self._random_language, "Trying to click random language on the register restaurant page was unsuccessful")
         except WebDriverException as e:
             self.get_driver().execute_script("arguments[0].click();", self.find_element(self._random_language))
         self.clear_field_and_send_keys(self._email_value, self._email_field)
@@ -80,14 +80,14 @@ class RegisterRestaurantPage(BasePage):
         self.clear_field_and_send_keys(self._google_value, self._google_field)
         self.clear_field_and_send_keys(self._yelp_value, self._yelp_field)
         self.clear_field_and_send_keys(self._phone_value, self._phone_field)
-        self.click(self._opening_hours_open_field)
+        self.click(self._opening_hours_open_field, "Trying to open field \"Opening hours\" to enter text to it was unsuccessful")
         self.clear_field_and_send_keys(self._opening_hours_value, self._opening_hours_field)
-        self.click(self._opening_hours_close_field)
+        self.click(self._opening_hours_close_field, "Trying to close field \"Opening hours\" after entering text to it was unsuccessful")
         self.clear_field_and_send_keys(self._image_url_value, self._image_url_field)
-        self.click(self._random_additional_option)
+        self.click(self._random_additional_option, "Trying to click random additional option at the bottom of the register restaurant page was unsuccessful")
 
     def save_restaurant(self):
-        self.click(self._save_restaurant_button)
+        self.click(self._save_restaurant_button, "Save restaurant button wasn't found on the register restaurant page")
         return AccountPage(self.get_driver())
 
 

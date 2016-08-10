@@ -28,9 +28,6 @@ class AccountPage(BasePage):
     _test_tomorrow_date = str(datetime.date.today().day+1)+"."+str(datetime.date.today().month)+"."+str(datetime.date.today().year)
     _book_now_button = (By.XPATH, "/html/body/div[2]/div[2]/div/div/div/div/div/div/div/button")
     _restaurants_dropdown = (By.XPATH, "//a/span")
-    _first_restaurant_option = (By.XPATH, "//div[2]/ul/li")
-    _third_restaurant_option = (By.XPATH, "//div/ul/li[3]")
-    _fourth_restaurant_option = (By.XPATH, "//div/ul/li[4]")
     _shifts_menu = (By.CSS_SELECTOR, "div.toolbar-top-item.toolbar-top-item-shift")
     _expand_first_shift_button = (By.XPATH, "//th/span/i")
     _click_first_shift_button = (By.CSS_SELECTOR, "span.js-go.shift-info > span")
@@ -38,11 +35,6 @@ class AccountPage(BasePage):
     _first_shift_first_room_name_field = (By.XPATH, "//tr[2]/th/span")
     _first_shift_second_room_name_field = (By.XPATH, "//tr[3]/th/span")
     _seatIn_menu = (By.PARTIAL_LINK_TEXT, "seatIn")
-    _fifth_restaurant_option = (By.XPATH, "//div/ul/li[5]")
-    _restaurant_AUTOTESTa_option = (By.ID, "cujLTfAiQ8v9ADAMm")
-    _restaurant_AUTOTESTb_option = (By.ID, "jmM3toAhncpgf87nG")
-    _restaurant_AUTOTESTammzkkcm_option = (By.ID, "xvkWn37yRSmcSNjjE")
-    _restaurant_George_Bar_Grill_option = (By.ID, "EYccPQ4dsanRaNnWd")
     _einloggen_text_field = (By.XPATH, "//h1")
     _relatin_menu = (By.XPATH, "//li[4]/a")
     _add_notes_button = (By.CSS_SELECTOR, "i.aleno-icon-pen.js-header-calendar-edit-mode-activator")
@@ -59,53 +51,38 @@ class AccountPage(BasePage):
     _added_note_value_field = (By.XPATH, "//div[3]/div/div[2]/div/div/span")
     _remove_added_note_button = (By.XPATH, "//div[4]/i")
     _remove_added_note_submit_yes_button = (By.XPATH, "//div[2]/div/button")
-    _stg_restaurant_AUTOTESTa_option = (By.PARTIAL_LINK_TEXT, "AUTOTESTa")
-    _stg_restaurant_AUTOTESTb_option = (By.ID, "JTcpXtDTGvF6wxG8X")
-
 
     def __init__(self, driver):
         super(AccountPage, self).__init__(driver, self._title)
 
-    def open_first_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._first_restaurant_option)
-
-    def open_third_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._third_restaurant_option)
-
     def open_restaurant_settings(self):
-        self.click(self._settings_icon)
+        self.click(self._settings_icon, "Settings icon cannot be clicked or wasn't found on the page")
         try:
-            self.click(self._settings_option)
+            self.click(self._settings_option, "Settings option on the dropdown cannot be clicked or wasn't found on the page")
         except TimeoutException:
-            self.click(self._settings_option2)
+            self.click(self._settings_option2, "Settings option on the dropdown cannot be clicked or wasn't found on the page")
         # if WebDriverWait.until(EC.element_to_be_clickable, self._settings_option):
         #
         # else:
         #     self.click(self._settings_option2)
         return RestaurantSettingsPage(self.get_driver())
 
-    def open_fourth_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._fourth_restaurant_option)
-
     def open_shifts_menu(self):
         try:
-            self.click(self._shifts_menu)
+            self.click(self._shifts_menu, "The shifts menu on the dashboard cannot be clicked or wasn't found on the page")
         except WebDriverException as e:
             self.get_driver().execute_script("arguments[0].click();", self.find_element(self._shifts_menu))
         sleep(3)
 
     def expand_first_shift(self):
         try:
-            self.click(self._expand_first_shift_button)
+            self.click(self._expand_first_shift_button, "The expand first shift button cannot be clicked or wasn't found on the shifts menu page")
         except WebDriverException as e:
             self.get_driver().execute_script("arguments[0].click();", self.find_element(self._expand_first_shift_button))
 
     def click_first_shift(self):
         try:
-            self.click(self._click_first_shift_button)
+            self.click(self._click_first_shift_button, "The first shift button cannot be clicked or isn't present on the shifts menu page")
         except WebDriverException as e:
             self.get_driver().execute_script("arguments[0].click();", self.find_element(self._click_first_shift_button))
         return SeatInPage(self.get_driver())
@@ -114,95 +91,68 @@ class AccountPage(BasePage):
         self.first_shift_start_time = self.get_text(self._first_shift_start_time_field)
 
     def open_test_page(self):
-        self.click(self._settings_icon)
-        self.click(self._test_option)
+        self.click(self._settings_icon, "The settings icon couldn't be clicked or wasn't found on the dashboard page")
+        self.click(self._test_option, "The test option on the settings dropdown couldn't be clicked or wasn't found on dashboard page")
 
     def fill_in_shift_name_and_tomorrow_date(self, shift_name):
         self.clear_field_and_send_keys(shift_name, self._test_shift_name_field)
         self.clear_field_and_send_keys(self._test_tomorrow_date, self._test_date_field)
 
     def open_book_now_pupup(self):
-        self.click(self._book_now_button)
+        self.click(self._book_now_button, "The button to open book now popup couldn't be clicked or wasn't found on the test-popup page")
         return ReservationPopupPage(self.get_driver())
 
     def open_seatIn(self):
-        self.click(self._seatIn_menu)
+        self.click(self._seatIn_menu, "The button to open SeatIn menu cannot be clicked or wasn't found on the dashboard")
         return SeatInPage(self.get_driver())
 
-    def open_fifth_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._fifth_restaurant_option)
-
     def open_daily_settings(self):
-        self.click(self._settings_icon)
-        self.click(self._daily_settings_option)
+        self.click(self._settings_icon, "The settings icon cannot be clicked or wasn't found on the dashboard")
+        self.click(self._daily_settings_option, "The daily settings option in the settings dropdown cannot be clicked or wasn't found in the dropdown")
         return RestaurantSettingsPage(self.get_driver())
 
-    def open_AUTOTESTa_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._restaurant_AUTOTESTa_option)
-
-    def open_AUTOTESTb_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._restaurant_AUTOTESTb_option)
-
-    def open_AUTOTESTammzkkcm_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._restaurant_AUTOTESTammzkkcm_option)
-
-    def open_George_Bar_Grill_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._restaurant_George_Bar_Grill_option)
-
     def open_relatIn(self):
-        self.click(self._relatin_menu)
+        self.click(self._relatin_menu, "The button to open relatIn cannot be clicked or wasn't found on the dashboard")
         return RelatInPage(self.get_driver())
 
     def add_note_for_staff(self):
-        self.click(self._add_notes_button)
-        self.click(self._add_note_for_staff_button)
+        self.click(self._add_notes_button, "The add note button cannot be clicked or wasn't found on the shifts menu page")
+        self.click(self._add_note_for_staff_button, "The add note for staff button cannot be clicked or wasn't found on the shifts menu page")
         sleep(2)
-        self.click(self._add_note_open_field)
-        self.click(self._add_note_text_field)
+        self.click(self._add_note_open_field, "The attempt to open add note text field to enter data to it wasn't successful")
+        self.click(self._add_note_text_field, "The attempt to click add note text field to enter data to it wasn't successful")
         self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field)
-        self.click(self._add_note_close_field)
-        self.click(self._add_note_submit_button)
+        self.click(self._add_note_close_field, "The attempt to close add note text field after entering data to it wasn't successful")
+        self.click(self._add_note_submit_button, "The attempt to click add note submit button wasn't successful")
         sleep(2)
 
     def add_note_for_guests(self):
-        self.click(self._add_notes_button)
+        self.click(self._add_notes_button, "The add note button cannot be clicked or wasn't found on the shifts menu page")
         # WebDriverWait(self.get_driver(), 15).until(EC.element_to_be_clickable(self._add_note_for_guests_button))
-        self.click(self._add_note_for_guests_button)
+        self.click(self._add_note_for_guests_button, "The add note for guests button cannot be clicked or wasn't found on the shifts menu page")
         sleep(2)
-        self.click(self._add_note_open_field)
-        self.click(self._add_note_text_field)
+        self.click(self._add_note_open_field, "The attempt to open add note text field to enter data to it wasn't successful")
+        self.click(self._add_note_text_field, "The attempt to click add note text field to enter data to it wasn't successful")
         self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field)
-        self.click(self._add_note_close_field)
-        self.click(self._add_note_submit_button)
+        self.click(self._add_note_close_field, "The attempt to close add note text field after entering data to it wasn't successful")
+        self.click(self._add_note_submit_button, "The attempt to click add note submit button wasn't successful")
         sleep(2)
+
     def click_add_notes_button(self):
-        self.click(self._add_notes_button)
+        self.click(self._add_notes_button, "The add note button cannot be clicked or wasn't found on the shifts menu page")
 
     def remove_added_note(self):
-        self.click(self._add_notes_button)
-        self.click(self._remove_added_note_button)
-        self.click(self._remove_added_note_submit_yes_button)
-        self.click(self._add_notes_button)
-
-    def stg_open_AUTOTESTa_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._stg_restaurant_AUTOTESTa_option)
-
-    def stg_open_AUTOTESTb_restaurant(self):
-        self.click(self._restaurants_dropdown)
-        self.click(self._stg_restaurant_AUTOTESTb_option)
+        self.click(self._add_notes_button, "The add note button cannot be clicked or wasn't found on the shifts menu page")
+        self.click(self._remove_added_note_button, "The remove note button cannot be clicked or wasn't found on the shifts menu page")
+        self.click(self._remove_added_note_submit_yes_button, "The add note  submit \"yes\" button cannot be clicked or wasn't found on the shifts menu page")
+        self.click(self._add_notes_button, "The add note button cannot be clicked or wasn't found on the shifts menu page")
 
     def get_text_added_note_type(self):
         self.added_note_type_text = (self.get_text(self._added_note_type_field)).encode('utf-8')
 
     def open_registered_restaurant(self, restaurant_name):
-        self.click(self._restaurants_dropdown)
+        self.click(self._restaurants_dropdown, "Dropdown of chosing restaurant wasn't found on the page")
         try:
-            self.click((By.NAME, "%s" %restaurant_name))
+            self.click((By.NAME, "%s" %restaurant_name), "Restaurant name wasn't found on the chosing restaurant dropdown")
         except WebDriverException as e:
             self.get_driver().execute_script("arguments[0].click();", self.find_element((By.NAME, "%s" %restaurant_name)))

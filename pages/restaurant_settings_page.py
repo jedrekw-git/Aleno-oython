@@ -156,33 +156,33 @@ class RestaurantSettingsPage(BasePage):
         super(RestaurantSettingsPage, self).__init__(driver, self._title)
 
     def get_restaurant_info(self):
-        self.restaurant_info_last_name = self.get_value(self._last_name_field)
-        self.restaurant_info_address = self.get_value(self._address_field)
-        self.restaurant_info_zip = self.get_value(self._zip_code_field)
-        self.restaurant_info_city = self.get_value(self._city_field)
-        self.restaurant_info_country = self.get_value(self._country_field)
-        self.restaurant_info_email = self.get_value(self._email_field)
-        self.restaurant_info_senders_email = self.get_value(self._senders_email_field)
-        self.restaurant_info_msgIn_email = self.get_value(self._msgIn_email_field)
-        self.restaurant_info_website = self.get_value(self._website_field)
-        self.restaurant_info_facebook = self.get_value(self._facebook_field)
-        self.restaurant_info_fan_page = self.get_value(self._fan_page_url_field)
-        self.restaurant_info_trip_advisor = self.get_value(self._trip_advisor_field)
-        self.restaurant_info_google = self.get_value(self._google_field)
-        self.restaurant_info_yelp = self.get_value(self._yelp_field)
-        self.restaurant_info_phone = self.get_value(self._phone_field)
-        self.restaurant_info_image_url = self.get_value(self._image_url_field)
+        self.restaurant_info_last_name = self.get_value(self._last_name_field, "Trying to get the value from the restaurant last name field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_address = self.get_value(self._address_field, "Trying to get the value from the restaurant address field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_zip = self.get_value(self._zip_code_field, "Trying to get the value from the restaurant zip code field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_city = self.get_value(self._city_field, "Trying to get the value from the restaurant city field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_country = self.get_value(self._country_field, "Trying to get the value from the restaurant country field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_email = self.get_value(self._email_field, "Trying to get the value from the restaurant email field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_senders_email = self.get_value(self._senders_email_field, "Trying to get the value from the senders email field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_msgIn_email = self.get_value(self._msgIn_email_field, "Trying to get the value from the msgIn email field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_website = self.get_value(self._website_field, "Trying to get the value from the restaurant website field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_facebook = self.get_value(self._facebook_field, "Trying to get the value from the restaurant facebook field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_fan_page = self.get_value(self._fan_page_url_field, "Trying to get the value from the restaurant fan page url field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_trip_advisor = self.get_value(self._trip_advisor_field, "Trying to get the value from the trip advisor field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_google = self.get_value(self._google_field, "Trying to get the value from the restaurant google field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_yelp = self.get_value(self._yelp_field, "Trying to get the value from the restaurant yelp field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_phone = self.get_value(self._phone_field, "Trying to get the value from the restaurant phone field on the restaurant settings page was unsuccessful")
+        self.restaurant_info_image_url = self.get_value(self._image_url_field, "Trying to get the value from the restaurant image url field on the restaurant settings page was unsuccessful")
 
     def open_rooms_tab(self):
-        self.click(self._rooms_tab)
+        self.click(self._rooms_tab, "Rooms tab cannot be clicked or wasn't found on the restaurant settings page")
 
     def add_two_rooms(self):
         # self.click(self._add_room_en_button)
         self.clear_field_and_send_keys(self._add_room_name_value1, self._add_room_name_field)
-        self.click(self._add_room_submit)
+        self.click(self._add_room_submit, "Button to submit adding room cannot be clicked or wasn't found on the restaurant settings page")
         sleep(3)
         self.clear_field_and_send_keys(self._add_room_name_value2, self._add_room_name_field)
-        self.click(self._add_room_submit)
+        self.click(self._add_room_submit, "Button to submit adding room cannot be clicked or wasn't found on the restaurant settings page")
         self.clear_field_and_send_keys(self._add_room_capacity_value, self._add_room_capacity_field1)
         self.clear_field_and_send_keys(self._add_room_capacity_value, self._add_room_capacity_field2)
         self.clear_field_and_send_keys(self._add_room_bookable_value, self._add_room_bookable_field1)
@@ -191,19 +191,19 @@ class RestaurantSettingsPage(BasePage):
         self.clear_field_and_send_keys(self._add_room_order_value2, self._add_room_order_field2)
 
     def remove_added_rooms(self):
-        self.click(self._add_room_remove_first)
+        self.click(self._add_room_remove_first, "Button to remove first added room cannot be clicked or wasn't found on the restaurant settings page")
         self.accept_alert()
         sleep(3)
-        self.click(self._add_room_remove_first)
+        self.click(self._add_room_remove_first, "Button to remove first added room cannot be clicked or wasn't found on the restaurant settings page")
         self.accept_alert()
         sleep(3)
 
     def open_shift_tab(self):
-        self.click(self._shift_tab)
+        self.click(self._shift_tab, "Shifts tab cannot be clicked or wasn't found on the restaurant settings page")
         sleep(2)
 
     def add_shift_first_accordeon(self):
-        self.click(self._add_shift_button)
+        self.click(self._add_shift_button, "Add shift button cannot be clicked or wasn't found on the restaurant shifts settings page")
         self.clear_field_and_send_keys(self._shift_name_value, self._shift_name_field)
         self.clear_field_and_send_keys(self._shift_internal_name_value, self._shift_internal_name_field)
         self.clear_field_and_send_keys(self._shift_start_date_value, self._shift_start_date_field)
@@ -211,8 +211,8 @@ class RestaurantSettingsPage(BasePage):
         self.clear_field_and_send_keys(self._shift_service_end_value, self._shift_service_end_field)
 
     def add_shift_second_accordeon(self):
-        self.click(self._shift_second_accordeon_menu)
-        self.click(self._shift_reservation_requirements_checkbox)
+        self.click(self._shift_second_accordeon_menu, "While adding shift second accordeon tab cannot be clicked or wasn't found on the page")
+        self.click(self._shift_reservation_requirements_checkbox), "Shift reservation requirements checkbox cannot be clicked or wasn't found on the register shift page"
         sleep(2)
         self.clear_field_and_send_keys(self._shift_capacity_value, self._shift_capacity_field)
         self.clear_field_and_send_keys(self._shift_reservations_confirmed_value, self._shift_reservations_confirmed_field)
@@ -226,44 +226,44 @@ class RestaurantSettingsPage(BasePage):
         self.clear_field_and_send_keys(self._shift_maximum_guests_value, self._shift_maximum_guests_field)
 
     def save_shift(self):
-        self.click(self._shift_save_button)
+        self.click(self._shift_save_button, "Save shift button cannot be clicked or wasn't found on the register shift page")
 
     def open_first_shift_details(self):
-        self.click(self._added_shift_show_copies_button)
+        self.click(self._added_shift_show_copies_button, "First shift details button (show copies) cannot be clicked or wasn't found on the restaurant shifts settings page")
 
     def first_shift_get_values(self):
-        self.added_shift_name = self.get_value(self._added_shift_name_field)
-        self.added_shift_internal_name = self.get_value(self._added_shift_internal_name_field)
-        self.added_shift_capacity = self.get_value(self._shift_capacity_field)
-        self.added_shift_buffer = self.get_value(self._shift_buffer_field)
+        self.added_shift_name = self.get_value(self._added_shift_name_field, "Trying to get the value from shift name field on the first shift show copies page was unsuccessful")
+        self.added_shift_internal_name = self.get_value(self._added_shift_internal_name_field, "Trying to get the value from shift internal name field on the first shift show copies page was unsuccessful")
+        self.added_shift_capacity = self.get_value(self._shift_capacity_field, "Trying to get the value from shift capacity field on the first shift show copies page was unsuccessful")
+        self.added_shift_buffer = self.get_value(self._shift_buffer_field, "Trying to get the value from shift buffer field on the first shift show copies page was unsuccessful")
         self.get_driver().execute_script("window.scrollTo(1100, 0);")
-        self.added_shift_daily_deadlinie = self.get_value(self._shift_daily_online_deadline_field)
-        self.added_shift_kitchen_start = self.get_value(self._shift_kitchen_start_field)
-        self.added_shift_kitchen_end = self.get_value(self._shift_kitchen_end_field)
+        self.added_shift_daily_deadlinie = self.get_value(self._shift_daily_online_deadline_field, "Trying to get the value from shift daily online deadline field on the first shift show copies page was unsuccessful")
+        self.added_shift_kitchen_start = self.get_value(self._shift_kitchen_start_field, "Trying to get the value from shift kitchen start field on the first shift show copies page was unsuccessful")
+        self.added_shift_kitchen_end = self.get_value(self._shift_kitchen_end_field, "Trying to get the value from shift kitchen end field on the first shift show copies page was unsuccessful")
         self.get_driver().execute_script("window.scrollTo(2000, 0);")
-        self.added_shift_timeslot_capacity = self.get_value(self._shift_timeslot_capacity_field)
-        self.added_shift_reservations_confirmed = self.get_value(self._shift_reservations_confirmed_field)
-        self.added_shift_minimum_guests = self.get_value(self._shift_minimum_guests_field)
-        self.added_shift_maximum_guests = self.get_value(self._shift_maximum_guests_field)
+        self.added_shift_timeslot_capacity = self.get_value(self._shift_timeslot_capacity_field, "Trying to get the value from shift timeslot capacity field on the first shift show copies page was unsuccessful")
+        self.added_shift_reservations_confirmed = self.get_value(self._shift_reservations_confirmed_field, "Trying to get the value from shift reservations confirmed field on the first shift show copies page was unsuccessful")
+        self.added_shift_minimum_guests = self.get_value(self._shift_minimum_guests_field, "Trying to get the value from shift minimum guests field on the first shift show copies page was unsuccessful")
+        self.added_shift_maximum_guests = self.get_value(self._shift_maximum_guests_field, "Trying to get the value from shift maximum guests field on the first shift show copies page was unsuccessful")
 
     def remove_first_shift(self):
-        self.click(self._remove_added_shift_button)
+        self.click(self._remove_added_shift_button, "Remove first shift button cannot be clicked or wasn't found on the restaurant shifts settings page")
         self.accept_alert()
 
     def add_1_room_to_shift(self):
-        self.click(self._shift_third_accordeon_menu)
+        self.click(self._shift_third_accordeon_menu, "While adding shift - the third accordeon cannot be clicked or wasn't found on the page")
         self.first_room_name = self.get_text(self._shift_first_room_name_field)
-        self.click(self._shift_select_first_room_checkbox)
+        self.click(self._shift_select_first_room_checkbox, "While adding shift - in the third accordeon the select first room checkbox cannot be clicked or wasn't found on the page")
 
     def add_2_rooms_to_shift_publish(self):
-        self.click(self._shift_third_accordeon_menu)
+        self.click(self._shift_third_accordeon_menu, "While adding shift - the third accordeon cannot be clicked or wasn't found on the page")
         self.first_room_name = self.get_text(self._shift_first_room_name_field)
         self.second_room_name = self.get_text(self._shift_second_room_name_field)
-        self.click(self._shift_select_first_room_publish_checkbox)
-        self.click(self._shift_select_second_room_publish_checkbox)
+        self.click(self._shift_select_first_room_publish_checkbox, "While adding shift - in the third accordeon the first room \"Publish\" checkbox cannot be clicked or wasn't found on the page")
+        self.click(self._shift_select_second_room_publish_checkbox, "While adding shift - in the third accordeon the second room \"Publish\" checkbox cannot be clicked or wasn't found on the page")
 
     def add_daily_shift_click_button(self):
-        self.click(self._add_daily_shift_button)
+        self.click(self._add_daily_shift_button, "The button to add daily shift cannot be clicked or wasn't found on the daily shifts page")
 
     def add_shift_daily_first_accordeon(self):
         self.clear_field_and_send_keys(self._add_daily_shift_name_value, self._shift_name_field)
@@ -272,12 +272,12 @@ class RestaurantSettingsPage(BasePage):
         self.clear_field_and_send_keys(self._shift_service_end_value, self._shift_service_end_field)
 
     def remove_first_daily_shift(self):
-        self.click(self._remove_first_daily_shift_button)
+        self.click(self._remove_first_daily_shift_button, "The remove first daily shift button cannot be clicked or isn't present on the daily shifts page")
         self.accept_alert()
 
     def daily_shift_activate_first_global(self):
-        self.click(self._daily_shift_activate_global_checkbox)
-        self.click(self._daily_shift_activate_global_save_button)
+        self.click(self._daily_shift_activate_global_checkbox, "The first global shift checkbox in the daily shifts menu cannot be clicked or wasn't visible on the daily shifts page")
+        self.click(self._daily_shift_activate_global_save_button, "The save global shift button in the daily shifts menu cannot be clicked or wasn't visible on the daily shifts page")
 
     def get_first_global_shift_name(self):
         self.first_global_shift_name = self.get_text(self._daily_shift_first_global_name_field)
@@ -287,43 +287,43 @@ class RestaurantSettingsPage(BasePage):
 
     def edit_first_daily_shift(self):
         try:
-            self.click(self._daily_shift_edit_first_button)
+            self.click(self._daily_shift_edit_first_button, "The edit first daily shift button cannot be clicked or wasn't visible on the daily shift page")
         except WebDriverException as e:
             self.get_driver().execute_script("arguments[0].click();", self.find_element(self._daily_shift_edit_first_button))
 
     def archive_first_shift(self):
-        self.click(self._first_shift_archive_button)
+        self.click(self._first_shift_archive_button, "First shift Archive button on the restaurant shifts settings page cannot be clicked or isn't found on the page")
 
     def get_first_shift_internal_name(self):
         self._first_shift_internal_name = self.get_text(self._first_shift_internal_name_field)
 
     def expand_archived_shifts(self):
-        self.click(self._expand_archived_shifts_button)
+        self.click(self._expand_archived_shifts_button, "Expand archived shifts button cannot be clicked or isn't found on the restaurant shifts settings page")
 
     def unachive_shift(self):
-        self.click(self._unarchive_shift_button)
+        self.click(self._unarchive_shift_button, "Unarchive first shift button cannot be clicked or wasn't found on the restaurant shifts settings page")
 
     def open_tables_tab(self):
-        self.click(self._tables_tab)
+        self.click(self._tables_tab, "The tables tab in the restaurant settings cannot be clicked or wasn't found on the page")
 
     def add_table(self):
         self.clear_field_and_send_keys(self._table_name_value, self._table_name_field)
         self.clear_field_and_send_keys(self._table_capacity_value, self._table_capacity_field)
-        self.click(self._add_table_button)
+        self.click(self._add_table_button, "The add table button cannot be clicked or wasn't found on the add table page")
 
     def remove_first_table(self):
-        self.click(self._remove_first_table_button)
+        self.click(self._remove_first_table_button, "The remove first table button cannot be clicked or wasn't found on the add table page")
         self.accept_alert()
 
     def open_holidays_tab(self):
-        self.click(self._holidays_tab)
+        self.click(self._holidays_tab, "Holidays tab cannot be clicked or wasn't found on the restaurant settings page")
         sleep(2)
 
     def add_holiday(self):
-        self.click(self._add_holiday_button)
+        self.click(self._add_holiday_button, "Add holiday button cannot be clicked or wasn't found on the holidays tab in restaurant settings")
         sleep(2)
         self.clear_field_and_send_keys(self._holiday_name_value, self._holiday_name_field)
-        self.click(self._holiday_from_to_checkbox)
+        self.click(self._holiday_from_to_checkbox, "While adding holiday, the \"From\" checkbox cannot be clicked or wasn't found on the page")
         self.clear_field_and_send_keys(self._holiday_start_date_value, self._holiday_start_date_field)
         if (datetime.date.today().day)==29 and (datetime.date.today().month)==2:
             self.clear_field_and_send_keys(self._first_day_next_month, self._holiday_end_date_field)
@@ -332,14 +332,14 @@ class RestaurantSettingsPage(BasePage):
         else:
             self.clear_field_and_send_keys(self._holiday_end_date_value, self._holiday_end_date_field)
         self._holiday_end_date_inserted = self.get_text(self._holiday_end_date_field)
-        self.click(self._holiday_name_field)
-        self.click(self._holiday_information_open_field)
+        self.click(self._holiday_name_field, "While adding holiday, the \"Holiday name\" field cannot be clicked or wasn't found on the page")
+        self.click(self._holiday_information_open_field, "While adding holiday, the attempt to open \"Holiday information\" field to enter data to it wasn't successful")
         self.clear_field_and_send_keys(self._holiday_information_value, self._holiday_information_text_field)
-        self.click(self._holiday_information_close_field)
-        self.click(self._add_holiday_submit)
+        self.click(self._holiday_information_close_field, "While adding holiday, the attempt to close \"Holiday information\" field after entering data to it wasn't successful")
+        self.click(self._add_holiday_submit, "While adding holiday, the attempt to click \"Submit\" button wasn't successful")
 
     def edit_holiday(self):
-        self.click(self._first_added_holiday_name_field)
+        self.click(self._first_added_holiday_name_field, "The first holiday name field on the holidays tab cannot be clicked or wasn't found on the page, so added holiday cannot be edited")
         sleep(2)
         self.clear_field_and_send_keys(self._edit_holiday_name_value, self._edit_holiday_name_field)
         if (datetime.date.today().day)==1:
@@ -348,28 +348,28 @@ class RestaurantSettingsPage(BasePage):
             self.clear_field_and_send_keys(self._edit_holiday_start_date_value, self._edit_holiday_start_date_field)
         self._edit_holiday_start_date_inserted = self.get_text(self._edit_holiday_start_date_field)
         self.clear_field_and_send_keys(self._edit_holiday_end_date_value, self._edit_holiday_end_date_field)
-        self.click(self._edit_holiday_name_field)
-        self.click(self._edit_holiday_information_open_field)
+        self.click(self._edit_holiday_name_field, "While editing holiday, the \"Holiday name\" field cannot be clicked or wasn't found on the page")
+        self.click(self._edit_holiday_information_open_field, "While editing holiday, the attempt to open \"Holiday information\" field to enter data to it wasn't successful")
         self.clear_field_and_send_keys(self._edit_holiday_information_value, self._edit_holiday_information_text_field)
-        self.click(self._edit_holiday_information_close_field)
-        self.click(self._edit_holiday_submit)
+        self.click(self._edit_holiday_information_close_field,"While editing holiday, the attempt to close \"Holiday information\" field after entering data to it wasn't successful")
+        self.click(self._edit_holiday_submit, "While editing holiday, the \"Submit\" button cannot be clicked or wasn't found on the page")
 
     def remove_added_holiday(self):
-        self.click(self._remove_first_added_holiday_button)
+        self.click(self._remove_first_added_holiday_button, "The remove first added holiday button on holidays tab cannot be clicked or wasn't found on the page")
         self.accept_alert()
 
     def open_coustomizations_tab(self):
-        self.click(self._coustomizations_tab)
+        self.click(self._coustomizations_tab, "The coustomization tab in restaurant settings page cannot be clicked or wasn't found on the page")
         sleep(2)
 
     def click_percentage_of_capacity_checkbox(self):
-        self.click(self._percentage_of_capacity_labeled_as_confirmed_checkbox)
+        self.click(self._percentage_of_capacity_labeled_as_confirmed_checkbox, "The percentage of capacity labeled as confirmed checkbox cannot be clicked or wasn't found on the restaurant coustomizations settings page")
 
     def edit_coustomization_tab(self):
         self.clear_field_and_send_keys(self._percentage_of_capacity_labeled_as_confirmed_value, self._percentage_of_capacity_labeled_as_confirmed_field)
         self.clear_field_and_send_keys(self._booking_in_advance_value, self._booking_in_advance_field)
-        self.click(self._save_coustomizations_tab)
+        self.click(self._save_coustomizations_tab, "The save coustomizations tab settings button cannot be clicked or wasn't found on the page")
 
     def get_vaules_coustomization_tab(self):
-        self._percentage_of_capacity_labeled_as_confirmed_saved_value = self.get_value(self._percentage_of_capacity_labeled_as_confirmed_field)
-        self._booking_in_advance_saved_value = self.get_value(self._booking_in_advance_field)
+        self._percentage_of_capacity_labeled_as_confirmed_saved_value = self.get_value(self._percentage_of_capacity_labeled_as_confirmed_field, "The attempt to get value of the precentage of capacity labeled as confirmed field in the coustomizations tab in restaurant settings wasn't successful")
+        self._booking_in_advance_saved_value = self.get_value(self._booking_in_advance_field, "The attempt to get value of the booking in advance field in the coustomizations tab in restaurant settings wasn't successful")

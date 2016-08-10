@@ -20,7 +20,7 @@ class HeaderRegion(Page):
     def login(self, login, password):
         self.clear_field_and_send_keys(login, self._login_field)
         self.clear_field_and_send_keys(password, self._password_field)
-        self.click(self._login_submit)
+        self.click(self._login_submit, "Button to submit login action wasn't found on the login page")
         return AccountPage(self.get_driver())
 
     def open_register_restaurant_page(self):
@@ -35,5 +35,5 @@ class HeaderRegion(Page):
         return AccountPage(self.get_driver())
 
     def click_account_page(self):
-        self.click(self._aleno_logo)
+        self.click(self._aleno_logo, "Aleno logo wasn't found")
         return AccountPage(self.get_driver())

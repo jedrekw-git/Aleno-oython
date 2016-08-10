@@ -54,27 +54,27 @@ class SeatInPage(BasePage):
         self._add_reservation_surname_value = get_random_string(9)
 
     def click_add_reservation_plus_button(self):
-        self.click(self._add_reservation_plus_button)
+        self.click(self._add_reservation_plus_button, "The add reservation \"Plus\" button cannot be clicked or wasn't found on the SeatIn page")
 
     def click_hour(self):
         self.click(self._add_reservation_hour_button)
 
     def click_reservation_details_button(self):
-        self.click(self._add_reservation_details_button)
+        self.click(self._add_reservation_details_button, "THe button to edit reservation details (pencil) cannot be clicked or wasnt forund on the SeatIn page")
 
     def reservation_open_first_accordeon(self):
-        self.click(self._add_reservation_first_accordeon)
+        self.click(self._add_reservation_first_accordeon, "The attempt to open first accordeon while adding reservation was not successful")
 
     def enter_reservation_details(self, start_time):
         self.clear_field_and_send_keys(self._add_reservation_guests_value, self._add_reservation_guests_field)
         self.clear_field_and_send_keys(start_time, self._add_reservation_start_time_field)
-        self.click(self._add_reservation_second_accordeon)
+        self.click(self._add_reservation_second_accordeon, "The attempt to open second accordeon while adding reservation was not successful")
         # self.select_index_from_dropdown(0, self._add_reservation_language_dropdown)
         self.clear_field_and_send_keys(self._add_reservation_phone_value, self._add_reservation_phone_field)
         self.clear_field_and_send_keys(self._add_reservation_first_name_value, self._add_reservation_first_name_field)
         self.clear_field_and_send_keys(self._add_reservation_surname_value, self._add_reservation_surname_field)
         self.clear_field_and_send_keys(self._add_reservation_email_value, self._add_reservation_email_field)
-        WebDriverWait(self.get_driver(), 60).until(EC.text_to_be_present_in_element(self._add_reservation_edited_by_header, "Bearbeitet von"))
+        WebDriverWait(self.get_driver(), 60).until(EC.text_to_be_present_in_element(self._add_reservation_edited_by_header, "Bearbeitet von"), "While adding reservation the text \"Bearbeitet von\" didn't show after waiting for 60 seconds")
         # self.click(self._add_reservation_fourth_accordeon)
         # sleep(2)
         # self.click(self._add_reservation_guests_comment_open_field)
@@ -92,16 +92,16 @@ class SeatInPage(BasePage):
         self.click(self._add_reservation_send_sms_e_mail_reminder)
 
     def save_reservation(self):
-        self.click(self._save_reservation_button)
+        self.click(self._save_reservation_button, "The save reservation button cannot be clicked or wasn't found on the adding reservation page")
 
     def expand_seatIn_reservation_details(self):
-        self.click(self._expand_seatIn_reservation_details_button)
+        self.click(self._expand_seatIn_reservation_details_button, "The button to view details of the reservations cannot be clicked or wasn't present on the SeatIn page")
 
     def click_added_reservation(self):
-        self.click(self._added_reservation)
+        self.click(self._added_reservation, "The attempt to click added reservation in the reservation details view in SeatIn wasn't successful")
 
     def remove_added_reservation(self):
-        self.click(self._remove_added_reservation_button)
+        self.click(self._remove_added_reservation_button, "The attempt to remove added reservation in the reservation details view in SeatIn wasn't successful")
         self.accept_alert()
         sleep(2)
 
