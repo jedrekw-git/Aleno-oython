@@ -107,7 +107,10 @@ class AccountPage(BasePage):
         return SeatInPage(self.get_driver())
 
     def open_daily_settings(self):
-        self.click(self._settings_icon, "The settings icon cannot be clicked or wasn't found on the dashboard")
+        try:
+            self.click(self._settings_icon, "The settings icon cannot be clicked or wasn't found on the dashboard")
+        except WebDriverException as e:
+            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._settings_icon))
         self.click(self._daily_settings_option, "The daily settings option in the settings dropdown cannot be clicked or wasn't found in the dropdown")
         return RestaurantSettingsPage(self.get_driver())
 

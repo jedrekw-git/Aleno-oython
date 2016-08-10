@@ -280,7 +280,6 @@ class SmokeTest(unittest.TestCase):
         while True:
             try:
                 WebDriverWait(self.driver, 7).until(EC.presence_of_element_located(restaurant_settings_page._first_added_holiday_name_field), "The first holiday on the holiday settings page is not visible")
-                #self.first_holiday_name = restaurant_settings_page.get_text(restaurant_settings_page._first_added_holiday_name_field)
                 restaurant_settings_page.remove_added_holiday()
             except WebDriverException as e:
                 break
@@ -506,7 +505,12 @@ class SmokeTest(unittest.TestCase):
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_registered_restaurant("AUTOTESTb")
         daily_settings_page = account_page.open_daily_settings()
-        sleep(6)
+        sleep(3)
+        while True:
+            if daily_settings_page._add_daily_shift_name_value in daily_settings_page.get_page_source():
+                daily_settings_page.remove_first_daily_shift()
+            if not daily_settings_page._add_daily_shift_name_value in daily_settings_page.get_page_source():
+                break
         daily_settings_page.add_daily_shift_click_button()
         daily_settings_page.add_shift_daily_first_accordeon()
         daily_settings_page.add_shift_second_accordeon()
@@ -533,7 +537,6 @@ class SmokeTest(unittest.TestCase):
         account_page.open_registered_restaurant("George Bar & Grill")
         daily_settings_page = account_page.open_daily_settings()
         sleep(3)
-        daily_settings_page.daily_shift_activate_first_global()
         if not "edit-shift" in daily_settings_page.get_page_source():
             daily_settings_page.daily_shift_activate_first_global()
         if not "edit-shift" in daily_settings_page.get_page_source():

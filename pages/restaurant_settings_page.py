@@ -339,7 +339,10 @@ class RestaurantSettingsPage(BasePage):
         self.click(self._add_holiday_submit, "While adding holiday, the attempt to click \"Submit\" button wasn't successful")
 
     def edit_holiday(self):
-        self.click(self._first_added_holiday_name_field, "The first holiday name field on the holidays tab cannot be clicked or wasn't found on the page, so added holiday cannot be edited")
+        try:
+            self.click(self._first_added_holiday_name_field, "The first holiday name field on the holidays tab cannot be clicked or wasn't found on the page, so added holiday cannot be edited")
+        except WebDriverException as e:
+            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._first_added_holiday_name_field))
         sleep(2)
         self.clear_field_and_send_keys(self._edit_holiday_name_value, self._edit_holiday_name_field)
         if (datetime.date.today().day)==1:
