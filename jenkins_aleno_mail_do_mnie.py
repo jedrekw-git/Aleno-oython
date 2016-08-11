@@ -126,9 +126,9 @@ class SmokeTest(unittest.TestCase):
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         while True:
-            if restaurant_settings_page._shift_name_value in account_page.get_page_source():
+            if "Interne Bezeichnung" in account_page.get_page_source():
                 restaurant_settings_page.remove_first_shift()
-            if not restaurant_settings_page._shift_name_value in account_page.get_page_source():
+            if not "Interne Bezeichnung" in account_page.get_page_source():
                 break
         restaurant_settings_page.add_shift_first_accordeon()
         restaurant_settings_page.add_shift_second_accordeon()
@@ -187,6 +187,11 @@ class SmokeTest(unittest.TestCase):
         account_page.open_registered_restaurant("AUTOTESTb")
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
+        while True:
+            if "Interne Bezeichnung" in account_page.get_page_source():
+                restaurant_settings_page.remove_first_shift()
+            if not "Interne Bezeichnung" in account_page.get_page_source():
+                break
         restaurant_settings_page.add_shift_first_accordeon()
         restaurant_settings_page.add_1_room_to_shift()
         restaurant_settings_page.save_shift()
@@ -216,9 +221,9 @@ class SmokeTest(unittest.TestCase):
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
         while True:
-            if restaurant_settings_page._shift_name_value in account_page.get_page_source():
+            if "Interne Bezeichnung" in account_page.get_page_source():
                 restaurant_settings_page.remove_first_shift()
-            if not restaurant_settings_page._shift_name_value in account_page.get_page_source():
+            if not "Interne Bezeichnung" in account_page.get_page_source():
                 break
         restaurant_settings_page.add_shift_first_accordeon()
         restaurant_settings_page.add_shift_second_accordeon()

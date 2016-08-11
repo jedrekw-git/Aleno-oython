@@ -352,7 +352,7 @@ class RestaurantSettingsPage(BasePage):
         self.click(self._edit_holiday_submit, "While editing holiday, the \"Submit\" button cannot be clicked or wasn't found on the page")
 
     def remove_added_holiday(self):
-        self.click(self._remove_first_added_holiday_button, "The remove first added holiday button on holidays tab cannot be clicked or wasn't found on the page")
+        self.condition_click(self._remove_first_added_holiday_button, "The remove first added holiday button on holidays tab cannot be clicked or wasn't found on the page")
         self.accept_alert()
 
     def open_coustomizations_tab(self):

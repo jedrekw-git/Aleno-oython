@@ -76,7 +76,7 @@ class Page(object):
             try:
                 self.get_driver().execute_script("arguments[0].click();", self.find_element((locator)))
             except NoSuchElementException:
-                logging.error(info)
+                raise TimeoutException(info)
 
 
 

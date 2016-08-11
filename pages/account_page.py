@@ -146,6 +146,6 @@ class AccountPage(BasePage):
         self.added_note_type_text = (self.get_text(self._added_note_type_field)).encode('utf-8')
 
     def open_registered_restaurant(self, restaurant_name):
-        self.click(self._restaurants_dropdown, "Dropdown of chosing restaurant wasn't found on the page")
+        self.condition_click(self._restaurants_dropdown, "Dropdown of chosing restaurant wasn't found on the page")
         self.condition_click((By.NAME, "%s" %restaurant_name), "Restaurant name wasn't found on the choosing restaurant dropdown")
 
