@@ -3,7 +3,8 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import *
+import logging
 
 class Page(object):
     def __init__(self, driver, title=None, url=None):
@@ -44,7 +45,8 @@ class Page(object):
         element.send_keys(value_to_send)
         return self
 
-    def clear_field_and_send_keys(self, value_to_send, locator):
+    def clear_field_and_send_keys(self, value_to_send, locator, info="no error"):
+        self.wait_for_visibility(locator, info)
         self.clear_field(locator)
         self.send_keys(value_to_send, locator)
 
@@ -66,6 +68,18 @@ class Page(object):
         wait = WebDriverWait(self.get_driver(), 10, poll_frequency=.2)
         wait.until(expected_conditions.element_to_be_clickable(locator)).click()
 
+    def condition_click(self, locator, info="no error"):
+        try:
+            element = self.wait_for_visibility(locator, info)
+            element.click()
+        except WebDriverException as e:
+            try:
+                self.get_driver().execute_script("arguments[0].click();", self.find_element((locator)))
+            except NoSuchElementException:
+                logging.error(info)
+
+
+
     def select_value_from_dropdown(self, value, locator):
         dropdown = Select(self.find_element(locator))
         dropdown.select_by_value(value)
@@ -74,7 +88,8 @@ class Page(object):
         dropdown = Select(element)
         dropdown.select_by_value(value)
 
-    def select_index_from_dropdown(self, index, locator):
+    def select_index_from_dropdown(self, index, locator, info="no error"):
+        self.wait_for_visibility(locator, info)
         dropdown = Select(self.find_element(locator))
         dropdown.select_by_index(index)
 
@@ -87,7 +102,7 @@ class Page(object):
             WebDriverWait(self.get_driver(), 15).until(EC.alert_is_present())
             return self.get_driver().switch_to_alert().accept()
         except TimeoutException:
-            print "no alert was found on the page"
+            print "no alert popup was found on the page"
 
     def refresh(self):
         self.get_driver().refresh()

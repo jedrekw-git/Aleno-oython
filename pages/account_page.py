@@ -22,6 +22,7 @@ class AccountPage(BasePage):
     _settings_option = (By.LINK_TEXT, "Grundeinstellungen")
     _settings_option2 = (By.LINK_TEXT, "Settings")
     _daily_settings_option = (By.LINK_TEXT, "Tageseinstellungen")
+    _daily_settings_option2 = (By.LINK_TEXT, "Daily settings")
     _test_option = (By.NAME, "Test")
     _test_shift_name_field = (By.XPATH, "//div/input")
     _test_date_field = (By.XPATH, "//div[2]/input")
@@ -68,23 +69,14 @@ class AccountPage(BasePage):
         return RestaurantSettingsPage(self.get_driver())
 
     def open_shifts_menu(self):
-        try:
-            self.click(self._shifts_menu, "The shifts menu on the dashboard cannot be clicked or wasn't found on the page")
-        except WebDriverException as e:
-            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._shifts_menu))
+        self.condition_click(self._shifts_menu, "The shifts menu on the dashboard cannot be clicked or wasn't found on the page")
         sleep(3)
 
     def expand_first_shift(self):
-        try:
-            self.click(self._expand_first_shift_button, "The expand first shift button cannot be clicked or wasn't found on the shifts menu page")
-        except WebDriverException as e:
-            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._expand_first_shift_button))
+        self.condition_click(self._expand_first_shift_button, "The expand first shift button cannot be clicked or wasn't found on the shifts menu page")
 
     def click_first_shift(self):
-        try:
-            self.click(self._click_first_shift_button, "The first shift button cannot be clicked or isn't present on the shifts menu page")
-        except WebDriverException as e:
-            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._click_first_shift_button))
+        self.condition_click(self._click_first_shift_button, "The first shift button cannot be clicked or isn't present on the shifts menu page")
         return SeatInPage(self.get_driver())
 
     def get_first_shift_start_time(self):
@@ -107,11 +99,11 @@ class AccountPage(BasePage):
         return SeatInPage(self.get_driver())
 
     def open_daily_settings(self):
+        self.condition_click(self._settings_icon, "The settings icon cannot be clicked or wasn't found on the dashboard")
         try:
-            self.click(self._settings_icon, "The settings icon cannot be clicked or wasn't found on the dashboard")
-        except WebDriverException as e:
-            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._settings_icon))
-        self.click(self._daily_settings_option, "The daily settings option in the settings dropdown cannot be clicked or wasn't found in the dropdown")
+            self.click(self._daily_settings_option, "The daily settings option in the settings dropdown cannot be clicked or wasn't found in the dropdown")
+        except TimeoutException:
+            self.click(self._daily_settings_option2, "The daily settings option in the settings dropdown cannot be clicked or wasn't found in the dropdown")
         return RestaurantSettingsPage(self.get_driver())
 
     def open_relatIn(self):
@@ -124,7 +116,7 @@ class AccountPage(BasePage):
         sleep(2)
         self.click(self._add_note_open_field, "The attempt to open add note text field to enter data to it wasn't successful")
         self.click(self._add_note_text_field, "The attempt to click add note text field to enter data to it wasn't successful")
-        self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field)
+        self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field, "The add note text field on add note page didn't show")
         self.click(self._add_note_close_field, "The attempt to close add note text field after entering data to it wasn't successful")
         self.click(self._add_note_submit_button, "The attempt to click add note submit button wasn't successful")
         sleep(2)
@@ -136,7 +128,7 @@ class AccountPage(BasePage):
         sleep(2)
         self.click(self._add_note_open_field, "The attempt to open add note text field to enter data to it wasn't successful")
         self.click(self._add_note_text_field, "The attempt to click add note text field to enter data to it wasn't successful")
-        self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field)
+        self.clear_field_and_send_keys(self._add_note_text_value, self._add_note_text_field, "The add note text field on add note page didn't show")
         self.click(self._add_note_close_field, "The attempt to close add note text field after entering data to it wasn't successful")
         self.click(self._add_note_submit_button, "The attempt to click add note submit button wasn't successful")
         sleep(2)
@@ -155,7 +147,5 @@ class AccountPage(BasePage):
 
     def open_registered_restaurant(self, restaurant_name):
         self.click(self._restaurants_dropdown, "Dropdown of chosing restaurant wasn't found on the page")
-        try:
-            self.click((By.NAME, "%s" %restaurant_name), "Restaurant name wasn't found on the chosing restaurant dropdown")
-        except WebDriverException as e:
-            self.get_driver().execute_script("arguments[0].click();", self.find_element((By.NAME, "%s" %restaurant_name)))
+        self.condition_click((By.NAME, "%s" %restaurant_name), "Restaurant name wasn't found on the choosing restaurant dropdown")
+

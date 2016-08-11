@@ -38,22 +38,19 @@ class RelatInPage(BasePage):
 
     def add_client(self):
         self.click(self._add_client_button, "The add client button cannot be clicked or wasn't found on the relatIn page")
-        WebDriverWait(self.get_driver(), 15).until(EC.visibility_of_element_located(self._client_first_name_field))
+        WebDriverWait(self.get_driver(), 15).until(EC.visibility_of_element_located(self._client_first_name_field), "The client first name field on add client popup page didn't show, probably the popup didn't open")
         self.click(self._client_first_name_field, "While adding client - first name field couldn't be clicked or wasn't found on the relatIn page")
-        self.clear_field_and_send_keys(self._client_first_name_value, self._client_first_name_field)
-        self.clear_field_and_send_keys(self._client_last_name_value, self._client_last_name_field)
-        self.clear_field_and_send_keys(self._client_phone_number_value, self._client_phone_number_field)
-        self.clear_field_and_send_keys(self._client_email_value, self._client_email_field)
-        self.clear_field_and_send_keys(self._client_description_value, self._client_description_field)
-        self.clear_field_and_send_keys(self._client_category_value, self._client_category_field)
+        self.clear_field_and_send_keys(self._client_first_name_value, self._client_first_name_field, "The client first name field on add client popup didn't show")
+        self.clear_field_and_send_keys(self._client_last_name_value, self._client_last_name_field, "The client last name field on add client popup didn't show")
+        self.clear_field_and_send_keys(self._client_phone_number_value, self._client_phone_number_field, "The client phone number field on add client popup didn't show")
+        self.clear_field_and_send_keys(self._client_email_value, self._client_email_field, "The client email field on add client popup didn't show")
+        self.clear_field_and_send_keys(self._client_description_value, self._client_description_field, "The client description field on add client popup didn't show")
+        self.clear_field_and_send_keys(self._client_category_value, self._client_category_field, "The client category field on add client popup didn't show")
         self.click(self._save_client_button, "While adding client - save client button couldn't be clicked or wasn't found on the relatIn page")
         self.click(self._close_new_client_popup_button, "After adding client - close new client popup button couldn't be clicked or wasn't found on the relatIn page")
 
     def remove_first_client(self):
-        try:
-            self.click(self._remove_first_client_button, "The remove first client button cannot be clicked or wasn't found on the relatIn page")
-        except WebDriverException as e:
-            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._remove_first_client_button))
+        self.condition_click(self._remove_first_client_button, "The remove first client button cannot be clicked or wasn't found on the relatIn page")
         self.accept_alert()
 
 

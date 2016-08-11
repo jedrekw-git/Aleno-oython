@@ -18,8 +18,8 @@ class HeaderRegion(Page):
     _einloggen_text = (By.XPATH, "//h1")
 
     def login(self, login, password):
-        self.clear_field_and_send_keys(login, self._login_field)
-        self.clear_field_and_send_keys(password, self._password_field)
+        self.clear_field_and_send_keys(login, self._login_field, "The login field wasn't found on login page")
+        self.clear_field_and_send_keys(password, self._password_field, "The password field wasn't found on login page")
         self.click(self._login_submit, "Button to submit login action wasn't found on the login page")
         return AccountPage(self.get_driver())
 

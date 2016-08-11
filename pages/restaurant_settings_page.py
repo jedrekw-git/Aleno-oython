@@ -178,17 +178,17 @@ class RestaurantSettingsPage(BasePage):
 
     def add_two_rooms(self):
         # self.click(self._add_room_en_button)
-        self.clear_field_and_send_keys(self._add_room_name_value1, self._add_room_name_field)
+        self.clear_field_and_send_keys(self._add_room_name_value1, self._add_room_name_field, "The field to enter room name to add room on restaurant room settings page didn't show")
         self.click(self._add_room_submit, "Button to submit adding room cannot be clicked or wasn't found on the restaurant settings page")
         sleep(3)
-        self.clear_field_and_send_keys(self._add_room_name_value2, self._add_room_name_field)
+        self.clear_field_and_send_keys(self._add_room_name_value2, self._add_room_name_field, "The field to enter room name to add room on restaurant room settings page didn't show")
         self.click(self._add_room_submit, "Button to submit adding room cannot be clicked or wasn't found on the restaurant settings page")
-        self.clear_field_and_send_keys(self._add_room_capacity_value, self._add_room_capacity_field1)
-        self.clear_field_and_send_keys(self._add_room_capacity_value, self._add_room_capacity_field2)
-        self.clear_field_and_send_keys(self._add_room_bookable_value, self._add_room_bookable_field1)
-        self.clear_field_and_send_keys(self._add_room_bookable_value, self._add_room_bookable_field2)
-        self.clear_field_and_send_keys(self._add_room_order_value1, self._add_room_order_field1)
-        self.clear_field_and_send_keys(self._add_room_order_value2, self._add_room_order_field2)
+        self.clear_field_and_send_keys(self._add_room_capacity_value, self._add_room_capacity_field1, "The first room field to enter room capacity on restaurant room settings page didn't show")
+        self.clear_field_and_send_keys(self._add_room_capacity_value, self._add_room_capacity_field2, "The second room field to enter room capacity on restaurant room settings page didn't show")
+        self.clear_field_and_send_keys(self._add_room_bookable_value, self._add_room_bookable_field1, "The first room field to enter room bookable value on restaurant room settings page didn't show")
+        self.clear_field_and_send_keys(self._add_room_bookable_value, self._add_room_bookable_field2, "The second room field to enter room bookable value on restaurant room settings page didn't show")
+        self.clear_field_and_send_keys(self._add_room_order_value1, self._add_room_order_field1, "The first room field to enter room order on restaurant room settings page didn't show")
+        self.clear_field_and_send_keys(self._add_room_order_value2, self._add_room_order_field2, "The second room field to enter room order on restaurant room settings page didn't show")
 
     def remove_added_rooms(self):
         self.click(self._add_room_remove_first, "Button to remove first added room cannot be clicked or wasn't found on the restaurant settings page")
@@ -204,26 +204,26 @@ class RestaurantSettingsPage(BasePage):
 
     def add_shift_first_accordeon(self):
         self.click(self._add_shift_button, "Add shift button cannot be clicked or wasn't found on the restaurant shifts settings page")
-        self.clear_field_and_send_keys(self._shift_name_value, self._shift_name_field)
-        self.clear_field_and_send_keys(self._shift_internal_name_value, self._shift_internal_name_field)
-        self.clear_field_and_send_keys(self._shift_start_date_value, self._shift_start_date_field)
-        self.clear_field_and_send_keys(self._shift_service_start_value, self._shift_service_start_field)
-        self.clear_field_and_send_keys(self._shift_service_end_value, self._shift_service_end_field)
+        self.clear_field_and_send_keys(self._shift_name_value, self._shift_name_field, "The shift name field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_internal_name_value, self._shift_internal_name_field, "The shift internal name field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_start_date_value, self._shift_start_date_field, "The shift start date field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_service_start_value, self._shift_service_start_field, "The shift service start field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_service_end_value, self._shift_service_end_field, "The shift service end field on add shift page didn't show")
 
     def add_shift_second_accordeon(self):
         self.click(self._shift_second_accordeon_menu, "While adding shift second accordeon tab cannot be clicked or wasn't found on the page")
         self.click(self._shift_reservation_requirements_checkbox), "Shift reservation requirements checkbox cannot be clicked or wasn't found on the register shift page"
         sleep(2)
-        self.clear_field_and_send_keys(self._shift_capacity_value, self._shift_capacity_field)
-        self.clear_field_and_send_keys(self._shift_reservations_confirmed_value, self._shift_reservations_confirmed_field)
-        self.clear_field_and_send_keys(self._shift_buffer_value, self._shift_buffer_field)
-        self.clear_field_and_send_keys(self._shift_daily_online_deadline_value, self._shift_daily_online_deadline_field)
-        self.clear_field_and_send_keys(self._shift_kitchen_start_value, self._shift_kitchen_start_field)
-        self.clear_field_and_send_keys(self._shift_kitchen_end_value, self._shift_kitchen_end_field)
-        self.clear_field_and_send_keys(self._shift_duration_of_reservation_value, self._shift_duration_of_reservation_field)
-        self.clear_field_and_send_keys(self._shift_timeslot_capacity_value, self._shift_timeslot_capacity_field)
-        self.clear_field_and_send_keys(self._shift_minimum_guests_value, self._shift_minimum_guests_field)
-        self.clear_field_and_send_keys(self._shift_maximum_guests_value, self._shift_maximum_guests_field)
+        self.clear_field_and_send_keys(self._shift_capacity_value, self._shift_capacity_field, "The shift capacity field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_reservations_confirmed_value, self._shift_reservations_confirmed_field, "The shift reservations confirmed field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_buffer_value, self._shift_buffer_field, "The shift buffer field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_daily_online_deadline_value, self._shift_daily_online_deadline_field, "The shift daily online deadline field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_kitchen_start_value, self._shift_kitchen_start_field, "The shift kitchen start field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_kitchen_end_value, self._shift_kitchen_end_field, "The shift kitchen end field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_duration_of_reservation_value, self._shift_duration_of_reservation_field, "The shift duration of reservation field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_timeslot_capacity_value, self._shift_timeslot_capacity_field, "The shift timeslot capacity field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_minimum_guests_value, self._shift_minimum_guests_field, "The shift minimum guests field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_maximum_guests_value, self._shift_maximum_guests_field, "The shift maximum guests field on add shift page didn't show")
 
     def save_shift(self):
         self.click(self._shift_save_button, "Save shift button cannot be clicked or wasn't found on the register shift page")
@@ -266,10 +266,10 @@ class RestaurantSettingsPage(BasePage):
         self.click(self._add_daily_shift_button, "The button to add daily shift cannot be clicked or wasn't found on the daily shifts page")
 
     def add_shift_daily_first_accordeon(self):
-        self.clear_field_and_send_keys(self._add_daily_shift_name_value, self._shift_name_field)
-        self.clear_field_and_send_keys(self._add_daily_shift_internal_name_value, self._shift_internal_name_field)
-        self.clear_field_and_send_keys(self._shift_service_start_value, self._shift_service_start_field)
-        self.clear_field_and_send_keys(self._shift_service_end_value, self._shift_service_end_field)
+        self.clear_field_and_send_keys(self._add_daily_shift_name_value, self._shift_name_field, "The shift name field on add daily shift page didn't show")
+        self.clear_field_and_send_keys(self._add_daily_shift_internal_name_value, self._shift_internal_name_field, "The shift internal name field on add daily shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_service_start_value, self._shift_service_start_field, "The shift service start field on add shift page didn't show")
+        self.clear_field_and_send_keys(self._shift_service_end_value, self._shift_service_end_field, "The shift service end field on add shift page didn't show")
 
     def remove_first_daily_shift(self):
         self.click(self._remove_first_daily_shift_button, "The remove first daily shift button cannot be clicked or isn't present on the daily shifts page")
@@ -286,10 +286,7 @@ class RestaurantSettingsPage(BasePage):
         self.first_active_shift_internal_name = self.get_text(self._first_shift_internal_name_field)
 
     def edit_first_daily_shift(self):
-        try:
-            self.click(self._daily_shift_edit_first_button, "The edit first daily shift button cannot be clicked or wasn't visible on the daily shift page")
-        except WebDriverException as e:
-            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._daily_shift_edit_first_button))
+        self.condition_click(self._daily_shift_edit_first_button, "The edit first daily shift button cannot be clicked or wasn't visible on the daily shift page")
 
     def archive_first_shift(self):
         self.click(self._first_shift_archive_button, "First shift Archive button on the restaurant shifts settings page cannot be clicked or isn't found on the page")
@@ -307,8 +304,8 @@ class RestaurantSettingsPage(BasePage):
         self.click(self._tables_tab, "The tables tab in the restaurant settings cannot be clicked or wasn't found on the page")
 
     def add_table(self):
-        self.clear_field_and_send_keys(self._table_name_value, self._table_name_field)
-        self.clear_field_and_send_keys(self._table_capacity_value, self._table_capacity_field)
+        self.clear_field_and_send_keys(self._table_name_value, self._table_name_field, "The table name field on add table page didn't show")
+        self.clear_field_and_send_keys(self._table_capacity_value, self._table_capacity_field, "The table capacity field on add table page didn't show")
         self.click(self._add_table_button, "The add table button cannot be clicked or wasn't found on the add table page")
 
     def remove_first_table(self):
@@ -322,38 +319,35 @@ class RestaurantSettingsPage(BasePage):
     def add_holiday(self):
         self.click(self._add_holiday_button, "Add holiday button cannot be clicked or wasn't found on the holidays tab in restaurant settings")
         sleep(2)
-        self.clear_field_and_send_keys(self._holiday_name_value, self._holiday_name_field)
+        self.clear_field_and_send_keys(self._holiday_name_value, self._holiday_name_field, "The holiday name field on add holiday page didn't show")
         self.click(self._holiday_from_to_checkbox, "While adding holiday, the \"From\" checkbox cannot be clicked or wasn't found on the page")
-        self.clear_field_and_send_keys(self._holiday_start_date_value, self._holiday_start_date_field)
+        self.clear_field_and_send_keys(self._holiday_start_date_value, self._holiday_start_date_field, "The holiday start date field on add holiday page didn't show")
         if (datetime.date.today().day)==29 and (datetime.date.today().month)==2:
-            self.clear_field_and_send_keys(self._first_day_next_month, self._holiday_end_date_field)
+            self.clear_field_and_send_keys(self._first_day_next_month, self._holiday_end_date_field, "The holiday end date field on add holiday page didn't show")
         elif (datetime.date.today().day)==30 or (datetime.date.today().day)==31:
-            self.clear_field_and_send_keys(self._first_day_next_month, self._holiday_end_date_field)
+            self.clear_field_and_send_keys(self._first_day_next_month, self._holiday_end_date_field, "The holiday end date field on add holiday page didn't show")
         else:
-            self.clear_field_and_send_keys(self._holiday_end_date_value, self._holiday_end_date_field)
+            self.clear_field_and_send_keys(self._holiday_end_date_value, self._holiday_end_date_field, "The holiday end date field on add holiday page didn't show")
         self._holiday_end_date_inserted = self.get_text(self._holiday_end_date_field)
         self.click(self._holiday_name_field, "While adding holiday, the \"Holiday name\" field cannot be clicked or wasn't found on the page")
         self.click(self._holiday_information_open_field, "While adding holiday, the attempt to open \"Holiday information\" field to enter data to it wasn't successful")
-        self.clear_field_and_send_keys(self._holiday_information_value, self._holiday_information_text_field)
+        self.clear_field_and_send_keys(self._holiday_information_value, self._holiday_information_text_field, "The holiday information text field on add holiday page didn't show")
         self.click(self._holiday_information_close_field, "While adding holiday, the attempt to close \"Holiday information\" field after entering data to it wasn't successful")
         self.click(self._add_holiday_submit, "While adding holiday, the attempt to click \"Submit\" button wasn't successful")
 
     def edit_holiday(self):
-        try:
-            self.click(self._first_added_holiday_name_field, "The first holiday name field on the holidays tab cannot be clicked or wasn't found on the page, so added holiday cannot be edited")
-        except WebDriverException as e:
-            self.get_driver().execute_script("arguments[0].click();", self.find_element(self._first_added_holiday_name_field))
+        self.condition_click(self._first_added_holiday_name_field, "The first holiday name field on the holidays tab cannot be clicked or wasn't found on the page, so added holiday cannot be edited")
         sleep(2)
-        self.clear_field_and_send_keys(self._edit_holiday_name_value, self._edit_holiday_name_field)
+        self.clear_field_and_send_keys(self._edit_holiday_name_value, self._edit_holiday_name_field, "The holiday edit name field on edit holiday page didn't show")
         if (datetime.date.today().day)==1:
-            self.clear_field_and_send_keys(self._last_day_previous_month, self._edit_holiday_start_date_field)
+            self.clear_field_and_send_keys(self._last_day_previous_month, self._edit_holiday_start_date_field, "The holiday start date field on edit holiday page didn't show")
         else:
-            self.clear_field_and_send_keys(self._edit_holiday_start_date_value, self._edit_holiday_start_date_field)
+            self.clear_field_and_send_keys(self._edit_holiday_start_date_value, self._edit_holiday_start_date_field, "The holiday start date field on edit holiday page didn't show")
         self._edit_holiday_start_date_inserted = self.get_text(self._edit_holiday_start_date_field)
-        self.clear_field_and_send_keys(self._edit_holiday_end_date_value, self._edit_holiday_end_date_field)
+        self.clear_field_and_send_keys(self._edit_holiday_end_date_value, self._edit_holiday_end_date_field, "The holiday end date field on edit holiday page didn't show")
         self.click(self._edit_holiday_name_field, "While editing holiday, the \"Holiday name\" field cannot be clicked or wasn't found on the page")
         self.click(self._edit_holiday_information_open_field, "While editing holiday, the attempt to open \"Holiday information\" field to enter data to it wasn't successful")
-        self.clear_field_and_send_keys(self._edit_holiday_information_value, self._edit_holiday_information_text_field)
+        self.clear_field_and_send_keys(self._edit_holiday_information_value, self._edit_holiday_information_text_field, "The holiday information field on edit holiday page didn't show")
         self.click(self._edit_holiday_information_close_field,"While editing holiday, the attempt to close \"Holiday information\" field after entering data to it wasn't successful")
         self.click(self._edit_holiday_submit, "While editing holiday, the \"Submit\" button cannot be clicked or wasn't found on the page")
 
@@ -369,8 +363,8 @@ class RestaurantSettingsPage(BasePage):
         self.click(self._percentage_of_capacity_labeled_as_confirmed_checkbox, "The percentage of capacity labeled as confirmed checkbox cannot be clicked or wasn't found on the restaurant coustomizations settings page")
 
     def edit_coustomization_tab(self):
-        self.clear_field_and_send_keys(self._percentage_of_capacity_labeled_as_confirmed_value, self._percentage_of_capacity_labeled_as_confirmed_field)
-        self.clear_field_and_send_keys(self._booking_in_advance_value, self._booking_in_advance_field)
+        self.clear_field_and_send_keys(self._percentage_of_capacity_labeled_as_confirmed_value, self._percentage_of_capacity_labeled_as_confirmed_field, "The percentage of capacity labeled as confirmed field on restaurant coustomization settings page didn't show")
+        self.clear_field_and_send_keys(self._booking_in_advance_value, self._booking_in_advance_field, "The booking in advance field on restaurant coustomization settings page didn't show")
         self.click(self._save_coustomizations_tab, "The save coustomizations tab settings button cannot be clicked or wasn't found on the page")
 
     def get_vaules_coustomization_tab(self):

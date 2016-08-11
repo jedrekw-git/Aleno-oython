@@ -66,14 +66,14 @@ class SeatInPage(BasePage):
         self.click(self._add_reservation_first_accordeon, "The attempt to open first accordeon while adding reservation was not successful")
 
     def enter_reservation_details(self, start_time):
-        self.clear_field_and_send_keys(self._add_reservation_guests_value, self._add_reservation_guests_field)
-        self.clear_field_and_send_keys(start_time, self._add_reservation_start_time_field)
+        self.clear_field_and_send_keys(self._add_reservation_guests_value, self._add_reservation_guests_field, "The guests field on add reservation page didn't show")
+        self.clear_field_and_send_keys(start_time, self._add_reservation_start_time_field, "The start time field on add reservation page didn't show")
         self.click(self._add_reservation_second_accordeon, "The attempt to open second accordeon while adding reservation was not successful")
         # self.select_index_from_dropdown(0, self._add_reservation_language_dropdown)
-        self.clear_field_and_send_keys(self._add_reservation_phone_value, self._add_reservation_phone_field)
-        self.clear_field_and_send_keys(self._add_reservation_first_name_value, self._add_reservation_first_name_field)
-        self.clear_field_and_send_keys(self._add_reservation_surname_value, self._add_reservation_surname_field)
-        self.clear_field_and_send_keys(self._add_reservation_email_value, self._add_reservation_email_field)
+        self.clear_field_and_send_keys(self._add_reservation_phone_value, self._add_reservation_phone_field, "The phone field on add reservation page didn't show")
+        self.clear_field_and_send_keys(self._add_reservation_first_name_value, self._add_reservation_first_name_field, "The first name field on add reservation page didn't show")
+        self.clear_field_and_send_keys(self._add_reservation_surname_value, self._add_reservation_surname_field, "The surname field on add reservation page didn't show")
+        self.clear_field_and_send_keys(self._add_reservation_email_value, self._add_reservation_email_field, "The email field on add reservation page didn't show")
         WebDriverWait(self.get_driver(), 60).until(EC.text_to_be_present_in_element(self._add_reservation_edited_by_header, "Bearbeitet von"), "While adding reservation the text \"Bearbeitet von\" didn't show after waiting for 60 seconds")
         # self.click(self._add_reservation_fourth_accordeon)
         # sleep(2)
@@ -85,7 +85,7 @@ class SeatInPage(BasePage):
         # self.click(self._add_reservation_internal_comment_close_field)
 
     def reservation_set_provisional(self):
-        self.select_index_from_dropdown(0, self._add_reservation_status_dropdown)
+        self.select_index_from_dropdown(0, self._add_reservation_status_dropdown, "The status dropdown on add reservation page didn't show")
 
     def reservation_set_email_sms_notifications(self):
         self.click(self._add_reservation_email_benachrichtigung_checkbox)
