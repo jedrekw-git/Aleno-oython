@@ -52,6 +52,7 @@ class AccountPage(BasePage):
     _added_note_value_field = (By.XPATH, "//div[3]/div/div[2]/div/div/span")
     _remove_added_note_button = (By.XPATH, "//div[4]/i")
     _remove_added_note_submit_yes_button = (By.XPATH, "//div[2]/div/button")
+    _seatin3_menu = (By.XPATH, "//li[2]/a")
 
     def __init__(self, driver):
         super(AccountPage, self).__init__(driver, self._title)
@@ -149,3 +150,6 @@ class AccountPage(BasePage):
         self.condition_click(self._restaurants_dropdown, "Dropdown of chosing restaurant wasn't found on the page")
         self.condition_click((By.NAME, "%s" %restaurant_name), "Restaurant name wasn't found on the choosing restaurant dropdown")
 
+    def open_seatin3(self):
+        self.click(self._seatin3_menu, "The seatin3 menu on dashboard didn't show or couldn't be clicked")
+        return SeatInPage(self.get_driver())

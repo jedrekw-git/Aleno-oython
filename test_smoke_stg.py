@@ -584,6 +584,28 @@ class SmokeTest(unittest.TestCase):
         self.not_contains(relatIn_page._client_phone_number_value, relatIn_page.get_page_source(), "The added client phone number value appeared on the relatIn page, although it shouldn't, because the client was supposed to be removed")
         self.not_contains(relatIn_page._client_email_value, relatIn_page.get_page_source(), "The added client email value appeared on the relatIn page, although it shouldn't, because the client was supposed to be removed")
 
+    def test_SEATIN3_add_reservation_should_succeed(self):
+        home_page = HomePage(self.driver).open_home_page()
+        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"),"\"Einloggen\" text wasn't found on the login page")
+        account_page = home_page.header.login(USER, PASSWORD)
+        sleep(5)
+        if "Einloggen" in home_page.header.get_page_source():
+            account_page = home_page.header.login(USER, PASSWORD)
+        account_page.open_registered_restaurant("August test restaurant")
+        seatin3_page = account_page.open_seatin3()
+        seatin3_page.seatin3_change_shift()
+        seatin3_page.seatin3_add_reservation()
+
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(seatin3_page._seatin3_10_hour_reservation_client_name_field, seatin3_page._seatin3_client_name_value), "The client name (test test) didn't show in the reservation client name field at 10:00 in left panel in seatin3 page, probably the reservation wasn't added")
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(seatin3_page._seatin3_reservation_comment_field, seatin3_page._seatin3_reservation_comment_value), "The added reservation comment value didn't show in the comment field for reservation at 10:00 in seatIn3 page")
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(seatin3_page._seatin3_10_hour_reservation_start_hour_field, "10:00"), "The reservation start hour (10:00) didn't show in reservation at 10:00 start hour field in seatIn3 page")
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(seatin3_page._seatin3_10_hour_reservation_end_hour_field, "10:30"), "The reservation end hour (10:30) didn't show in reservation at 10:00 end hour field in seatIn3 page")
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(seatin3_page._seatin3_10_hour_reservation_person_field, "5"), "The reservation number of people (5) didn't show in reservation at 10:00 number of people field in seatIn3 page")
+
+        seatin3_page.seatin3_remove_added_reservation()
+
+        WebDriverWait(self.driver, 10).until_not(EC.text_to_be_present_in_element(seatin3_page._seatin3_10_hour_reservation_client_name_field, seatin3_page._seatin3_client_name_value), "The reservation client name (test test) was shown in the reservation client name field at 10:00 in left panel in seatIn3, although it shouldn't, because the reservation was supposed to be removed")
+
     def tally(self):
         return len(self._resultForDoCleanups.errors) + len(self._resultForDoCleanups.failures)
 

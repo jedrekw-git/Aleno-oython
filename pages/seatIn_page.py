@@ -48,6 +48,27 @@ class SeatInPage(BasePage):
     _remove_added_reservation_button = (By.LINK_TEXT, "Storniert")
     _shift_name_field = (By.CSS_SELECTOR, "span.shiftName")
     _seatIn_room_separator_field = (By.CSS_SELECTOR, "div.ce-room-separator")
+    _seatin3_shift_dropdown = (By.XPATH, "//div[3]/div/div/div/div/div/div/div/div")
+    _seatin3_first_shift_on_dropdown = (By.XPATH, "//div[2]/div/span")
+    _seatin3_10_hour_button = (By.XPATH, "//div[9]/div/div/span")
+    _seatin3_add_reservation_plus_button = (By.XPATH, "//div[4]/div/div/button")
+    _seatin3_client_name_value = "test test"
+    _seatin3_client_name_field = (By.XPATH, "//input")
+    _seatin3_second_client_on_dropdown = (By.XPATH, "//div[2]/div/div/div")
+    _seatin3_5_person_button = (By.XPATH, "//span[5]")
+    _seatin3_reservation_details_button = (By.XPATH, "//button[2]")
+    _seatin3_reservation_comment_value = get_random_string(6)+" "+get_random_string(7)+" "+get_random_string(8)
+    _seatin3_reservation_comment_field = (By.NAME, "reservationComment")
+    _seatin3_internal_comment_value = get_random_string(6)+" "+get_random_string(5)+" "+get_random_string(6)
+    _seatin3_internal_comment_field = (By.NAME, "internalComment")
+    _seatin3_external_comment_value = get_random_string(7)+" "+get_random_string(5)+" "+get_random_string(8)
+    _seatin3_external_comment_field = (By.NAME, "comment")
+    _seatin3_add_reservation_submit_button = (By.XPATH, "//button[3]")
+    _seatin3_10_hour_reservation_client_name_field = (By.XPATH, "//div[9]/div[2]/div/div/div[2]/div/div/span")
+    _seatin3_10_hour_reservation_start_hour_field = (By.XPATH, "//div[9]/div[2]/div/div/div[3]/div/div/span")
+    _seatin3_10_hour_reservation_end_hour_field = (By.XPATH, "//div[9]/div[2]/div/div/div[3]/div/div[2]/span")
+    _seatin3_10_hour_reservation_person_field = (By.XPATH, "//div[9]/div[2]/div/div/div/span")
+    _seatin3_10_hour_reservation_remove_option_on_dropdown = (By.XPATH, '//div[2]/div/div/div[4]')
 
     def __init__(self, driver):
         super(SeatInPage, self).__init__(driver, self._title)
@@ -105,7 +126,26 @@ class SeatInPage(BasePage):
         self.accept_alert()
         sleep(2)
 
+    def seatin3_change_shift(self):
+        self.click(self._seatin3_shift_dropdown)
+        self.click(self._seatin3_first_shift_on_dropdown)
 
+    def seatin3_add_reservation(self):
+        self.click(self._seatin3_10_hour_button, "The 10 hour button on the left panel didn't show or couldn't be clicked in seatIn3 page")
+        self.click(self._seatin3_add_reservation_plus_button, "The add reservation (PLUS) button didn't show or couldn't be clicked in seatIn3 page")
+        self.clear_field_and_send_keys(self._seatin3_client_name_value, self._seatin3_client_name_field, "The client name field on the panel didn't show in seatIn3 page")
+        self.click(self._seatin3_second_client_on_dropdown, "The second client on client name dropdown on the panel didn't show or couldn't be clicked in seatIn3 page")
+        self.click(self._seatin3_5_person_button, "The 5 person button on the panel didn't show or couldn't be clicked in seatIn3 page")
+        self.click(self._seatin3_reservation_details_button, "The reservation details button on the panel didn't show or couldn't be clicked in seatIn3 page")
+        self.clear_field_and_send_keys(self._seatin3_reservation_comment_value, self._seatin3_reservation_comment_field, "The reservation comment field on the panel didn't show in seatIn3 page")
+        self.clear_field_and_send_keys(self._seatin3_internal_comment_value, self._seatin3_internal_comment_field, "The internal comment field on the panel didn't show in seatIn3 page")
+        self.clear_field_and_send_keys(self._seatin3_external_comment_value, self._seatin3_external_comment_field, "The external comment field on the panel didn't show in seatIn3 page")
+        self.click(self._seatin3_add_reservation_submit_button, "The add reservation submit button on the panel didn't show or couldn't be clicked in seatIn3 page")
+
+    def seatin3_remove_added_reservation(self):
+        self.click(self._seatin3_10_hour_reservation_person_field, "The person field in reservation at 10:00 couldn't be clicked or didn't show in left panel in seatIn3 page")
+        self.click(self._seatin3_10_hour_reservation_remove_option_on_dropdown, "The Stoniert option on dropdown in first reservation at 10:00 didn't show or couldn't be clicked in left panel in seatin3 page")
+        self.accept_alert()
 
 
 
