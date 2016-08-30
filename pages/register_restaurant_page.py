@@ -45,13 +45,13 @@ class RegisterRestaurantPage(BasePage):
     _yelp_value = get_random_string(7)
     _phone_field = (By.NAME, "phone")
     _phone_value = get_random_integer(9)
-    _opening_hours_open_field = (By.XPATH, "//div[19]/div/div")
-    _opening_hours_close_field = (By.XPATH, "//div[19]/div/button")
+    _opening_hours_open_field = (By.XPATH, "//div[22]/div/div")
+    _opening_hours_close_field = (By.XPATH, "//div[22]/div/button")
     _opening_hours_field = (By.XPATH, "//div[3]/div[3]")
     _opening_hours_value = get_random_integer(2)+"-"+get_random_integer(2)+": Monday - Friday"
     _image_url_field = (By.NAME, "imageUrl")
     _image_url_value = "http://www.avsforum.com/photopost/data/2277869/9/9f/9f50538d_test.jpeg"
-    _random_additional_option = (By.XPATH, "//div[%s]/div/label/input" % randint(21, 24))
+    _random_additional_option = (By.XPATH, "//div[%s]/div/label/input" % randint(25, 30))
     _save_restaurant_button = (By.XPATH, "//form/div[2]/div/button")
 
 
@@ -66,7 +66,7 @@ class RegisterRestaurantPage(BasePage):
         self.clear_field_and_send_keys(self._city_value, self._city_field, "Restaurant city field wasn't found on add new restaurant page")
         self.clear_field_and_send_keys(self._country_value, self._country_field, "Restaurant country field wasn't found on add new restaurant page")
         self.select_index_from_dropdown(self._timezone_index, self._timezone_dropdown, "Restaurant timezone dropdown wasn't found on add new restaurant page")
-        self.condition_click(self._random_language, "Trying to click random language on the register restaurant page was unsuccessful")
+        # self.condition_click(self._random_language, "Trying to click random language on the register restaurant page was unsuccessful")
         self.clear_field_and_send_keys(self._email_value, self._email_field, "Restaurant email field wasn't found on add new restaurant page")
         self.clear_field_and_send_keys(self._senders_email_value, self._senders_email_field, "Restaurant senders email field wasn't found on add new restaurant page")
         self.clear_field_and_send_keys(self._msgIn_email_value, self._msgIn_email_field, "Restaurant msgIn email field wasn't found on add new restaurant page")

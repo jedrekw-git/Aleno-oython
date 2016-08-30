@@ -69,6 +69,7 @@ class SeatInPage(BasePage):
     _seatin3_10_hour_reservation_end_hour_field = (By.XPATH, "//div[9]/div[2]/div/div/div[3]/div/div[2]/span")
     _seatin3_10_hour_reservation_person_field = (By.XPATH, "//div[9]/div[2]/div/div/div/span")
     _seatin3_10_hour_reservation_remove_option_on_dropdown = (By.XPATH, '//div[2]/div/div/div[4]')
+    _seatin3_first_shift_on_list = (By.XPATH, "//th/span[2]/span")
 
     def __init__(self, driver):
         super(SeatInPage, self).__init__(driver, self._title)
@@ -127,8 +128,11 @@ class SeatInPage(BasePage):
         sleep(2)
 
     def seatin3_change_shift(self):
-        self.click(self._seatin3_shift_dropdown)
-        self.click(self._seatin3_first_shift_on_dropdown)
+        self.click(self._seatin3_shift_dropdown, "The shifts dropdown couldn't be clicked or didn't show on seatin3 page")
+        self.click(self._seatin3_first_shift_on_dropdown, "The first shift on shifts dropdown couldn't be clicked or didn't show on seatin3 page")
+
+    def seatin3_click_first_shift_on_list(self):
+        self.click(self._seatin3_first_shift_on_list, "First shift on list couldn't be clicked or didn't show on seatin3 page")
 
     def seatin3_add_reservation(self):
         self.click(self._seatin3_10_hour_button, "The 10 hour button on the left panel didn't show or couldn't be clicked in seatIn3 page")

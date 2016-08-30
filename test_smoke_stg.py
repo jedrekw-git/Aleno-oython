@@ -159,6 +159,7 @@ class SmokeTest(unittest.TestCase):
         account_page.open_registered_restaurant("George Bar & Grill")
         restaurant_settings_page = account_page.open_restaurant_settings()
         restaurant_settings_page.open_shift_tab()
+        sleep(7)
         restaurant_settings_page.get_first_shift_internal_name()
         restaurant_settings_page.archive_first_shift()
         sleep(3)
@@ -593,7 +594,11 @@ class SmokeTest(unittest.TestCase):
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_registered_restaurant("August test restaurant")
         seatin3_page = account_page.open_seatin3()
-        seatin3_page.seatin3_change_shift()
+        try:
+            WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(seatin3_page._seatin3_first_shift_on_list), "First shift on list on seatin3 page didn't show")
+            seatin3_page.seatin3_click_first_shift_on_list()
+        except WebDriverException as e:
+            seatin3_page.seatin3_change_shift()
         seatin3_page.seatin3_add_reservation()
 
         WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(seatin3_page._seatin3_10_hour_reservation_client_name_field, seatin3_page._seatin3_client_name_value), "The client name (test test) didn't show in the reservation client name field at 10:00 in left panel in seatin3 page, probably the reservation wasn't added")
