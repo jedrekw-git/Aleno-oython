@@ -9,7 +9,7 @@ USER2 = "patryk.bader@testuj.pl"
 PASSWORD2 = "tester777"
 
 USER = "aleksandra.mika@vazco.eu"
-PASSWORD = "aleno101"
+PASSWORD = "aleno102"
 
 CHANGE_PASSWORD_USER = "testujpl@go2.pl"
 

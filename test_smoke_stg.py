@@ -400,107 +400,107 @@ class SmokeTest(unittest.TestCase):
         self.not_contains(account_page._added_note_type_guests_value, account_page.get_page_source().encode('utf-8'), "The added note type (For Guests) is present on the page source although it shouldn't be because the note should was supposed to be removed")
         self.not_contains(account_page._add_note_text_value, account_page.get_page_source(), "The added note text is present on the page source although it shouldn't be because the note should was supposed to be removed")
 
-    def test_add_reservation_should_succeed(self):
-        home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"),"\"Einloggen\" text wasn't found on the login page")
-        account_page = home_page.header.login(USER, PASSWORD)
-        sleep(5)
-        if "Einloggen" in home_page.header.get_page_source():
-            account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_registered_restaurant("George Bar & Grill")
-        account_page.open_shifts_menu()
-        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button), "The first shift wasn't found on the shifts menu page")
-        sleep(2)
-        account_page.get_first_shift_start_time()
-        seatIn_page = account_page.click_first_shift()
-        # seatIn_page = account_page.open_seatIn()
-        # seatIn_page.click_hour()
-        seatIn_page.click_add_reservation_plus_button()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
-        seatIn_page.click_reservation_details_button()
-        seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
-        seatIn_page.save_reservation()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
-        seatIn_page.expand_seatIn_reservation_details()
-
-        Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value wasn't found in the added reservations in SeatIn page, probably the reservation wasn't added")
-        # Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
-        # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
-
-        seatIn_page.click_added_reservation()
-        seatIn_page.click_added_reservation()
-        seatIn_page.remove_added_reservation()
-
-        self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value was found in the added reservations page in SeatIn, although it shouldn't be, because the reservation was supposed to be removed")
-
-    def test_add_provisional_reservation_should_succeed(self):
-        home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"),"\"Einloggen\" text wasn't found on the login page")
-        account_page = home_page.header.login(USER, PASSWORD)
-        sleep(5)
-        if "Einloggen" in home_page.header.get_page_source():
-            account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_registered_restaurant("George Bar & Grill")
-        account_page.open_shifts_menu()
-        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button), "The first shift wasn't found on the shifts menu page")
-        sleep(2)
-        account_page.get_first_shift_start_time()
-        seatIn_page = account_page.click_first_shift()
-        # seatIn_page = account_page.open_seatIn()
-        # seatIn_page.click_hour()
-        seatIn_page.click_add_reservation_plus_button()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
-        seatIn_page.click_reservation_details_button()
-        seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
-        seatIn_page.reservation_set_provisional()
-        seatIn_page.save_reservation()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
-        seatIn_page.expand_seatIn_reservation_details()
-
-        Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value wasn't found in the added reservations in SeatIn page, probably the reservation wasn't added")
-        # Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
-        # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
-        Assert.contains("Provisorisch", seatIn_page.get_page_source(), "The text \"Provisorisch\" wasn't found in the added reservations in SeatIn page, the reservation wasn't set provisional")
-
-        seatIn_page.click_added_reservation()
-        seatIn_page.click_added_reservation()
-        seatIn_page.remove_added_reservation()
-
-        self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value was found in the added reservations page in SeatIn, although it shouldn't be, because the reservation was supposed to be removed")
-
-    def test_edit_reservation_should_succeed(self):
-        home_page = HomePage(self.driver).open_home_page()
-        WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"),"\"Einloggen\" text wasn't found on the login page")
-        account_page = home_page.header.login(USER, PASSWORD)
-        sleep(5)
-        if "Einloggen" in home_page.header.get_page_source():
-            account_page = home_page.header.login(USER, PASSWORD)
-        account_page.open_registered_restaurant("George Bar & Grill")
-        account_page.open_shifts_menu()
-        WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button), "The first shift wasn't found on the shifts menu page")
-        sleep(2)
-        account_page.get_first_shift_start_time()
-        seatIn_page = account_page.click_first_shift()
-        # seatIn_page = account_page.open_seatIn()
-        # seatIn_page.click_hour()
-        seatIn_page.click_add_reservation_plus_button()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
-        seatIn_page.click_reservation_details_button()
-        seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
-        seatIn_page.save_reservation()
-        WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
-        seatIn_page.expand_seatIn_reservation_details()
-
-        Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value wasn't found in the added reservations in SeatIn page, probably the reservation wasn't added")
-        # Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
-        # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
-
-        seatIn_page.click_added_reservation()
-        seatIn_page.click_added_reservation()
-        seatIn_page.remove_added_reservation()
-
-        self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value was found in the added reservations page in SeatIn, although it shouldn't be, because the reservation was supposed to be removed")
-        #do napisania
+    # def test_add_reservation_should_succeed(self):
+    #     home_page = HomePage(self.driver).open_home_page()
+    #     WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"),"\"Einloggen\" text wasn't found on the login page")
+    #     account_page = home_page.header.login(USER, PASSWORD)
+    #     sleep(5)
+    #     if "Einloggen" in home_page.header.get_page_source():
+    #         account_page = home_page.header.login(USER, PASSWORD)
+    #     account_page.open_registered_restaurant("George Bar & Grill")
+    #     account_page.open_shifts_menu()
+    #     WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button), "The first shift wasn't found on the shifts menu page")
+    #     sleep(2)
+    #     account_page.get_first_shift_start_time()
+    #     seatIn_page = account_page.click_first_shift()
+    #     # seatIn_page = account_page.open_seatIn()
+    #     # seatIn_page.click_hour()
+    #     seatIn_page.click_add_reservation_plus_button()
+    #     WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
+    #     seatIn_page.click_reservation_details_button()
+    #     seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
+    #     seatIn_page.save_reservation()
+    #     WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
+    #     seatIn_page.expand_seatIn_reservation_details()
+    #
+    #     Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value wasn't found in the added reservations in SeatIn page, probably the reservation wasn't added")
+    #     # Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
+    #     # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
+    #
+    #     seatIn_page.click_added_reservation()
+    #     seatIn_page.click_added_reservation()
+    #     seatIn_page.remove_added_reservation()
+    #
+    #     self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value was found in the added reservations page in SeatIn, although it shouldn't be, because the reservation was supposed to be removed")
+    #
+    # def test_add_provisional_reservation_should_succeed(self):
+    #     home_page = HomePage(self.driver).open_home_page()
+    #     WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"),"\"Einloggen\" text wasn't found on the login page")
+    #     account_page = home_page.header.login(USER, PASSWORD)
+    #     sleep(5)
+    #     if "Einloggen" in home_page.header.get_page_source():
+    #         account_page = home_page.header.login(USER, PASSWORD)
+    #     account_page.open_registered_restaurant("George Bar & Grill")
+    #     account_page.open_shifts_menu()
+    #     WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button), "The first shift wasn't found on the shifts menu page")
+    #     sleep(2)
+    #     account_page.get_first_shift_start_time()
+    #     seatIn_page = account_page.click_first_shift()
+    #     seatIn_page = account_page.open_seatIn()
+    #     # seatIn_page.click_hour()
+    #     seatIn_page.click_add_reservation_plus_button()
+    #     WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
+    #     seatIn_page.click_reservation_details_button()
+    #     seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
+    #     seatIn_page.reservation_set_provisional()
+    #     seatIn_page.save_reservation()
+    #     WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
+    #     seatIn_page.expand_seatIn_reservation_details()
+    #
+    #     Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value wasn't found in the added reservations in SeatIn page, probably the reservation wasn't added")
+    #     # Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
+    #     # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
+    #     Assert.contains("Provisorisch", seatIn_page.get_page_source(), "The text \"Provisorisch\" wasn't found in the added reservations in SeatIn page, the reservation wasn't set provisional")
+    #
+    #     seatIn_page.click_added_reservation()
+    #     seatIn_page.click_added_reservation()
+    #     seatIn_page.remove_added_reservation()
+    #
+    #     self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value was found in the added reservations page in SeatIn, although it shouldn't be, because the reservation was supposed to be removed")
+    #
+    # def test_edit_reservation_should_succeed(self):
+    #     home_page = HomePage(self.driver).open_home_page()
+    #     WebDriverWait(self.driver, 60).until(EC.text_to_be_present_in_element(home_page.header._einloggen_text, "Einloggen"),"\"Einloggen\" text wasn't found on the login page")
+    #     account_page = home_page.header.login(USER, PASSWORD)
+    #     sleep(5)
+    #     if "Einloggen" in home_page.header.get_page_source():
+    #         account_page = home_page.header.login(USER, PASSWORD)
+    #     account_page.open_registered_restaurant("George Bar & Grill")
+    #     account_page.open_shifts_menu()
+    #     WebDriverWait(self.driver, 60).until(EC.presence_of_element_located(account_page._click_first_shift_button), "The first shift wasn't found on the shifts menu page")
+    #     sleep(2)
+    #     account_page.get_first_shift_start_time()
+    #     seatIn_page = account_page.click_first_shift()
+    #     # seatIn_page = account_page.open_seatIn()
+    #     # seatIn_page.click_hour()
+    #     seatIn_page.click_add_reservation_plus_button()
+    #     WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
+    #     seatIn_page.click_reservation_details_button()
+    #     seatIn_page.enter_reservation_details(account_page.first_shift_start_time)
+    #     seatIn_page.save_reservation()
+    #     WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(seatIn_page._seatIn_room_separator_field), "The room separator field wasn't found on the SeatIn page")
+    #     seatIn_page.expand_seatIn_reservation_details()
+    #
+    #     Assert.contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value wasn't found in the added reservations in SeatIn page, probably the reservation wasn't added")
+    #     # Assert.contains(seatIn_page._add_reservation_guests_comment_value, seatIn_page.get_page_source())
+    #     # Assert.contains(seatIn_page._add_reservation_internal_comment_value, seatIn_page.get_page_source())
+    #
+    #     seatIn_page.click_added_reservation()
+    #     seatIn_page.click_added_reservation()
+    #     seatIn_page.remove_added_reservation()
+    #
+    #     self.not_contains(seatIn_page._add_reservation_surname_value, seatIn_page.get_page_source(), "The added reservation surname value was found in the added reservations page in SeatIn, although it shouldn't be, because the reservation was supposed to be removed")
+    #     #do napisania
 
     def test_add_daily_shift_should_succeed(self):
         home_page = HomePage(self.driver).open_home_page()
@@ -570,6 +570,12 @@ class SmokeTest(unittest.TestCase):
             account_page = home_page.header.login(USER, PASSWORD)
         account_page.open_registered_restaurant("AUTOTESTa")
         relatIn_page = account_page.open_relatIn()
+        while True:
+            try:
+                WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(relatIn_page._added_client_first_name_field), "The client first name wasn't clickable in relatin")
+                relatIn_page.remove_first_client()
+            except WebDriverException as e:
+                break
         relatIn_page.add_client()
 
         WebDriverWait(self.driver, 15).until(EC.text_to_be_present_in_element(relatIn_page._added_client_first_name_field, relatIn_page._client_first_name_value), "The added client first name value didn't appear in the first name field of the first client on the relatIn page, probably the client wasn't added or the text was shown in the wrong place")
