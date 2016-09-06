@@ -55,7 +55,7 @@ class SeatInPage(BasePage):
     _seatin3_client_name_value = "test test"
     _seatin3_client_name_field = (By.XPATH, "//input")
     _seatin3_second_client_on_dropdown = (By.XPATH, "//div[2]/div/div/div")
-    _seatin3_first_client_on_dropdown = (By.XPATH, "//div/div/div/div")
+    _seatin3_first_client_on_dropdown = (By.XPATH, "//div/div/div/div/div")
     _seatin3_5_person_button = (By.XPATH, "//span[5]")
     _seatin3_reservation_details_button = (By.XPATH, "//button[2]")
     _seatin3_reservation_comment_value = get_random_string(6)+" "+get_random_string(7)+" "+get_random_string(8)
