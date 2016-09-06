@@ -48,8 +48,8 @@ class SeatInPage(BasePage):
     _remove_added_reservation_button = (By.LINK_TEXT, "Storniert")
     _shift_name_field = (By.CSS_SELECTOR, "span.shiftName")
     _seatIn_room_separator_field = (By.CSS_SELECTOR, "div.ce-room-separator")
-    _seatin3_shift_dropdown = (By.XPATH, "//div[3]/div/div/div/div/div/div/div/div")
-    _seatin3_first_shift_on_dropdown = (By.XPATH, "//div[2]/div/span")
+    _seatin3_shift_dropdown = (By.XPATH, "//div[2]/div/div/div/div/div/div/div/div")
+    _seatin3_first_shift_on_dropdown = (By.XPATH, "//div/div/div/div[2]/div")
     _seatin3_10_hour_button = (By.XPATH, "//div[9]/div/div/span")
     _seatin3_add_reservation_plus_button = (By.XPATH, "//div[4]/div/div/button")
     _seatin3_client_name_value = "test test"
