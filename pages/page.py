@@ -78,8 +78,6 @@ class Page(object):
             except NoSuchElementException:
                 raise TimeoutException(info)
 
-
-
     def select_value_from_dropdown(self, value, locator):
         dropdown = Select(self.find_element(locator))
         dropdown.select_by_value(value)
